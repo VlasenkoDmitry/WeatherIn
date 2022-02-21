@@ -16,8 +16,15 @@
 		E10F787327C390560088549D /* LinkLoadingWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F787227C390560088549D /* LinkLoadingWeather.swift */; };
 		E10F787527C390670088549D /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F787427C390670088549D /* JSONParser.swift */; };
 		E10F787727C3907E0088549D /* Enum+TypeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F787627C3907E0088549D /* Enum+TypeRequest.swift */; };
+		E10F787927C3931C0088549D /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F787827C3931C0088549D /* MainController.swift */; };
+		E10F787C27C393760088549D /* ViewInputDelegateLVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F787B27C393760088549D /* ViewInputDelegateLVC.swift */; };
+		E10F787E27C3938C0088549D /* ViewOutputDelegateLVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F787D27C3938C0088549D /* ViewOutputDelegateLVC.swift */; };
+		E10F788027C393B90088549D /* ViewOutputDelegateMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F787F27C393B90088549D /* ViewOutputDelegateMC.swift */; };
+		E10F788227C393D30088549D /* ViewInputDelegateMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F788127C393D30088549D /* ViewInputDelegateMC.swift */; };
+		E10F788427C3940D0088549D /* PresenterLVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F788327C3940D0088549D /* PresenterLVC.swift */; };
+		E10F788627C3941C0088549D /* PresenterMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F788527C3941C0088549D /* PresenterMC.swift */; };
 		E161A0A227C388E900BC2AA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E161A0A127C388E900BC2AA6 /* AppDelegate.swift */; };
-		E161A0A627C388E900BC2AA6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E161A0A527C388E900BC2AA6 /* ViewController.swift */; };
+		E161A0A627C388E900BC2AA6 /* LaunchingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E161A0A527C388E900BC2AA6 /* LaunchingVC.swift */; };
 		E161A0A927C388E900BC2AA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E161A0A727C388E900BC2AA6 /* Main.storyboard */; };
 		E161A0AB27C388ED00BC2AA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E161A0AA27C388ED00BC2AA6 /* Assets.xcassets */; };
 		E161A0AE27C388ED00BC2AA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E161A0AC27C388ED00BC2AA6 /* LaunchScreen.storyboard */; };
@@ -33,9 +40,16 @@
 		E10F787227C390560088549D /* LinkLoadingWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkLoadingWeather.swift; sourceTree = "<group>"; };
 		E10F787427C390670088549D /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		E10F787627C3907E0088549D /* Enum+TypeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+TypeRequest.swift"; sourceTree = "<group>"; };
+		E10F787827C3931C0088549D /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		E10F787B27C393760088549D /* ViewInputDelegateLVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInputDelegateLVC.swift; sourceTree = "<group>"; };
+		E10F787D27C3938C0088549D /* ViewOutputDelegateLVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOutputDelegateLVC.swift; sourceTree = "<group>"; };
+		E10F787F27C393B90088549D /* ViewOutputDelegateMC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOutputDelegateMC.swift; sourceTree = "<group>"; };
+		E10F788127C393D30088549D /* ViewInputDelegateMC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInputDelegateMC.swift; sourceTree = "<group>"; };
+		E10F788327C3940D0088549D /* PresenterLVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterLVC.swift; sourceTree = "<group>"; };
+		E10F788527C3941C0088549D /* PresenterMC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterMC.swift; sourceTree = "<group>"; };
 		E161A09E27C388E900BC2AA6 /* WeatherIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E161A0A127C388E900BC2AA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E161A0A527C388E900BC2AA6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E161A0A527C388E900BC2AA6 /* LaunchingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchingVC.swift; sourceTree = "<group>"; };
 		E161A0A827C388E900BC2AA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E161A0AA27C388ED00BC2AA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E161A0AD27C388ED00BC2AA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -53,6 +67,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E10F787A27C393460088549D /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				E10F787B27C393760088549D /* ViewInputDelegateLVC.swift */,
+				E10F787D27C3938C0088549D /* ViewOutputDelegateLVC.swift */,
+				E10F787F27C393B90088549D /* ViewOutputDelegateMC.swift */,
+				E10F788127C393D30088549D /* ViewInputDelegateMC.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		E161A09527C388E900BC2AA6 = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +97,7 @@
 		E161A0A027C388E900BC2AA6 /* WeatherIn */ = {
 			isa = PBXGroup;
 			children = (
+				E10F787A27C393460088549D /* Protocol */,
 				E161A0BB27C3899300BC2AA6 /* Model */,
 				E161A0BA27C3898C00BC2AA6 /* View */,
 				E161A0B927C3898300BC2AA6 /* Presenter */,
@@ -119,6 +145,8 @@
 		E161A0B927C3898300BC2AA6 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				E10F788327C3940D0088549D /* PresenterLVC.swift */,
+				E10F788527C3941C0088549D /* PresenterMC.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -126,7 +154,8 @@
 		E161A0BA27C3898C00BC2AA6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E161A0A527C388E900BC2AA6 /* ViewController.swift */,
+				E161A0A527C388E900BC2AA6 /* LaunchingVC.swift */,
+				E10F787827C3931C0088549D /* MainController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -220,15 +249,22 @@
 			files = (
 				E10F786927C38DB80088549D /* ActivityIndicator.swift in Sources */,
 				E10F787127C390450088549D /* Download.swift in Sources */,
-				E161A0A627C388E900BC2AA6 /* ViewController.swift in Sources */,
+				E161A0A627C388E900BC2AA6 /* LaunchingVC.swift in Sources */,
 				E10F786F27C390310088549D /* WeatherFiveDays.swift in Sources */,
+				E10F787927C3931C0088549D /* MainController.swift in Sources */,
 				E10F786D27C390190088549D /* WeatherCurrent.swift in Sources */,
+				E10F788627C3941C0088549D /* PresenterMC.swift in Sources */,
+				E10F788427C3940D0088549D /* PresenterLVC.swift in Sources */,
+				E10F788027C393B90088549D /* ViewOutputDelegateMC.swift in Sources */,
 				E10F786727C38DA40088549D /* ScreenSaver.swift in Sources */,
 				E10F787527C390670088549D /* JSONParser.swift in Sources */,
 				E161A0A227C388E900BC2AA6 /* AppDelegate.swift in Sources */,
+				E10F788227C393D30088549D /* ViewInputDelegateMC.swift in Sources */,
 				E10F787727C3907E0088549D /* Enum+TypeRequest.swift in Sources */,
 				E10F787327C390560088549D /* LinkLoadingWeather.swift in Sources */,
 				E10F786B27C38DD00088549D /* Enum+FormatIndicator.swift in Sources */,
+				E10F787E27C3938C0088549D /* ViewOutputDelegateLVC.swift in Sources */,
+				E10F787C27C393760088549D /* ViewInputDelegateLVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
