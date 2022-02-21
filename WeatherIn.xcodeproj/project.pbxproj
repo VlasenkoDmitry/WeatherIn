@@ -10,6 +10,12 @@
 		E10F786727C38DA40088549D /* ScreenSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F786627C38DA30088549D /* ScreenSaver.swift */; };
 		E10F786927C38DB80088549D /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F786827C38DB80088549D /* ActivityIndicator.swift */; };
 		E10F786B27C38DD00088549D /* Enum+FormatIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F786A27C38DD00088549D /* Enum+FormatIndicator.swift */; };
+		E10F786D27C390190088549D /* WeatherCurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F786C27C390190088549D /* WeatherCurrent.swift */; };
+		E10F786F27C390310088549D /* WeatherFiveDays.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F786E27C390310088549D /* WeatherFiveDays.swift */; };
+		E10F787127C390450088549D /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F787027C390450088549D /* Download.swift */; };
+		E10F787327C390560088549D /* LinkLoadingWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F787227C390560088549D /* LinkLoadingWeather.swift */; };
+		E10F787527C390670088549D /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F787427C390670088549D /* JSONParser.swift */; };
+		E10F787727C3907E0088549D /* Enum+TypeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F787627C3907E0088549D /* Enum+TypeRequest.swift */; };
 		E161A0A227C388E900BC2AA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E161A0A127C388E900BC2AA6 /* AppDelegate.swift */; };
 		E161A0A627C388E900BC2AA6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E161A0A527C388E900BC2AA6 /* ViewController.swift */; };
 		E161A0A927C388E900BC2AA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E161A0A727C388E900BC2AA6 /* Main.storyboard */; };
@@ -21,6 +27,12 @@
 		E10F786627C38DA30088549D /* ScreenSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSaver.swift; sourceTree = "<group>"; };
 		E10F786827C38DB80088549D /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		E10F786A27C38DD00088549D /* Enum+FormatIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+FormatIndicator.swift"; sourceTree = "<group>"; };
+		E10F786C27C390190088549D /* WeatherCurrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCurrent.swift; sourceTree = "<group>"; };
+		E10F786E27C390310088549D /* WeatherFiveDays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherFiveDays.swift; sourceTree = "<group>"; };
+		E10F787027C390450088549D /* Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
+		E10F787227C390560088549D /* LinkLoadingWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkLoadingWeather.swift; sourceTree = "<group>"; };
+		E10F787427C390670088549D /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
+		E10F787627C3907E0088549D /* Enum+TypeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+TypeRequest.swift"; sourceTree = "<group>"; };
 		E161A09E27C388E900BC2AA6 /* WeatherIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E161A0A127C388E900BC2AA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E161A0A527C388E900BC2AA6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +137,12 @@
 				E10F786627C38DA30088549D /* ScreenSaver.swift */,
 				E10F786827C38DB80088549D /* ActivityIndicator.swift */,
 				E10F786A27C38DD00088549D /* Enum+FormatIndicator.swift */,
+				E10F786C27C390190088549D /* WeatherCurrent.swift */,
+				E10F786E27C390310088549D /* WeatherFiveDays.swift */,
+				E10F787027C390450088549D /* Download.swift */,
+				E10F787227C390560088549D /* LinkLoadingWeather.swift */,
+				E10F787427C390670088549D /* JSONParser.swift */,
+				E10F787627C3907E0088549D /* Enum+TypeRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -201,9 +219,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				E10F786927C38DB80088549D /* ActivityIndicator.swift in Sources */,
+				E10F787127C390450088549D /* Download.swift in Sources */,
 				E161A0A627C388E900BC2AA6 /* ViewController.swift in Sources */,
+				E10F786F27C390310088549D /* WeatherFiveDays.swift in Sources */,
+				E10F786D27C390190088549D /* WeatherCurrent.swift in Sources */,
 				E10F786727C38DA40088549D /* ScreenSaver.swift in Sources */,
+				E10F787527C390670088549D /* JSONParser.swift in Sources */,
 				E161A0A227C388E900BC2AA6 /* AppDelegate.swift in Sources */,
+				E10F787727C3907E0088549D /* Enum+TypeRequest.swift in Sources */,
+				E10F787327C390560088549D /* LinkLoadingWeather.swift in Sources */,
 				E10F786B27C38DD00088549D /* Enum+FormatIndicator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
