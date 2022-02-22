@@ -7,7 +7,7 @@ class PresenterLVC: NSObject,CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     var dataFiveDays: WeatherFiveDays?
     var dataCurrent: WeatherCurrent?
-    var arrayImages: [UIImage] = []
+    var arrayImages: [UIImage?] = []
     var imageWeatherNow: UIImage?
     weak private var viewInputDelegate: ViewInputDelegateMC?
     
@@ -46,6 +46,7 @@ class PresenterLVC: NSObject,CLLocationManagerDelegate {
             print("FiveDays")
             
             guard let list = self.dataFiveDays?.list else {return}
+            arrayImages = Array(repeating: nil, count: list.count)
             let semaphore = DispatchSemaphore(value: 1)
             for (index,element) in list.enumerated() {
                 loadingForecastsGroup.enter()
@@ -53,7 +54,8 @@ class PresenterLVC: NSObject,CLLocationManagerDelegate {
                 Download.shared.requestImage(name: icon) { [self] imageData in
                     semaphore.wait()
                     guard let image = UIImage(data: imageData) else {return}
-                    arrayImages.insert(image, at: index)
+                    print(index)
+                    arrayImages[index] = image
                     loadingForecastsGroup.leave()
                     semaphore.signal()
                 }

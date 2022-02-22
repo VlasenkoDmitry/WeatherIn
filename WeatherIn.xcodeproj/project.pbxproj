@@ -28,6 +28,8 @@
 		E161A0A927C388E900BC2AA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E161A0A727C388E900BC2AA6 /* Main.storyboard */; };
 		E161A0AB27C388ED00BC2AA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E161A0AA27C388ED00BC2AA6 /* Assets.xcassets */; };
 		E161A0AE27C388ED00BC2AA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E161A0AC27C388ED00BC2AA6 /* LaunchScreen.storyboard */; };
+		E17A68FC27C4CE88008619FA /* FirstVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A68FB27C4CE88008619FA /* FirstVC.swift */; };
+		E17A68FE27C4CE96008619FA /* SecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A68FD27C4CE96008619FA /* SecondVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		E161A0AA27C388ED00BC2AA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E161A0AD27C388ED00BC2AA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E161A0AF27C388ED00BC2AA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E17A68FB27C4CE88008619FA /* FirstVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstVC.swift; sourceTree = "<group>"; };
+		E17A68FD27C4CE96008619FA /* SecondVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,8 @@
 				E10F787227C390560088549D /* LinkLoadingWeather.swift */,
 				E10F787427C390670088549D /* JSONParser.swift */,
 				E10F787627C3907E0088549D /* Enum+TypeRequest.swift */,
+				E17A68FB27C4CE88008619FA /* FirstVC.swift */,
+				E17A68FD27C4CE96008619FA /* SecondVC.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -253,9 +259,11 @@
 				E10F786F27C390310088549D /* WeatherFiveDays.swift in Sources */,
 				E10F787927C3931C0088549D /* MainController.swift in Sources */,
 				E10F786D27C390190088549D /* WeatherCurrent.swift in Sources */,
+				E17A68FE27C4CE96008619FA /* SecondVC.swift in Sources */,
 				E10F788627C3941C0088549D /* PresenterMC.swift in Sources */,
 				E10F788427C3940D0088549D /* PresenterLVC.swift in Sources */,
 				E10F788027C393B90088549D /* ViewOutputDelegateMC.swift in Sources */,
+				E17A68FC27C4CE88008619FA /* FirstVC.swift in Sources */,
 				E10F786727C38DA40088549D /* ScreenSaver.swift in Sources */,
 				E10F787527C390670088549D /* JSONParser.swift in Sources */,
 				E161A0A227C388E900BC2AA6 /* AppDelegate.swift in Sources */,
