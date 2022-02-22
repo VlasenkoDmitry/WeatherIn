@@ -32,6 +32,9 @@
 		E17A68FC27C4CE88008619FA /* FirstVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A68FB27C4CE88008619FA /* FirstVC.swift */; };
 		E17A68FE27C4CE96008619FA /* SecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A68FD27C4CE96008619FA /* SecondVC.swift */; };
 		E17A690027C4E003008619FA /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A68FF27C4E003008619FA /* Extension+UIView.swift */; };
+		E17A690227C4E279008619FA /* BuilderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690127C4E279008619FA /* BuilderDetailsView.swift */; };
+		E17A690427C4E29B008619FA /* DirectorViewsOfDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690327C4E29B008619FA /* DirectorViewsOfDetailsView.swift */; };
+		E17A690627C4E2C4008619FA /* imageAndTextSettingsInDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690527C4E2C4008619FA /* imageAndTextSettingsInDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,9 @@
 		E17A68FB27C4CE88008619FA /* FirstVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstVC.swift; sourceTree = "<group>"; };
 		E17A68FD27C4CE96008619FA /* SecondVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondVC.swift; sourceTree = "<group>"; };
 		E17A68FF27C4E003008619FA /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
+		E17A690127C4E279008619FA /* BuilderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderDetailsView.swift; sourceTree = "<group>"; };
+		E17A690327C4E29B008619FA /* DirectorViewsOfDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectorViewsOfDetailsView.swift; sourceTree = "<group>"; };
+		E17A690527C4E2C4008619FA /* imageAndTextSettingsInDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageAndTextSettingsInDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +98,6 @@
 				7BCE52BD123B55491DB67AD4 /* Pods-WeatherIn.debug.xcconfig */,
 				73928BF59EE0C965A3E303FA /* Pods-WeatherIn.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -103,6 +108,7 @@
 				E10F787D27C3938C0088549D /* ViewOutputDelegateLVC.swift */,
 				E10F787F27C393B90088549D /* ViewOutputDelegateMC.swift */,
 				E10F788127C393D30088549D /* ViewInputDelegateMC.swift */,
+				E17A690527C4E2C4008619FA /* imageAndTextSettingsInDetailsView.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -206,6 +212,8 @@
 				E10F787627C3907E0088549D /* Enum+TypeRequest.swift */,
 				E17A68FB27C4CE88008619FA /* FirstVC.swift */,
 				E17A68FD27C4CE96008619FA /* SecondVC.swift */,
+				E17A690127C4E279008619FA /* BuilderDetailsView.swift */,
+				E17A690327C4E29B008619FA /* DirectorViewsOfDetailsView.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -332,12 +340,15 @@
 				E10F787927C3931C0088549D /* MainController.swift in Sources */,
 				E10F786D27C390190088549D /* WeatherCurrent.swift in Sources */,
 				E17A68FE27C4CE96008619FA /* SecondVC.swift in Sources */,
+				E17A690427C4E29B008619FA /* DirectorViewsOfDetailsView.swift in Sources */,
 				E10F788627C3941C0088549D /* PresenterMC.swift in Sources */,
 				E10F788427C3940D0088549D /* PresenterLVC.swift in Sources */,
 				E10F788027C393B90088549D /* ViewOutputDelegateMC.swift in Sources */,
 				E17A68FC27C4CE88008619FA /* FirstVC.swift in Sources */,
 				E10F786727C38DA40088549D /* ScreenSaver.swift in Sources */,
 				E10F787527C390670088549D /* JSONParser.swift in Sources */,
+				E17A690627C4E2C4008619FA /* imageAndTextSettingsInDetailsView.swift in Sources */,
+				E17A690227C4E279008619FA /* BuilderDetailsView.swift in Sources */,
 				E161A0A227C388E900BC2AA6 /* AppDelegate.swift in Sources */,
 				E17A690027C4E003008619FA /* Extension+UIView.swift in Sources */,
 				E10F788227C393D30088549D /* ViewInputDelegateMC.swift in Sources */,
