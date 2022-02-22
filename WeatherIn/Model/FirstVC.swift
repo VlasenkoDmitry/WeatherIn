@@ -158,4 +158,55 @@ class FirstVC: UIViewController {
             imageView.tintColor = color
         }
     }
+    
+    func updateVCLoadingData(data: WeatherCurrent, imageWeatherNow: UIImage?) {
+        updateMainViewLabels(data: data)
+        if let textHumidity = data.main.humidity {
+            installationTextLabel(view: humidityView, textString: String(Int(textHumidity)), measure: " %")
+        }
+        var textPrecipitation = "0"
+        if let textSnow = data.rain?["1h"] {
+            textPrecipitation = String(textSnow)
+        }
+        if let textRain = data.snow?["1h"] {
+            textPrecipitation = String(textRain)
+        }
+        installationTextLabel(view: precipitationView, textString: textPrecipitation, measure: " mm")
+        if let textpressure = data.main.pressure {
+            installationTextLabel(view: pressureView, textString: String(Int(textpressure)), measure: " pHA")
+        }
+        if let textWindSpeed = data.wind.speed {
+            installationTextLabel(view: speedWindView, textString: String(Int(textWindSpeed)), measure: " km/h")
+        }
+        if let textdegWind = data.wind.deg?.direction {
+            installationTextLabel(view: degWindView, textString: textdegWind.description , measure: "")
+        }
+        installationImage(view: cityView, image: imageWeatherNow,color: .yellow)
+    }
+    
+    private func updateMainViewLabels(data: WeatherCurrent) {
+        let labelArray = cityView.allSubViewsOf(type: UILabel.self)
+        for label in labelArray {
+            switch label.tag {
+            case 1:
+                guard let city = data.name else { return }
+                guard let country = data.sys.country else { return }
+                let location = city + " ," + country
+                label.text = location
+            case 2:
+                guard let temp = data.main.temp else { return }
+                guard let main = data.weather[0].main else { return }
+                label.text = String(Int(temp)) + "°" + " | " + main
+            default:
+                label.text = ""
+            }
+        }
+    }
+    
+    private func installationTextLabel(view: UIView,textString: String?, measure: String? ) {
+        let label = view.allSubViewsOf(type: UILabel.self)[0]
+        guard let text = textString else { return }
+        guard let measure = measure else { return }
+        label.text = text + measure
+    }
 }

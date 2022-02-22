@@ -36,6 +36,7 @@
 		E17A690427C4E29B008619FA /* DirectorViewsOfDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690327C4E29B008619FA /* DirectorViewsOfDetailsView.swift */; };
 		E17A690627C4E2C4008619FA /* imageAndTextSettingsInDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690527C4E2C4008619FA /* imageAndTextSettingsInDetailsView.swift */; };
 		E17A690A27C4E8E5008619FA /* FDForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690927C4E8E5008619FA /* FDForecastTableViewCell.swift */; };
+		E17A690C27C50605008619FA /* Extension+Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690B27C50605008619FA /* Extension+Direction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		E17A690327C4E29B008619FA /* DirectorViewsOfDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectorViewsOfDetailsView.swift; sourceTree = "<group>"; };
 		E17A690527C4E2C4008619FA /* imageAndTextSettingsInDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageAndTextSettingsInDetailsView.swift; sourceTree = "<group>"; };
 		E17A690927C4E8E5008619FA /* FDForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDForecastTableViewCell.swift; sourceTree = "<group>"; };
+		E17A690B27C50605008619FA /* Extension+Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Direction.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				E17A68FF27C4E003008619FA /* Extension+UIView.swift */,
+				E17A690B27C50605008619FA /* Extension+Direction.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				E10F787727C3907E0088549D /* Enum+TypeRequest.swift in Sources */,
 				E10F787327C390560088549D /* LinkLoadingWeather.swift in Sources */,
 				E10F786B27C38DD00088549D /* Enum+FormatIndicator.swift in Sources */,
+				E17A690C27C50605008619FA /* Extension+Direction.swift in Sources */,
 				E10F787E27C3938C0088549D /* ViewOutputDelegateLVC.swift in Sources */,
 				E10F787C27C393760088549D /* ViewInputDelegateLVC.swift in Sources */,
 			);

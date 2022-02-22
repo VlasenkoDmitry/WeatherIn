@@ -16,7 +16,7 @@ class MainController: UITabBarController {
         self.viewOutputDelegate = presenter
         initialization()
         presenter?.getDataFirstVC()
-
+        firstVC.updateVCLoadingData(data: dataCurrent!, imageWeatherNow: imageWeatherNow)
     }
     
     func initialization() {
