@@ -40,6 +40,7 @@
 		E17A691027C5094F008619FA /* Extension+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690F27C5094F008619FA /* Extension+UILabel.swift */; };
 		E17A691427C536F0008619FA /* Extension+NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A691327C536F0008619FA /* Extension+NSDate.swift */; };
 		E17A691627C53F97008619FA /* UIRectSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A691527C53F97008619FA /* UIRectSide.swift */; };
+		E17A691827C54954008619FA /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A691727C54954008619FA /* Extension+UIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		E17A690F27C5094F008619FA /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
 		E17A691327C536F0008619FA /* Extension+NSDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+NSDate.swift"; sourceTree = "<group>"; };
 		E17A691527C53F97008619FA /* UIRectSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRectSide.swift; sourceTree = "<group>"; };
+		E17A691727C54954008619FA /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				E17A68FF27C4E003008619FA /* Extension+UIView.swift */,
+				E17A691727C54954008619FA /* Extension+UIViewController.swift */,
 				E17A690F27C5094F008619FA /* Extension+UILabel.swift */,
 				E17A690B27C50605008619FA /* Extension+Direction.swift */,
 				E17A691327C536F0008619FA /* Extension+NSDate.swift */,
@@ -372,6 +375,7 @@
 				E10F787927C3931C0088549D /* MainController.swift in Sources */,
 				E10F786D27C390190088549D /* WeatherCurrent.swift in Sources */,
 				E17A691027C5094F008619FA /* Extension+UILabel.swift in Sources */,
+				E17A691827C54954008619FA /* Extension+UIViewController.swift in Sources */,
 				E17A68FE27C4CE96008619FA /* SecondVC.swift in Sources */,
 				E17A690427C4E29B008619FA /* DirectorViewsOfDetailsView.swift in Sources */,
 				E10F788627C3941C0088549D /* PresenterMC.swift in Sources */,

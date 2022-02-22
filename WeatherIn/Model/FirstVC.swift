@@ -22,6 +22,7 @@ class FirstVC: UIViewController {
         layout()
         fillingStaticData()
         formatAllText()
+        addRecognizer(label: shareLabel)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -240,5 +241,14 @@ class FirstVC: UIViewController {
         }
         detailsView.drawDashLine(strokeColor: .gray, lineLength: 4, lineSpacing: 1, corners: .bottom, trimLine: self.view.frame.size.width / 3)
         detailsView.drawDashLine(strokeColor: .gray, lineLength: 4, lineSpacing: 1, corners: .top, trimLine: self.view.frame.size.width / 3)
+    }
+    
+    private func addRecognizer(label: UILabel) {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(tapDetected))
+        shareView.addGestureRecognizer(recognizer)
+    }
+    
+    @objc private func tapDetected(){
+        showAlert(title: "Ok", text: "Погода хорошая")
     }
 }

@@ -25,7 +25,9 @@ class SecondVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.register(FDForecastTableViewCell.self, forCellReuseIdentifier: "FDForecastTableViewCell")
+        self.view.backgroundColor = .white
         layout()
+        navigationBarSetup()
     }
     
     private func layout() {
@@ -40,6 +42,7 @@ class SecondVC: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        navigationBarView.drawLineDifferentColor(colorArray: [.systemPink,.orange,.green,.blue,.yellow,.red],lineWidth: 2, lineLength: 4, lineSpacing:  2, corners: .bottom)
     }
     
     func update(dataFiveDays: WeatherFiveDays, arrayImages: [UIImage?]?){
@@ -88,5 +91,10 @@ extension SecondVC: UITableViewDataSource, UITableViewDelegate {
         for views in cell.allSubViewsOf(type: UIImageView.self) {
             views.removeFromSuperview()
         }
+    }
+    
+    func navigationBarSetup() {
+        navigationBarView.allSubViewsOf(type: UILabel.self)[0].text = dataFiveDays?.city.name
+        navigationBarView.allSubViewsOf(type: UILabel.self)[0].format(size: 17)
     }
 }
