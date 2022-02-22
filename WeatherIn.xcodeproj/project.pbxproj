@@ -35,6 +35,7 @@
 		E17A690227C4E279008619FA /* BuilderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690127C4E279008619FA /* BuilderDetailsView.swift */; };
 		E17A690427C4E29B008619FA /* DirectorViewsOfDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690327C4E29B008619FA /* DirectorViewsOfDetailsView.swift */; };
 		E17A690627C4E2C4008619FA /* imageAndTextSettingsInDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690527C4E2C4008619FA /* imageAndTextSettingsInDetailsView.swift */; };
+		E17A690A27C4E8E5008619FA /* FDForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690927C4E8E5008619FA /* FDForecastTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		E17A690127C4E279008619FA /* BuilderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderDetailsView.swift; sourceTree = "<group>"; };
 		E17A690327C4E29B008619FA /* DirectorViewsOfDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectorViewsOfDetailsView.swift; sourceTree = "<group>"; };
 		E17A690527C4E2C4008619FA /* imageAndTextSettingsInDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageAndTextSettingsInDetailsView.swift; sourceTree = "<group>"; };
+		E17A690927C4E8E5008619FA /* FDForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDForecastTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,8 +194,8 @@
 		E161A0BA27C3898C00BC2AA6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E161A0A527C388E900BC2AA6 /* LaunchingVC.swift */,
-				E10F787827C3931C0088549D /* MainController.swift */,
+				E17A690827C4E8B9008619FA /* Controllers */,
+				E17A690727C4E8B1008619FA /* Cells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -216,6 +218,23 @@
 				E17A690327C4E29B008619FA /* DirectorViewsOfDetailsView.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E17A690727C4E8B1008619FA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E17A690927C4E8E5008619FA /* FDForecastTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		E17A690827C4E8B9008619FA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E161A0A527C388E900BC2AA6 /* LaunchingVC.swift */,
+				E10F787827C3931C0088549D /* MainController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,6 +363,7 @@
 				E10F788627C3941C0088549D /* PresenterMC.swift in Sources */,
 				E10F788427C3940D0088549D /* PresenterLVC.swift in Sources */,
 				E10F788027C393B90088549D /* ViewOutputDelegateMC.swift in Sources */,
+				E17A690A27C4E8E5008619FA /* FDForecastTableViewCell.swift in Sources */,
 				E17A68FC27C4CE88008619FA /* FirstVC.swift in Sources */,
 				E10F786727C38DA40088549D /* ScreenSaver.swift in Sources */,
 				E10F787527C390670088549D /* JSONParser.swift in Sources */,
