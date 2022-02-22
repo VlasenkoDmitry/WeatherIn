@@ -37,6 +37,7 @@
 		E17A690627C4E2C4008619FA /* imageAndTextSettingsInDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690527C4E2C4008619FA /* imageAndTextSettingsInDetailsView.swift */; };
 		E17A690A27C4E8E5008619FA /* FDForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690927C4E8E5008619FA /* FDForecastTableViewCell.swift */; };
 		E17A690C27C50605008619FA /* Extension+Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690B27C50605008619FA /* Extension+Direction.swift */; };
+		E17A691027C5094F008619FA /* Extension+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690F27C5094F008619FA /* Extension+UILabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		E17A690527C4E2C4008619FA /* imageAndTextSettingsInDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageAndTextSettingsInDetailsView.swift; sourceTree = "<group>"; };
 		E17A690927C4E8E5008619FA /* FDForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDForecastTableViewCell.swift; sourceTree = "<group>"; };
 		E17A690B27C50605008619FA /* Extension+Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Direction.swift"; sourceTree = "<group>"; };
+		E17A690F27C5094F008619FA /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				E17A68FF27C4E003008619FA /* Extension+UIView.swift */,
+				E17A690F27C5094F008619FA /* Extension+UILabel.swift */,
 				E17A690B27C50605008619FA /* Extension+Direction.swift */,
 			);
 			path = Extension;
@@ -361,6 +364,7 @@
 				E10F786F27C390310088549D /* WeatherFiveDays.swift in Sources */,
 				E10F787927C3931C0088549D /* MainController.swift in Sources */,
 				E10F786D27C390190088549D /* WeatherCurrent.swift in Sources */,
+				E17A691027C5094F008619FA /* Extension+UILabel.swift in Sources */,
 				E17A68FE27C4CE96008619FA /* SecondVC.swift in Sources */,
 				E17A690427C4E29B008619FA /* DirectorViewsOfDetailsView.swift in Sources */,
 				E10F788627C3941C0088549D /* PresenterMC.swift in Sources */,

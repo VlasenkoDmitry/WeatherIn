@@ -21,6 +21,7 @@ class FirstVC: UIViewController {
         super.viewDidLoad()
         layout()
         fillingStaticData()
+        formatAllText()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -208,5 +209,25 @@ class FirstVC: UIViewController {
         guard let text = textString else { return }
         guard let measure = measure else { return }
         label.text = text + measure
+    }
+    
+    private func formatAllText() {
+        let labelNavigationBar = navigationBarView.allSubViewsOf(type: UILabel.self)[0]
+        labelNavigationBar.format(size: 17)
+        let arrayLabels = cityView.allSubViewsOf(type: UILabel.self)
+        for label in arrayLabels {
+            switch label.tag {
+            case 1:
+                label.format(size: 17)
+            case 2:
+                guard let blueColor =  UIColor(named: "MyBlue") else { return }
+                label.format(size: 34, weight: .light, textColor: blueColor)
+            default:
+                label.format(size: 17)
+            }
+        }
+        let arrayLabelsDetailsView = detailsView.allSubViewsOf(type: UILabel.self)
+        arrayLabelsDetailsView.map({$0.format(size: 15)})
+        shareLabel.format(size: 17, weight: .regular, textColor: .orange)
     }
 }
