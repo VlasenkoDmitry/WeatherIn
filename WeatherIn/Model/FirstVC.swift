@@ -16,9 +16,11 @@ class FirstVC: UIViewController {
     private var pressureView = UIView()
     private var speedWindView = UIView()
     private var degWindView = UIView()
+    private var shareLabel = UILabel()
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
+        fillingStaticData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -62,9 +64,9 @@ class FirstVC: UIViewController {
         builder.reset(view: degWindView)
         degWindView = director.changeView()
         
-        let label = UILabel()
-        shareView.addSubview(label)
-        label.snp.makeConstraints { maker in
+
+        shareView.addSubview(shareLabel)
+        shareLabel.snp.makeConstraints { maker in
             maker.top.left.right.bottom.equalTo(shareView)
         }
             
@@ -136,5 +138,24 @@ class FirstVC: UIViewController {
             maker.height.equalTo(30)
         }
         weatherCurrent.tag = 2
+    }
+    
+    func fillingStaticData() {
+        navigationBarView.allSubViewsOf(type: UILabel.self)[0].text = "Today"
+        shareLabel.text = "Share"
+        installationImage(view: humidityView, image: UIImage(named: "humidity"))
+        installationImage(view: pressureView, image: UIImage(named: "pressure"))
+        installationImage(view: speedWindView, image: UIImage(named: "speedWind"))
+        installationImage(view: degWindView, image: UIImage(named: "degWind"))
+        installationImage(view: precipitationView, image: UIImage(named: "precipitation"))
+    }
+    
+    private func installationImage(view: UIView,image: UIImage?,color: UIColor = .black) {
+        let imageView = view.allSubViewsOf(type: UIImageView.self)[0]
+        imageView.image = image
+        if color != .black {
+            imageView.image?.withRenderingMode(.alwaysTemplate)
+            imageView.tintColor = color
+        }
     }
 }
