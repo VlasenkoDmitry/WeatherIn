@@ -39,6 +39,7 @@
 		E17A690C27C50605008619FA /* Extension+Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690B27C50605008619FA /* Extension+Direction.swift */; };
 		E17A691027C5094F008619FA /* Extension+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A690F27C5094F008619FA /* Extension+UILabel.swift */; };
 		E17A691427C536F0008619FA /* Extension+NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A691327C536F0008619FA /* Extension+NSDate.swift */; };
+		E17A691627C53F97008619FA /* UIRectSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A691527C53F97008619FA /* UIRectSide.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		E17A690B27C50605008619FA /* Extension+Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Direction.swift"; sourceTree = "<group>"; };
 		E17A690F27C5094F008619FA /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
 		E17A691327C536F0008619FA /* Extension+NSDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+NSDate.swift"; sourceTree = "<group>"; };
+		E17A691527C53F97008619FA /* UIRectSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRectSide.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +227,7 @@
 				E17A68FD27C4CE96008619FA /* SecondVC.swift */,
 				E17A690127C4E279008619FA /* BuilderDetailsView.swift */,
 				E17A690327C4E29B008619FA /* DirectorViewsOfDetailsView.swift */,
+				E17A691527C53F97008619FA /* UIRectSide.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				E10F788627C3941C0088549D /* PresenterMC.swift in Sources */,
 				E10F788427C3940D0088549D /* PresenterLVC.swift in Sources */,
 				E10F788027C393B90088549D /* ViewOutputDelegateMC.swift in Sources */,
+				E17A691627C53F97008619FA /* UIRectSide.swift in Sources */,
 				E17A690A27C4E8E5008619FA /* FDForecastTableViewCell.swift in Sources */,
 				E17A68FC27C4CE88008619FA /* FirstVC.swift in Sources */,
 				E10F786727C38DA40088549D /* ScreenSaver.swift in Sources */,

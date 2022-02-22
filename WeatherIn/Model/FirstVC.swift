@@ -26,6 +26,7 @@ class FirstVC: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        drawLine()
     }
     
     
@@ -229,5 +230,15 @@ class FirstVC: UIViewController {
         let arrayLabelsDetailsView = detailsView.allSubViewsOf(type: UILabel.self)
         arrayLabelsDetailsView.map({$0.format(size: 15)})
         shareLabel.format(size: 17, weight: .regular, textColor: .orange)
+    }
+    
+    private func drawLine() {
+        navigationBarView.drawLineDifferentColor(colorArray: [.systemPink,.orange,.green,.blue,.yellow,.red],lineWidth: 2, lineLength: 4, lineSpacing:  2, corners: .bottom)
+        let imageViews = detailsView.allSubViewsOf(type: UIImageView.self)
+        for imageView in imageViews {
+            imageView.drawDashLine(strokeColor: .gray, lineLength: 4, lineSpacing:  2, distanceBorder: 3, corners: .all)
+        }
+        detailsView.drawDashLine(strokeColor: .gray, lineLength: 4, lineSpacing: 1, corners: .bottom, trimLine: self.view.frame.size.width / 3)
+        detailsView.drawDashLine(strokeColor: .gray, lineLength: 4, lineSpacing: 1, corners: .top, trimLine: self.view.frame.size.width / 3)
     }
 }
