@@ -47,7 +47,8 @@ class MainController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presenter?.preparationFiveDaysDataForTable()
-        
+        guard let dataFiveDays = dataFiveDays else { return }
+        secondVC.update(dataFiveDays: dataFiveDays, arrayImages: arrayImages)
     }
 }
 

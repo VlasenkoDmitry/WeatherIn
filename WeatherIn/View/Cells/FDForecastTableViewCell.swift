@@ -31,7 +31,13 @@ class FDForecastTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureNameDay(row:List,indexRow:Int) {
+    func configureNameDayCell(row: List, indexRow: Int) {
+        layoutNameDay()
+        fillingNameDay(row: row, indexRow: indexRow)
+        formatTextNameDay()
+    }
+    
+    private func layoutNameDay() {
         self.addSubview(labelDay)
         labelDay.snp.makeConstraints { maker in
             maker.left.equalTo(self).inset(16)
@@ -39,7 +45,29 @@ class FDForecastTableViewCell: UITableViewCell {
         }
     }
     
-    func configureForecast(data: List,image:UIImage) {
+    private func fillingNameDay(row: List, indexRow: Int) {
+        var text = ""
+        guard let date = row.dt else { return }
+        if indexRow == 0 {
+            text = "TODAY"
+        } else {
+            let timeData = NSDate(timeIntervalSince1970:TimeInterval(date))
+            text = timeData.dayOfWeek()
+        }
+        labelDay.text = text
+    }
+    
+    private func formatTextNameDay() {
+        labelDay.format(size: 17,textAlignment: .left)
+    }
+    
+    func configureForecastCell(data: List,image:UIImage) {
+        layoutForecast()
+        fillingForecast(data: data, image: image)
+        formatTextForecast()
+    }
+    
+    private func layoutForecast() {
         self.addSubview(imageWeatherView)
         
         imageWeatherView.snp.makeConstraints { maker in
@@ -95,6 +123,23 @@ class FDForecastTableViewCell: UITableViewCell {
             maker.right.top.equalTo(forecastView)
             maker.height.equalTo(20)
         }
-
-    }    
+    }
+    
+    private func fillingForecast(data: List,image:UIImage) {
+        weatherImage.image = image
+        guard let blueColor =  UIColor(named: "MyBlue") else {return }
+        temperatureLabel.format(size: 34, textColor: blueColor)
+        guard let temp = data.main.temp else { return  }
+        temperatureLabel.text = String(Int(temp)) + " C°"
+        guard let day = data.dt else { return }
+        guard let main = data.weather[0].main else { return }
+        let timeData = NSDate(timeIntervalSince1970:TimeInterval(day))
+        timeLabel.text = timeData.date()
+        forecastLabel.text = main
+    }
+    
+    private func formatTextForecast() {
+        timeLabel.format(size: 17, textAlignment: .left)
+        forecastLabel.format(size: 15, textAlignment: .left)
+    }
 }

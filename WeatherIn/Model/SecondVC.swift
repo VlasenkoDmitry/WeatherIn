@@ -7,6 +7,8 @@ class SecondVC: UIViewController {
     private var tableView = UITableView()
     private var shortTableCellsArray: Set<Int> = []
     private var dataFiveDays: WeatherFiveDays?
+    private var arrayImages: [UIImage?]?
+    private var numberSelectedRow: Int?
     private var numberOfRowsInSection: Int {
         get {
             if let count = dataFiveDays?.list.count {
@@ -16,8 +18,7 @@ class SecondVC: UIViewController {
             }
         }
     }
-    private var arrayImages: [UIImage?]?
-    private var numberSelectedRow: Int?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,12 @@ class SecondVC: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    func update(dataFiveDays: WeatherFiveDays, arrayImages: [UIImage?]?){
+        self.dataFiveDays = dataFiveDays
+        self.arrayImages = arrayImages
+        tableView.reloadData()
     }
 }
 
@@ -62,12 +69,24 @@ extension SecondVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FDForecastTableViewCell", for: indexPath) as? FDForecastTableViewCell else { return UITableViewCell() }
+        clearCell(cell: cell)
+        if let data = dataFiveDays?.list[indexPath.row], let image = arrayImages?[indexPath.row] {
+            cell.tag = 2
+            cell.configureForecastCell(data: data,image: image)
+        } else {
+            shortTableCellsArray.insert(indexPath.row)
+            guard let row = dataFiveDays?.list[indexPath.row + 1] else { return cell }
+            cell.configureNameDayCell(row: row, indexRow: indexPath.row)
+        }
+        return cell
+    }
+    
+    func clearCell(cell: FDForecastTableViewCell) {
         for views in cell.allSubViewsOf(type: UILabel.self) {
             views.removeFromSuperview()
         }
         for views in cell.allSubViewsOf(type: UIImageView.self) {
             views.removeFromSuperview()
         }
-        return cell
     }
 }
