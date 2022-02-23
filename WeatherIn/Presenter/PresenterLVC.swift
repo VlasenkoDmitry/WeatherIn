@@ -26,15 +26,33 @@ class PresenterLVC: NSObject,CLLocationManagerDelegate {
         let location:CLLocationCoordinate2D = manager.location!.coordinate
         print("lat: \(location.latitude), lon \(location.longitude)")
         locationManager.stopUpdatingLocation()
-        
         let lat = String(location.latitude)
         let lon = String(location.longitude)
         loadData(lat: lat, lon: lon)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("location error: ", error)
-        print("Turn on geolocation")
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            print("Not Determined")
+        case .restricted, .denied:
+            print("Restricted or denied")
+            viewInputDelegate?.showAlertError(title: "", text: "App does not work without geolocation")
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("Authorized")
+        default:
+            print("Unknown status location manager")
+        }
+        switch error._code {
+        case 1:
+            print("User denied access to the location service")
+        case 0:
+            print("Location manager was unable to obtain a location value right now")
+        case 3:
+            print("Location manager can’t determine the heading")
+        default:
+            print("Unknown error")
+        }
     }
     
     func loadData(lat: String, lon: String) {

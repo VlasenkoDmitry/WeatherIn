@@ -31,6 +31,10 @@ class LaunchingVC: UIViewController {
 }
 
 extension LaunchingVC: ViewInputDelegateMC {
+    func showAlertError(title: String, text: String) {
+        showAlert(title: title, text: text)
+    }
+    
     func initializeTabBarController(presenter: PresenterMC) {
         self.screenSaver.remove()
         ActivityIndicator.shared.remove()
