@@ -2,5 +2,5 @@ import Foundation
 import UIKit
 
 protocol ViewOutputDelegateMC: AnyObject {
-   func beginLocationDetermination()
+    func beginLocationDetermination()
 }

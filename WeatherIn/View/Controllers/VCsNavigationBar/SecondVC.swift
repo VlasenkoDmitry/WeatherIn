@@ -19,7 +19,6 @@ class SecondVC: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -39,13 +38,13 @@ class SecondVC: UIViewController {
             maker.left.right.bottom.equalTo(view)
         }
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationBarView.drawLineDifferentColor(colorArray: [.systemPink,.orange,.green,.blue,.yellow,.red],lineWidth: 2, lineLength: 4, lineSpacing:  2, corners: .bottom)
+        navigationBarView.drawLineDifferentColor(colorArray: [.systemPink, .orange, .green, .blue, .yellow, .red],lineWidth: 2, lineLength: 4, lineSpacing:  2, corners: .bottom)
     }
     
-    func update(dataFiveDays: WeatherFiveDays, arrayImages: [UIImage?]?){
+    func update(dataFiveDays: WeatherFiveDays, arrayImages: [UIImage?]?) {
         self.dataFiveDays = dataFiveDays
         self.arrayImages = arrayImages
         tableView.reloadData()
@@ -55,6 +54,9 @@ class SecondVC: UIViewController {
 
 extension SecondVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if shortTableCellsArray.contains(indexPath.row) == false ,indexPath.row == 0 {
+            return 0
+        }
         if shortTableCellsArray.contains(indexPath.row) {
             return 50
         } else {
@@ -73,13 +75,14 @@ extension SecondVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FDForecastTableViewCell", for: indexPath) as? FDForecastTableViewCell else { return UITableViewCell() }
         clearCell(cell: cell)
-        if let data = dataFiveDays?.list[indexPath.row], let image = arrayImages?[indexPath.row] {
+        if let data = dataFiveDays?.list[indexPath.row] {
             cell.tag = 2
-            cell.configureForecastCell(data: data,image: image)
+            cell.configureForecastCell(data: data, image: arrayImages?[indexPath.row])
         } else {
-            shortTableCellsArray.insert(indexPath.row)
-            guard let row = dataFiveDays?.list[indexPath.row + 1] else { return cell }
-            cell.configureNameDayCell(row: row, indexRow: indexPath.row)
+            if let row = dataFiveDays?.list[indexPath.row + 1] {
+                cell.configureNameDayCell(row: row, indexRow: indexPath.row)
+                shortTableCellsArray.insert(indexPath.row)
+            }
         }
         return cell
     }

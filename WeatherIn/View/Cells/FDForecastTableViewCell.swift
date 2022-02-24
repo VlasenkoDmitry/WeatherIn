@@ -9,25 +9,25 @@ import UIKit
 
 class FDForecastTableViewCell: UITableViewCell {
     
-    var labelDay = UILabel()
-    var imageWeatherView = UIView()
-    var timeforecastView = UIView()
-    var timeView = UIView()
-    var forecastView = UIView()
-    var temperatureView = UIView()
-    var weatherImage = UIImageView()
-    var timeLabel = UILabel()
-    var forecastLabel = UILabel()
-    var temperatureLabel = UILabel()
+    private lazy var labelDay = UILabel()
+    private lazy var imageWeatherView = UIView()
+    private lazy var timeforecastView = UIView()
+    private lazy var timeView = UIView()
+    private lazy var forecastView = UIView()
+    private lazy var temperatureView = UIView()
+    private lazy var weatherImage = UIImageView()
+    private lazy var timeLabel = UILabel()
+    private lazy var forecastLabel = UILabel()
+    private lazy var temperatureLabel = UILabel()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -58,10 +58,10 @@ class FDForecastTableViewCell: UITableViewCell {
     }
     
     private func formatTextNameDay() {
-        labelDay.format(size: 17,textAlignment: .left)
+        labelDay.format(size: 17, textAlignment: .left)
     }
     
-    func configureForecastCell(data: List,image:UIImage) {
+    func configureForecastCell(data: List, image:UIImage?) {
         layoutForecast()
         fillingForecast(data: data, image: image)
         formatTextForecast()
@@ -75,7 +75,7 @@ class FDForecastTableViewCell: UITableViewCell {
             maker.top.bottom.equalTo(self)
             maker.width.equalTo(imageWeatherView.snp.height)
         }
-
+        
         self.addSubview(temperatureView)
         temperatureView.snp.makeConstraints { maker in
             maker.right.equalTo(self).inset(16)
@@ -110,7 +110,7 @@ class FDForecastTableViewCell: UITableViewCell {
         temperatureLabel.snp.makeConstraints { maker in
             maker.bottom.left.right.top.equalTo(temperatureView)
         }
-
+        
         timeView.addSubview(timeLabel)
         timeLabel.snp.makeConstraints { maker in
             maker.left.equalTo(timeView).inset(20)
@@ -125,9 +125,11 @@ class FDForecastTableViewCell: UITableViewCell {
         }
     }
     
-    private func fillingForecast(data: List,image:UIImage) {
-        weatherImage.image = image
-        guard let blueColor =  UIColor(named: "MyBlue") else {return }
+    private func fillingForecast(data: List, image:UIImage?) {
+        if let image = image {
+            weatherImage.image = image
+        }
+        guard let blueColor =  UIColor(named: "MyBlue") else { return }
         temperatureLabel.format(size: 34, textColor: blueColor)
         guard let temp = data.main.temp else { return  }
         temperatureLabel.text = String(Int(temp)) + " C°"

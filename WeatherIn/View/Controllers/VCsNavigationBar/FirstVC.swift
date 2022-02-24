@@ -17,6 +17,7 @@ class FirstVC: UIViewController {
     private var speedWindView = UIView()
     private var degWindView = UIView()
     private var shareLabel = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
@@ -24,12 +25,11 @@ class FirstVC: UIViewController {
         formatAllText()
         addRecognizer(label: shareLabel)
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         drawLine()
     }
-    
     
     private func layout() {
         self.view.backgroundColor = .white
@@ -47,12 +47,12 @@ class FirstVC: UIViewController {
             maker.left.right.equalToSuperview().inset(0)
             maker.bottom.equalToSuperview().inset(100)
         }
-
+        
         verticalDivisionBlockEqual(firstView: cityView, secondView: detailsShareView, mainView: mainView)
         verticalDivisionBlockEqual(firstView: detailsView, secondView: shareView, mainView: detailsShareView)
         verticalDivisionBlockEqual(firstView: detailsFirstLineView, secondView: detailsSecondLineView, mainView: detailsView)
-        horizontalDivisionBlockEqual(views: [humidityView,precipitationView,pressureView], mainView: detailsFirstLineView)
-        horizontalDivisionBlockEqual(views: [speedWindView,degWindView], mainView: detailsSecondLineView)
+        horizontalDivisionBlockEqual(views: [humidityView, precipitationView, pressureView], mainView: detailsFirstLineView)
+        horizontalDivisionBlockEqual(views: [speedWindView, degWindView], mainView: detailsSecondLineView)
         
         let builder = BuilderDetailsView()
         let director = DirectorViewsOfDetailsView(builder: builder)
@@ -67,12 +67,12 @@ class FirstVC: UIViewController {
         builder.reset(view: degWindView)
         degWindView = director.changeView()
         
-
+        
         shareView.addSubview(shareLabel)
         shareLabel.snp.makeConstraints { maker in
             maker.top.left.right.bottom.equalTo(shareView)
         }
-            
+        
         layoutViewAsMain(view: cityView)
     }
     
@@ -92,8 +92,8 @@ class FirstVC: UIViewController {
         }
     }
     
-    private func horizontalDivisionBlockEqual(views:[UIView], mainView: UIView) {
-        for (index,view) in views.enumerated() {
+    private func horizontalDivisionBlockEqual(views: [UIView], mainView: UIView) {
+        for (index, view) in views.enumerated() {
             if index == 0 {
                 mainView.addSubview(view)
                 view.snp.makeConstraints { maker in
@@ -111,7 +111,7 @@ class FirstVC: UIViewController {
                 view.snp.makeConstraints { maker in
                     maker.top.bottom.right.equalTo(mainView)
                     maker.left.equalTo(views[index - 1].snp.right)
-                  maker.width.equalTo(views[index-1])
+                    maker.width.equalTo(views[index-1])
                 }
             }
         }
@@ -153,7 +153,7 @@ class FirstVC: UIViewController {
         installationImage(view: precipitationView, image: UIImage(named: "precipitation"))
     }
     
-    private func installationImage(view: UIView,image: UIImage?,color: UIColor = .black) {
+    private func installationImage(view: UIView, image: UIImage?, color: UIColor = .black) {
         let imageView = view.allSubViewsOf(type: UIImageView.self)[0]
         imageView.image = image
         if color != .black {
@@ -182,9 +182,9 @@ class FirstVC: UIViewController {
             installationTextLabel(view: speedWindView, textString: String(Int(textWindSpeed)), measure: " km/h")
         }
         if let textdegWind = data.wind.deg?.direction {
-            installationTextLabel(view: degWindView, textString: textdegWind.description , measure: "")
+            installationTextLabel(view: degWindView, textString: textdegWind.description, measure: "")
         }
-        installationImage(view: cityView, image: imageWeatherNow,color: .yellow)
+        installationImage(view: cityView, image: imageWeatherNow, color: .yellow)
     }
     
     private func updateMainViewLabels(data: WeatherCurrent) {
@@ -206,7 +206,7 @@ class FirstVC: UIViewController {
         }
     }
     
-    private func installationTextLabel(view: UIView,textString: String?, measure: String? ) {
+    private func installationTextLabel(view: UIView, textString: String?, measure: String? ) {
         let label = view.allSubViewsOf(type: UILabel.self)[0]
         guard let text = textString else { return }
         guard let measure = measure else { return }
@@ -234,7 +234,7 @@ class FirstVC: UIViewController {
     }
     
     private func drawLine() {
-        navigationBarView.drawLineDifferentColor(colorArray: [.systemPink,.orange,.green,.blue,.yellow,.red],lineWidth: 2, lineLength: 4, lineSpacing:  2, corners: .bottom)
+        navigationBarView.drawLineDifferentColor(colorArray: [.systemPink, .orange, .green, .blue, .yellow, .red],lineWidth: 2, lineLength: 4, lineSpacing:  2, corners: .bottom)
         let imageViews = detailsView.allSubViewsOf(type: UIImageView.self)
         for imageView in imageViews {
             imageView.drawDashLine(strokeColor: .gray, lineLength: 4, lineSpacing:  2, distanceBorder: 3, corners: .all)
@@ -248,7 +248,7 @@ class FirstVC: UIViewController {
         shareView.addGestureRecognizer(recognizer)
     }
     
-    @objc private func tapDetected(){
-        showAlert(title: "Ok", text: "Погода хорошая")
+    @objc private func tapDetected() {
+        showAlert(title: "Ok", text: "Good weather...")
     }
 }

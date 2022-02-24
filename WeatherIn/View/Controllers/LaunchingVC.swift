@@ -3,12 +3,12 @@ import UIKit
 import CoreLocation
 
 class LaunchingVC: UIViewController {
-    let screenSaver = ScreenSaver()
-    var presenter = PresenterLVC()
+    private let screenSaver = ScreenSaver()
+    private var presenter = PresenterLVC()
     private weak var viewOutputDelegate: ViewOutputDelegateMC?
-    var lat = 0
-    var lon = 0
-    var nameCity = ""
+    private var lat = 0
+    private var lon = 0
+    private var nameCity = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,7 @@ class LaunchingVC: UIViewController {
         super.viewDidAppear(animated)
         presenter.beginLocationDetermination()
     }
-
+    
     func initialization() {
         screenSaver.add(view: view)
         ActivityIndicator.shared.addIndicator(view: view, format: .black)

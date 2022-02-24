@@ -20,6 +20,6 @@ struct Temp: Decodable {
 }
 
 struct WeatherMain: Decodable {
-    let main:String?
+    let main: String?
     let icon: String?
 }

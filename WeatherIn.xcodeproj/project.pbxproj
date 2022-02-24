@@ -226,8 +226,6 @@
 				E10F787227C390560088549D /* LinkLoadingWeather.swift */,
 				E10F787427C390670088549D /* JSONParser.swift */,
 				E10F787627C3907E0088549D /* Enum+TypeRequest.swift */,
-				E17A68FB27C4CE88008619FA /* FirstVC.swift */,
-				E17A68FD27C4CE96008619FA /* SecondVC.swift */,
 				E17A690127C4E279008619FA /* BuilderDetailsView.swift */,
 				E17A690327C4E29B008619FA /* DirectorViewsOfDetailsView.swift */,
 				E17A691527C53F97008619FA /* UIRectSide.swift */,
@@ -247,9 +245,19 @@
 			isa = PBXGroup;
 			children = (
 				E161A0A527C388E900BC2AA6 /* LaunchingVC.swift */,
+				E1CDBAF727C789330043D7E7 /* VCsNavigationBar */,
 				E10F787827C3931C0088549D /* MainController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E1CDBAF727C789330043D7E7 /* VCsNavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				E17A68FB27C4CE88008619FA /* FirstVC.swift */,
+				E17A68FD27C4CE96008619FA /* SecondVC.swift */,
+			);
+			path = VCsNavigationBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

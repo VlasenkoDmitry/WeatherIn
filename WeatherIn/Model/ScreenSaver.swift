@@ -3,7 +3,6 @@ import UIKit
 
 class ScreenSaver {
     private var viewImage = UIImageView()
-    private var view = UIView()
     
     init() {
         

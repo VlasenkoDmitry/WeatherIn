@@ -2,10 +2,10 @@ import Foundation
 import UIKit
 
 class PresenterMC {
-    var dataCurrent: WeatherCurrent?
-    var dataFiveDays: WeatherFiveDays?
-    var imageWeatherNow: UIImage?
-    var arrayImages: [UIImage?]?
+    private var dataCurrent: WeatherCurrent?
+    private var dataFiveDays: WeatherFiveDays?
+    private var imageWeatherNow: UIImage?
+    private var arrayImages: [UIImage?]?
     weak private var viewInputDelegate: ViewInputDelegateLVC?
     
     init(dataCurrent: WeatherCurrent?, dataFiveDays: WeatherFiveDays?, imageWeatherNow: UIImage?, arrayImages: [UIImage?]? ) {
@@ -19,7 +19,7 @@ class PresenterMC {
         self.viewInputDelegate = viewInputDelegate
     }
     
-    func preparation(){
+    private func preparation() {
         guard let firstDate = dataFiveDays?.list[0]?.dt else { return }
         var countDay = Int(Double(firstDate) / Double(86400))
         guard let data = dataFiveDays?.list else { return }
@@ -49,7 +49,7 @@ extension PresenterMC: ViewOutputDelegateLVC {
         guard let dataCurrent = dataCurrent else { return }
         viewInputDelegate?.setupDataFirstVC(dataCurrent: dataCurrent, imageWeatherNow: imageWeatherNow)
     }
-   
+    
     func preparationFiveDaysDataForTable() {
         preparation()
         guard let dataFiveDays = dataFiveDays else { return }

@@ -1,13 +1,13 @@
 import UIKit
 
 class MainController: UITabBarController {
-    let firstVC = FirstVC()
-    let secondVC = SecondVC()
+    private let firstVC = FirstVC()
+    private let secondVC = SecondVC()
     var presenter: PresenterMC?
-    var dataCurrent: WeatherCurrent?
-    var dataFiveDays: WeatherFiveDays?
-    var imageWeatherNow: UIImage?
-    var arrayImages: [UIImage?]?
+    private var dataCurrent: WeatherCurrent?
+    private var dataFiveDays: WeatherFiveDays?
+    private var imageWeatherNow: UIImage?
+    private var arrayImages: [UIImage?]?
     private weak var viewOutputDelegate: ViewOutputDelegateLVC?
     
     override func viewDidLoad() {
@@ -42,7 +42,7 @@ class MainController: UITabBarController {
         self.tabBar.layer.borderWidth = 0.50
         self.tabBar.layer.borderColor = UIColor.gray.cgColor
         self.tabBar.backgroundColor = .white
-        self.viewControllers = [firstVC,secondVC]
+        self.viewControllers = [firstVC, secondVC]
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -64,6 +64,6 @@ extension MainController: ViewInputDelegateLVC {
         self.imageWeatherNow = imageWeatherNow
     }
     
-
+    
 }
 
