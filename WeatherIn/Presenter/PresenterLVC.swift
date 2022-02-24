@@ -149,7 +149,3 @@ extension PresenterLVC: ViewOutputDelegateMC {
     }
 }
 
-enum LoadingErrors: Error {
-    case jsonParseError
-    case loadDataError
-}

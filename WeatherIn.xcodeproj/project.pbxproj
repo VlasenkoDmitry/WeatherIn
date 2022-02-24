@@ -41,6 +41,7 @@
 		E17A691427C536F0008619FA /* Extension+NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A691327C536F0008619FA /* Extension+NSDate.swift */; };
 		E17A691627C53F97008619FA /* UIRectSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A691527C53F97008619FA /* UIRectSide.swift */; };
 		E17A691827C54954008619FA /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A691727C54954008619FA /* Extension+UIViewController.swift */; };
+		E1CDBAF927C797990043D7E7 /* Enum+LoadingErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CDBAF827C797990043D7E7 /* Enum+LoadingErrors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		E17A691327C536F0008619FA /* Extension+NSDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+NSDate.swift"; sourceTree = "<group>"; };
 		E17A691527C53F97008619FA /* UIRectSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRectSide.swift; sourceTree = "<group>"; };
 		E17A691727C54954008619FA /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
+		E1CDBAF827C797990043D7E7 /* Enum+LoadingErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+LoadingErrors.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +231,7 @@
 				E17A690127C4E279008619FA /* BuilderDetailsView.swift */,
 				E17A690327C4E29B008619FA /* DirectorViewsOfDetailsView.swift */,
 				E17A691527C53F97008619FA /* UIRectSide.swift */,
+				E1CDBAF827C797990043D7E7 /* Enum+LoadingErrors.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				E17A690427C4E29B008619FA /* DirectorViewsOfDetailsView.swift in Sources */,
 				E10F788627C3941C0088549D /* PresenterMC.swift in Sources */,
 				E10F788427C3940D0088549D /* PresenterLVC.swift in Sources */,
+				E1CDBAF927C797990043D7E7 /* Enum+LoadingErrors.swift in Sources */,
 				E10F788027C393B90088549D /* ViewOutputDelegateMC.swift in Sources */,
 				E17A691627C53F97008619FA /* UIRectSide.swift in Sources */,
 				E17A690A27C4E8E5008619FA /* FDForecastTableViewCell.swift in Sources */,
