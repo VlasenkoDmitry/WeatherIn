@@ -12,9 +12,12 @@ class MainController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialization()
+    }
+    
+    func updateInform() {
         presenter?.setViewInputDelegate(viewInputDelegate: self)
         self.viewOutputDelegate = presenter
-        initialization()
         presenter?.getDataFirstVC()
         guard let dataCurrent = dataCurrent else { return }
         firstVC.updateVCLoadingData(data: dataCurrent, imageWeatherNow: imageWeatherNow)
@@ -47,6 +50,7 @@ class MainController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        updateInform()
         presenter?.preparationFiveDaysDataForTable()
         guard let dataFiveDays = dataFiveDays else { return }
         secondVC.update(dataFiveDays: dataFiveDays, arrayImages: arrayImages)
@@ -63,7 +67,5 @@ extension MainController: ViewInputDelegateLVC {
         self.dataCurrent = dataCurrent
         self.imageWeatherNow = imageWeatherNow
     }
-    
-    
 }
 

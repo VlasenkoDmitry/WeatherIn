@@ -39,7 +39,7 @@ extension LaunchingVC: ViewInputDelegateMC {
     func initializeTabBarController(presenter: PresenterMC) {
         self.screenSaver.remove()
         actInd.remove()
-        guard let controler = self.storyboard?.instantiateViewController(identifier: "MainController") as? MainController else { return }
+        let controler = MainController()
         controler.presenter = presenter
         self.navigationController?.pushViewController(controler, animated: true)
     }
