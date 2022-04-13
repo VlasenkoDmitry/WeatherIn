@@ -11,6 +11,8 @@ class PresenterLVC: NSObject, CLLocationManagerDelegate {
     private var imageWeatherNow: UIImage?
     weak private var viewInputDelegate: ViewInputDelegateMC?
     private var newError: Error?
+    private var download = Download()
+    
     func setViewInputDelegate(viewInputDelegate:ViewInputDelegateMC?) {
         self.viewInputDelegate = viewInputDelegate
     }
@@ -69,7 +71,7 @@ class PresenterLVC: NSObject, CLLocationManagerDelegate {
     private func loadData(lat: String, lon: String) throws {
         let loadingForecastsGroup = DispatchGroup()
         loadingForecastsGroup.enter()
-        Download.shared.requestWeather(typeRequest: .FiveDays, lat: lat, lon: lon) { [weak self] newResult in
+        download.requestWeather(typeRequest: .FiveDays, lat: lat, lon: lon) { [weak self] newResult in
             switch newResult {
             case .success(let data):
                 self?.dataFiveDays = JSONParser().decode(data: data, classRequest: WeatherFiveDays.self)
@@ -85,7 +87,7 @@ class PresenterLVC: NSObject, CLLocationManagerDelegate {
                 for (index, element) in list.enumerated() {
                     loadingForecastsGroup.enter()
                     guard let icon = element?.weather[0].icon else { return }
-                    Download.shared.requestImage(name: icon) { [weak self] imageData in
+                    self?.download.requestImage(name: icon) { [weak self] imageData in
                         semaphore.wait()
                         if let imageData = imageData {
                             self?.arrayImages[index] = UIImage(data: imageData)
@@ -103,7 +105,7 @@ class PresenterLVC: NSObject, CLLocationManagerDelegate {
         }
         
         loadingForecastsGroup.enter()
-        Download.shared.requestWeather(typeRequest: .Current, lat: lat, lon: lon) { [weak self] newResult in
+        download.requestWeather(typeRequest: .Current, lat: lat, lon: lon) { [weak self] newResult in
             switch newResult {
             case .success(let data):
                 self?.dataCurrent = JSONParser().decode(data: data, classRequest: WeatherCurrent.self)
@@ -114,7 +116,7 @@ class PresenterLVC: NSObject, CLLocationManagerDelegate {
                 print("Current")
                 guard let name = self?.dataCurrent?.weather[0].icon else { return }
                 loadingForecastsGroup.enter()
-                Download.shared.requestImage(name: name) { [weak self] imageData in
+                self?.download.requestImage(name: name) { [weak self] imageData in
                     if let imageData = imageData {
                         self?.imageWeatherNow = UIImage(data: imageData)
                     } else {

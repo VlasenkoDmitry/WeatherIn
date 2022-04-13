@@ -2,14 +2,14 @@ import Foundation
 import UIKit
 
 class Download {
-    static let shared = Download()
+    private var linkLoadingWeather = LinkLoadingWeather()
     
     func requestWeather (typeRequest request: TypeRequest,
                          lat: String,
                          lon: String,
                          completion: @escaping (Result<Data, Error>) -> Void) {
-        LinkLoadingWeather.shared.changeParametrs(lon: lon, lat: lat)
-        guard let url = LinkLoadingWeather.shared.getURL(request.rawValue) else { return }
+        linkLoadingWeather.changeParametrs(lon: lon, lat: lat)
+        guard let url = linkLoadingWeather.getURL(request.rawValue) else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"

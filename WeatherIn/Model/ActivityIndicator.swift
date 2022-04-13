@@ -1,9 +1,7 @@
 import Foundation
 import UIKit
 
-class ActivityIndicator {
-    static let shared = ActivityIndicator()
-    
+class ActivityIndicator {   
     private var view: UIView?
     private var indicator = UIActivityIndicatorView(style: .large)
     

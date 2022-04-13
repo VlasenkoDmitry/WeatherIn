@@ -9,6 +9,7 @@ class LaunchingVC: UIViewController {
     private var lat = 0
     private var lon = 0
     private var nameCity = ""
+    private var actInd = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +25,8 @@ class LaunchingVC: UIViewController {
     
     func initialization() {
         screenSaver.add(view: view)
-        ActivityIndicator.shared.addIndicator(view: view, format: .black)
-        ActivityIndicator.shared.start()
+        actInd.addIndicator(view: view, format: .black)
+        actInd.start()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 }
@@ -37,7 +38,7 @@ extension LaunchingVC: ViewInputDelegateMC {
     
     func initializeTabBarController(presenter: PresenterMC) {
         self.screenSaver.remove()
-        ActivityIndicator.shared.remove()
+        actInd.remove()
         guard let controler = self.storyboard?.instantiateViewController(identifier: "MainController") as? MainController else { return }
         controler.presenter = presenter
         self.navigationController?.pushViewController(controler, animated: true)

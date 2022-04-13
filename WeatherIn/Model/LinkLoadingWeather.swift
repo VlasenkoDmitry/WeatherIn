@@ -1,7 +1,6 @@
 import Foundation
 
 class LinkLoadingWeather {
-    static let shared = LinkLoadingWeather()
     static var urlParameters = [
         "lat": "0",
         "lon": "0",
