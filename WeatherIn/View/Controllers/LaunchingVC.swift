@@ -2,19 +2,17 @@ import Foundation
 import UIKit
 import CoreLocation
 
+//launching screen, begin location determination and load data in presenter
 class LaunchingVC: UIViewController {
     private let screenSaver = ScreenSaver()
-    private var presenter = PresenterLVC()
-    private weak var viewOutputDelegate: ViewOutputDelegateMC?
-    private var lat = 0
-    private var lon = 0
-    private var nameCity = ""
+    private var presenter = PresenterLaunchingVC()
+    private weak var viewInputputDelegate: ViewInputDelegateLaunchingVC?
     private var actInd = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.setViewInputDelegate(viewInputDelegate: self)
-        self.viewOutputDelegate = presenter
+        presenter.setViewOutputDelegate(viewOutputDelegate: self)
+        self.viewInputputDelegate = presenter
         initialization()
     }
     
@@ -23,7 +21,7 @@ class LaunchingVC: UIViewController {
         presenter.beginLocationDetermination()
     }
     
-    func initialization() {
+    private func initialization() {
         screenSaver.add(view: view)
         actInd.addIndicator(view: view, format: .black)
         actInd.start()
@@ -31,16 +29,10 @@ class LaunchingVC: UIViewController {
     }
 }
 
-extension LaunchingVC: ViewInputDelegateMC {
-    func showAlertError(title: String, text: String) {
-        showAlert(title: title, text: text)
-    }
-    
-    func initializeTabBarController(presenter: PresenterMC) {
-        self.screenSaver.remove()
-        actInd.remove()
-        let controler = MainController()
-        controler.presenter = presenter
+//after finding coordinates and downloading all data - open main controller(tab controller which consists of two vc: first and second)
+extension LaunchingVC: ViewOutputDelegateLaunchingVC {
+    func initializeTabBarController(presenter: PresenterMainVC) {
+        let controler = MainController(presenter: presenter)
         self.navigationController?.pushViewController(controler, animated: true)
     }
 }

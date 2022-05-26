@@ -1,6 +1,5 @@
 import Foundation
-import UIKit
 
-protocol ViewOutputDelegateMC: AnyObject {
+protocol ViewInputDelegateLaunchingVC: AnyObject {
     func beginLocationDetermination()
 }

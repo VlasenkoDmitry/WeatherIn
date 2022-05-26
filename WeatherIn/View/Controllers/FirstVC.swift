@@ -17,6 +17,8 @@ class FirstVC: UIViewController {
     private var speedWindView = UIView()
     private var degWindView = UIView()
     private var shareLabel = UILabel()
+    var presenter = PresenterFirstVC()
+    private weak var viewInputputDelegate: ViewInputDelegateFirstVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,9 @@ class FirstVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        presenter.setViewOutputDelegate(viewOutputDelegate: self)
+        self.viewInputputDelegate = presenter
+        presenter.takeDataFirstVC()
         drawLine()
     }
     
@@ -76,7 +81,7 @@ class FirstVC: UIViewController {
         layoutViewAsMain(view: cityView)
     }
     
-    func verticalDivisionBlockEqual(firstView: UIView, secondView: UIView, mainView: UIView) {
+    private func verticalDivisionBlockEqual(firstView: UIView, secondView: UIView, mainView: UIView) {
         mainView.addSubview(firstView)
         mainView.addSubview(secondView)
         firstView.snp.makeConstraints { maker in
@@ -143,7 +148,7 @@ class FirstVC: UIViewController {
         weatherCurrent.tag = 2
     }
     
-    func fillingStaticData() {
+    private func fillingStaticData() {
         navigationBarView.allSubViewsOf(type: UILabel.self)[0].text = "Today"
         shareLabel.text = "Share"
         installationImage(view: humidityView, image: UIImage(named: "humidity"))
@@ -162,7 +167,7 @@ class FirstVC: UIViewController {
         }
     }
     
-    func updateVCLoadingData(data: WeatherCurrent, imageWeatherNow: UIImage?) {
+    private func updateVC(data: WeatherCurrent, imageWeatherNow: UIImage?) {
         updateMainViewLabels(data: data)
         if let textHumidity = data.main.humidity {
             installationTextLabel(view: humidityView, textString: String(Int(textHumidity)), measure: " %")
@@ -250,5 +255,12 @@ class FirstVC: UIViewController {
     
     @objc private func tapDetected() {
         showAlert(title: "Ok", text: "Good weather...")
+    }
+}
+
+extension FirstVC: ViewOutputDelegateFirstVC {
+    func publishDataFirstVC(dataCurrent: WeatherCurrent?, imageWeatherNow: UIImage?) {
+        guard let dataCurrent = dataCurrent else { return }
+        updateVC(data: dataCurrent, imageWeatherNow: imageWeatherNow)
     }
 }

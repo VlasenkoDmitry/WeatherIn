@@ -9,3 +9,5 @@ protocol imageAndTextSettingsInDetailsView {
     func formatLabel()
     func returnView() -> UIView
 }
+
+

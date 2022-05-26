@@ -1,6 +1,11 @@
 import Foundation
 import UIKit
 
+ enum FormatIndicator {
+    case black
+    case yellow
+}
+
 class ActivityIndicator {   
     private var view: UIView?
     private var indicator = UIActivityIndicatorView(style: .large)

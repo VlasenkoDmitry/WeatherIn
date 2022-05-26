@@ -5,7 +5,7 @@ import SnapKit
 class BuilderDetailsView: imageAndTextSettingsInDetailsView {
     private var view = UIView()
     
-    func reset(view:UIView) {
+    func reset(view: UIView) {
         self.view = view
     }
     

@@ -12,7 +12,7 @@ class DirectorViewsOfDetailsView {
         self.builder = builder
     }
     
-    func changeView() -> UIView{
+    func changeView() -> UIView {
         builder.addImageView()
         builder.addTextLabel()
         builder.formatImageView()

@@ -8,7 +8,6 @@ class SecondVC: UIViewController {
     private var shortTableCellsArray: Set<Int> = []
     private var dataFiveDays: WeatherFiveDays?
     private var arrayImages: [UIImage?]?
-    private var numberSelectedRow: Int?
     private var numberOfRowsInSection: Int {
         get {
             if let count = dataFiveDays?.list.count {
@@ -18,6 +17,8 @@ class SecondVC: UIViewController {
             }
         }
     }
+    var presenter = PresenterSecondVC()
+    private weak var viewInputputDelegate: ViewInputDelegateSecondVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,13 @@ class SecondVC: UIViewController {
         self.view.backgroundColor = .white
         layout()
         navigationBarSetup()
+        presenter.setViewOutputDelegate(viewOutputDelegate: self)
+        self.viewInputputDelegate = presenter
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.downloadDataSecondVC()
     }
     
     private func layout() {
@@ -44,14 +52,19 @@ class SecondVC: UIViewController {
         navigationBarView.drawLineDifferentColor(colorArray: [.systemPink, .orange, .green, .blue, .yellow, .red],lineWidth: 2, lineLength: 4, lineSpacing:  2, corners: .bottom)
     }
     
-    func update(dataFiveDays: WeatherFiveDays, arrayImages: [UIImage?]?) {
+    private func updateTableView(dataFiveDays: WeatherFiveDays, arrayImages: [UIImage?]?){
         self.dataFiveDays = dataFiveDays
         self.arrayImages = arrayImages
+        navigationBarSetup()
         tableView.reloadData()
+    }
+    private func navigationBarSetup() {
+        navigationBarView.allSubViewsOf(type: UILabel.self)[0].text = dataFiveDays?.city.name
+        navigationBarView.allSubViewsOf(type: UILabel.self)[0].format(size: 17)
     }
 }
 
-
+//  delegates to work with table view
 extension SecondVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if shortTableCellsArray.contains(indexPath.row) == false ,indexPath.row == 0 {
@@ -75,6 +88,7 @@ extension SecondVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FDForecastTableViewCell", for: indexPath) as? FDForecastTableViewCell else { return UITableViewCell() }
         clearCell(cell: cell)
+        // before that in dataFiveDays was add extra data to devide by days of week. If data is nil - we create special cell in tableview
         if let data = dataFiveDays?.list[indexPath.row] {
             cell.tag = 2
             cell.configureForecastCell(data: data, image: arrayImages?[indexPath.row])
@@ -86,8 +100,9 @@ extension SecondVC: UITableViewDataSource, UITableViewDelegate {
         }
         return cell
     }
-    
-    func clearCell(cell: FDForecastTableViewCell) {
+
+    // clean all Labels and ImageViews before reuse
+    private func clearCell(cell: FDForecastTableViewCell) {
         for views in cell.allSubViewsOf(type: UILabel.self) {
             views.removeFromSuperview()
         }
@@ -95,9 +110,11 @@ extension SecondVC: UITableViewDataSource, UITableViewDelegate {
             views.removeFromSuperview()
         }
     }
-    
-    func navigationBarSetup() {
-        navigationBarView.allSubViewsOf(type: UILabel.self)[0].text = dataFiveDays?.city.name
-        navigationBarView.allSubViewsOf(type: UILabel.self)[0].format(size: 17)
+}
+
+// update tableview cells after adding days of week in dataFiveDays(PresenterSecondVC)
+extension SecondVC: ViewOutputDelegateSecondVC {
+    func publishDataSecondVC(dataFiveDays: WeatherFiveDays, arrayImages: [UIImage?]?) {
+        updateTableView(dataFiveDays: dataFiveDays, arrayImages: arrayImages)
     }
 }

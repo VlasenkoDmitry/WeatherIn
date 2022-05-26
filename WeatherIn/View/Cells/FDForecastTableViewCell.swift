@@ -1,10 +1,3 @@
-//
-//  FDForecastTableViewCell.swift
-//  WeatherIn
-//
-//  Created by Ap on 22.02.22.
-//
-
 import UIKit
 
 class FDForecastTableViewCell: UITableViewCell {
@@ -51,7 +44,7 @@ class FDForecastTableViewCell: UITableViewCell {
         if indexRow == 0 {
             text = "TODAY"
         } else {
-            let timeData = NSDate(timeIntervalSince1970:TimeInterval(date))
+            let timeData = NSDate(timeIntervalSince1970: TimeInterval(date))
             text = timeData.dayOfWeek()
         }
         labelDay.text = text
@@ -61,7 +54,7 @@ class FDForecastTableViewCell: UITableViewCell {
         labelDay.format(size: 17, textAlignment: .left)
     }
     
-    func configureForecastCell(data: List, image:UIImage?) {
+    func configureForecastCell(data: List, image: UIImage?) {
         layoutForecast()
         fillingForecast(data: data, image: image)
         formatTextForecast()
@@ -125,7 +118,7 @@ class FDForecastTableViewCell: UITableViewCell {
         }
     }
     
-    private func fillingForecast(data: List, image:UIImage?) {
+    private func fillingForecast(data: List, image: UIImage?) {
         if let image = image {
             weatherImage.image = image
         }
@@ -135,7 +128,7 @@ class FDForecastTableViewCell: UITableViewCell {
         temperatureLabel.text = String(Int(temp)) + " C°"
         guard let day = data.dt else { return }
         guard let main = data.weather[0].main else { return }
-        let timeData = NSDate(timeIntervalSince1970:TimeInterval(day))
+        let timeData = NSDate(timeIntervalSince1970: TimeInterval(day))
         timeLabel.text = timeData.date()
         forecastLabel.text = main
     }

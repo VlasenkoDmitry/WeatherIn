@@ -3,27 +3,26 @@ import UIKit
 class MainController: UITabBarController {
     private let firstVC = FirstVC()
     private let secondVC = SecondVC()
-    var presenter: PresenterMC?
-    private var dataCurrent: WeatherCurrent?
-    private var dataFiveDays: WeatherFiveDays?
-    private var imageWeatherNow: UIImage?
-    private var arrayImages: [UIImage?]?
-    private weak var viewOutputDelegate: ViewOutputDelegateLVC?
+    private var presenter : PresenterMainVC
+    private weak var viewInputDelegate: ViewInputDelegateMainVC?
+    
+    init(presenter: PresenterMainVC) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.setViewInputDelegate(viewInputDelegate: self)
+        self.viewInputDelegate = presenter
         initialization()
     }
     
-    func updateInform() {
-        presenter?.setViewInputDelegate(viewInputDelegate: self)
-        self.viewOutputDelegate = presenter
-        presenter?.getDataFirstVC()
-        guard let dataCurrent = dataCurrent else { return }
-        firstVC.updateVCLoadingData(data: dataCurrent, imageWeatherNow: imageWeatherNow)
-    }
-    
-    func initialization() {
+    private func initialization() {
         firstVC.title = "Today"
         secondVC.title = "Forecast"
         let sunBlack = UIImage(systemName: "sun.max")
@@ -45,27 +44,22 @@ class MainController: UITabBarController {
         self.tabBar.layer.borderWidth = 0.50
         self.tabBar.layer.borderColor = UIColor.gray.cgColor
         self.tabBar.backgroundColor = .white
-        self.viewControllers = [firstVC, secondVC]
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateInform()
-        presenter?.preparationFiveDaysDataForTable()
-        guard let dataFiveDays = dataFiveDays else { return }
-        secondVC.update(dataFiveDays: dataFiveDays, arrayImages: arrayImages)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.takeDataPresentersViewControllers(firstVC: firstVC, secondVC: secondVC)
     }
 }
 
-extension MainController: ViewInputDelegateLVC {
-    func setupDataSecondVC(dataFiveDays: WeatherFiveDays, arrayImages: [UIImage?]?) {
-        self.dataFiveDays = dataFiveDays
-        self.arrayImages = arrayImages
-    }
-    
-    func setupDataFirstVC(dataCurrent: WeatherCurrent, imageWeatherNow: UIImage?) {
-        self.dataCurrent = dataCurrent
-        self.imageWeatherNow = imageWeatherNow
+// extension to delegate from presenterMainVC. Adding view controllers to tab bar after adding all weathers data to presenters First and Second controllers
+extension MainController: ViewOutputDelegateMainVC {
+    func loadViewControllersToTabBar() {
+        self.viewControllers = [firstVC, secondVC]
     }
 }
 
