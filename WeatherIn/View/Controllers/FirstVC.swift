@@ -72,7 +72,6 @@ class FirstVC: UIViewController {
         builder.reset(view: degWindView)
         degWindView = director.changeView()
         
-        
         shareView.addSubview(shareLabel)
         shareLabel.snp.makeConstraints { maker in
             maker.top.left.right.bottom.equalTo(shareView)

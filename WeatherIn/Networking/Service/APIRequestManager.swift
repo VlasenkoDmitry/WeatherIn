@@ -93,13 +93,13 @@ enum APIRequestManager: APIRequestProtocol,EndPointType {
             onCompletion(nil, NetworkResponse.failed.rawValue)
         }
     }
+    
     /// This function calls the URLRequest passed to it, maps the result and returns it. It is called by GET and POST.
     static func makeRequest<T: Codable>(session: URLSession, request: URLRequest, model: T.Type, onCompletion: @escaping(T?, String?) -> ()) {
         session.dataTask(with: request) { data, response, error in
             if error != nil {
                 onCompletion(nil, "Please check your network connection.")
             }
-            
             if let response = response as? HTTPURLResponse {
                 let result = handleNetworkResponse(response: response)
                 switch result {
