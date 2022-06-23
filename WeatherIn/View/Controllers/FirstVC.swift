@@ -6,9 +6,9 @@ class FirstVC: UIViewController {
     private var navigationBarView = UIView()
     private var mainView = UIView()
     private var cityView = UIView()
-    private var detailsShareView = UIView()
+    private var detailsDescriptionView = UIView()
     private var detailsView = UIView()
-    private var shareView = UIView()
+    private var descriptionView = UIView()
     private var detailsFirstLineView = UIView()
     private var detailsSecondLineView = UIView()
     private var humidityView = UIView()
@@ -16,7 +16,7 @@ class FirstVC: UIViewController {
     private var pressureView = UIView()
     private var speedWindView = UIView()
     private var degWindView = UIView()
-    private var shareLabel = UILabel()
+    private var descriptionLabel = UILabel()
     var presenter = PresenterFirstVC()
     private weak var viewInputputDelegate: ViewInputDelegateFirstVC?
     
@@ -25,7 +25,7 @@ class FirstVC: UIViewController {
         layout()
         fillingStaticData()
         formatAllText()
-        addRecognizer(label: shareLabel)
+        addRecognizer(label: descriptionLabel)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,8 +53,8 @@ class FirstVC: UIViewController {
             maker.bottom.equalToSuperview().inset(100)
         }
         
-        verticalDivisionBlockEqual(firstView: cityView, secondView: detailsShareView, mainView: mainView)
-        verticalDivisionBlockEqual(firstView: detailsView, secondView: shareView, mainView: detailsShareView)
+        verticalDivisionBlockEqual(firstView: cityView, secondView: detailsDescriptionView, mainView: mainView)
+        verticalDivisionBlockEqual(firstView: detailsView, secondView: descriptionView, mainView: detailsDescriptionView)
         verticalDivisionBlockEqual(firstView: detailsFirstLineView, secondView: detailsSecondLineView, mainView: detailsView)
         horizontalDivisionBlockEqual(views: [humidityView, precipitationView, pressureView], mainView: detailsFirstLineView)
         horizontalDivisionBlockEqual(views: [speedWindView, degWindView], mainView: detailsSecondLineView)
@@ -72,9 +72,9 @@ class FirstVC: UIViewController {
         builder.reset(view: degWindView)
         degWindView = director.changeView()
         
-        shareView.addSubview(shareLabel)
-        shareLabel.snp.makeConstraints { maker in
-            maker.top.left.right.bottom.equalTo(shareView)
+        descriptionView.addSubview(descriptionLabel)
+        descriptionLabel.snp.makeConstraints { maker in
+            maker.top.left.right.bottom.equalTo(descriptionView)
         }
         
         layoutViewAsMain(view: cityView)
@@ -148,8 +148,8 @@ class FirstVC: UIViewController {
     }
     
     private func fillingStaticData() {
-        navigationBarView.allSubViewsOf(type: UILabel.self)[0].text = "Today"
-        shareLabel.text = "Share"
+        navigationBarView.allSubViewsOf(type: UILabel.self)[0].text = "Today".localize()
+        descriptionLabel.text = "Description".localize()
         installationImage(view: humidityView, image: UIImage(named: "humidity"))
         installationImage(view: pressureView, image: UIImage(named: "pressure"))
         installationImage(view: speedWindView, image: UIImage(named: "speedWind"))
@@ -178,15 +178,16 @@ class FirstVC: UIViewController {
         if let textRain = data.snow?["1h"] {
             textPrecipitation = String(textRain)
         }
-        installationTextLabel(view: precipitationView, textString: textPrecipitation, measure: " mm")
+        installationTextLabel(view: precipitationView, textString: textPrecipitation, measure: " mm".localize())
         if let textpressure = data.main.pressure {
-            installationTextLabel(view: pressureView, textString: String(Int(textpressure)), measure: " pHA")
+            installationTextLabel(view: pressureView, textString: String(Int(textpressure)), measure: " hPa".localize())
         }
         if let textWindSpeed = data.wind.speed {
-            installationTextLabel(view: speedWindView, textString: String(Int(textWindSpeed)), measure: " km/h")
+            installationTextLabel(view: speedWindView, textString: String(Int(textWindSpeed)), measure: " km/h".localize())
         }
         if let textdegWind = data.wind.deg?.direction {
-            installationTextLabel(view: degWindView, textString: textdegWind.description, measure: "")
+            var t = textdegWind.description.localize()
+            installationTextLabel(view: degWindView, textString: textdegWind.description.localize(), measure: "")
         }
         installationImage(view: cityView, image: imageWeatherNow, color: .yellow)
     }
@@ -198,12 +199,12 @@ class FirstVC: UIViewController {
             case 1:
                 guard let city = data.name else { return }
                 guard let country = data.sys.country else { return }
-                let location = city + " ," + country
+                let location = city + ", " + country
                 label.text = location
             case 2:
                 guard let temp = data.main.temp else { return }
-                guard let main = data.weather[0].main else { return }
-                label.text = String(Int(temp)) + "°" + " | " + main
+                guard let description = data.weather[0].description else { return }
+                label.text = String(Int(temp)) + "°" + " | " + description.firstUppercased()
             default:
                 label.text = ""
             }
@@ -234,7 +235,7 @@ class FirstVC: UIViewController {
         }
         let arrayLabelsDetailsView = detailsView.allSubViewsOf(type: UILabel.self)
         arrayLabelsDetailsView.map({$0.format(size: 15)})
-        shareLabel.format(size: 17, weight: .regular, textColor: .orange)
+        descriptionLabel.format(size: 17, weight: .regular, textColor: .orange)
     }
     
     private func drawLine() {
@@ -249,11 +250,11 @@ class FirstVC: UIViewController {
     
     private func addRecognizer(label: UILabel) {
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(tapDetected))
-        shareView.addGestureRecognizer(recognizer)
+        descriptionView.addGestureRecognizer(recognizer)
     }
     
     @objc private func tapDetected() {
-        showAlert(title: "Ok", text: "Good weather...")
+        showAlert(title: "Ok".localize(), text: "Good weather...".localize())
     }
 }
 

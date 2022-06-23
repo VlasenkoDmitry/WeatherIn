@@ -1,0 +1,32 @@
+/* 
+  Localizable.strings
+  WeatherIn
+
+  Created by Ap on 23.06.22.
+  
+*/
+"Today" = "Today";
+"Forecast" = "Forecast";
+"Description" = "Description";
+" mm" = " mm";
+" hPa" = " hPa";
+" km/h" = " km/h";
+"Good weather..." = "Good weather...";
+"Ok" = "Ok";
+"TODAY" = "TODAY";
+"N" = "N";
+"NNe" = "NNE";
+"NE" = "NE";
+"ENE" = "ENE";
+"E" = "E";
+"ESE" = "ESE";
+"SE" = "SE";
+"SSE" = "SSE";
+"S" = "S";
+"SSW" = "SSW";
+"SW" = "SW";
+"WSW" = "WSW";
+"W" = "W";
+"WNW" = "WNW";
+"NW" = "NW";
+"NNW" = "NNW";

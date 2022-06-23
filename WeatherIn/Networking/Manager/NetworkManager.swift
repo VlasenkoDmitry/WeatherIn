@@ -2,9 +2,11 @@ import Foundation
 import UIKit
 
 struct NetworkManager {
-    func getCurrent(lat: String,lon: String,onCompletion: @escaping (WeatherCurrent?, String?) -> ()) {
+    
+    
+    func getCurrent(lat: String,lon: String, language: String, onCompletion: @escaping (WeatherCurrent?, String?) -> ()) {
         let parametrs: Parameters = ["lat": lat, "lon": lon]
-        APIRequestManager.makeGetRequest( type: .current, coordinates: parametrs) { (result: WeatherCurrent?, error) in
+        APIRequestManager.makeGetRequest( type: .current, coordinates: parametrs,language: language) { (result: WeatherCurrent?, error) in
             if let error = error {
                 print("Get current - ", error)
             }
@@ -12,9 +14,9 @@ struct NetworkManager {
         }
     }
     
-    func getFiveDays(lat: String,lon: String,onCompletion: @escaping (WeatherFiveDays?, String?) -> ()) {
+    func getFiveDays(lat: String,lon: String, language: String, onCompletion: @escaping (WeatherFiveDays?, String?) -> ()) {
         let parametrs: Parameters = ["lat": lat, "lon": lon]
-        APIRequestManager.makeGetRequest(type: .fiveDays, coordinates: parametrs) { (result: WeatherFiveDays?, error) in
+        APIRequestManager.makeGetRequest(type: .fiveDays, coordinates: parametrs, language: language) { (result: WeatherFiveDays?, error) in
             if let error = error {
                 print("Get five days - ", error)
             }

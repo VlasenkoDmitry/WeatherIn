@@ -23,8 +23,8 @@ class MainController: UITabBarController {
     }
     
     private func initialization() {
-        firstVC.title = "Today"
-        secondVC.title = "Forecast"
+        firstVC.title = "Today".localize()
+        secondVC.title = "Forecast".localize()
         let sunBlack = UIImage(systemName: "sun.max")
         sunBlack?.withTintColor(.black, renderingMode: .alwaysOriginal)
         let sunBlue = UIImage(systemName: "sun.max")

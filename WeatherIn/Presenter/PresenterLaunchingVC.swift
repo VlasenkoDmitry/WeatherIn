@@ -11,6 +11,7 @@ class PresenterLaunchingVC {
     private var newError: String?
     private let networkManager = NetworkManager()
     private var locationManager = LocationManager()
+    private let languageApp = Locale.current.languageCode
     
     func setViewOutputDelegate(viewOutputDelegate:ViewOutputDelegateLaunchingVC?) {
         self.viewOutputDelegate = viewOutputDelegate
@@ -23,7 +24,8 @@ class PresenterLaunchingVC {
     }
     //function to start download data after finding coordinates
     private func downloadAllData(lat: String, lon: String) {
-        loadData(lat: lat, lon: lon, completion: { package,error in
+        guard let language = languageApp else { return }
+        loadData(lat: lat, lon: lon, language: language, completion: { package,error in
             if error == nil {
                 let presenter = PresenterMainVC(dataCurrent: package?.0, dataFiveDays:  package?.1, imageWeatherNow:  package?.2, arrayImages:  package?.3)
                 self.viewOutputDelegate?.initializeTabBarController(presenter: presenter)
@@ -31,12 +33,12 @@ class PresenterLaunchingVC {
         })
     }
     
-    private func loadData(lat: String, lon: String, completion: @escaping (PackageData?,String?)->()) {
+    private func loadData(lat: String, lon: String, language: String, completion: @escaping (PackageData?,String?)->()) {
         //to synchronize download data use DispatchGroup
         let loadingForecastsGroup = DispatchGroup()
         
         loadingForecastsGroup.enter()
-        networkManager.getFiveDays(lat: lat, lon: lon) { result, error in
+        networkManager.getFiveDays(lat: lat, lon: lon, language: language) { result, error in
             if error == nil && result != nil {
                 self.dataFiveDays = result
                 guard let list = result?.list else { return }
@@ -63,7 +65,7 @@ class PresenterLaunchingVC {
         }
         
         loadingForecastsGroup.enter()
-        networkManager.getCurrent(lat: lat, lon: lon) { result, error in
+        networkManager.getCurrent(lat: lat, lon: lon, language: language) { result, error in
             if error == nil && result != nil {
                 self.dataCurrent = result
                 print("Current")

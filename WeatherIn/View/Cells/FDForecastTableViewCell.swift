@@ -42,7 +42,7 @@ class FDForecastTableViewCell: UITableViewCell {
         var text = ""
         guard let date = row.dt else { return }
         if indexRow == 0 {
-            text = "TODAY"
+            text = "TODAY".localize()
         } else {
             let timeData = NSDate(timeIntervalSince1970: TimeInterval(date))
             text = timeData.dayOfWeek()
@@ -127,10 +127,10 @@ class FDForecastTableViewCell: UITableViewCell {
         guard let temp = data.main.temp else { return  }
         temperatureLabel.text = String(Int(temp)) + " C°"
         guard let day = data.dt else { return }
-        guard let main = data.weather[0].main else { return }
+        guard let description = data.weather[0].description else { return }
         let timeData = NSDate(timeIntervalSince1970: TimeInterval(day))
         timeLabel.text = timeData.date()
-        forecastLabel.text = main
+        forecastLabel.text = description.firstUppercased()
     }
     
     private func formatTextForecast() {

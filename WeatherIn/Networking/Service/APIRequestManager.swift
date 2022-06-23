@@ -2,7 +2,7 @@ import Foundation
 
 protocol APIRequestProtocol {
     static func makeRequest<T: Codable>(session: URLSession, request: URLRequest, model: T.Type, onCompletion: @escaping(T?, String?) -> ())
-    static func makeGetRequest<T: Codable> (type: TypeRequest , coordinates: Parameters, onCompletion: @escaping(T?, String?) -> ())
+    static func makeGetRequest<T: Codable> (type: TypeRequest , coordinates: Parameters, language: String, onCompletion: @escaping(T?, String?) -> ())
     static func makeGetImage(name: String, onCompletion: @escaping(Data?,Error?) -> ())
 }
 
@@ -21,7 +21,7 @@ enum TypeRequest {
 
 enum APIRequestManager: APIRequestProtocol,EndPointType {
     
-    case getAPIWeather(type: TypeRequest ,coordinates: Parameters)
+    case getAPIWeather(type: TypeRequest ,coordinates: Parameters, language: String)
     case getImage(name: String)
     
     var apiKeyWeather: String {
@@ -49,7 +49,7 @@ enum APIRequestManager: APIRequestProtocol,EndPointType {
     
     var path: String {
         switch self {
-        case .getAPIWeather(let type, _):
+        case .getAPIWeather(let type, _, _):
             switch type {
             case .current:
                 return "/data/2.5/weather"
@@ -70,11 +70,12 @@ enum APIRequestManager: APIRequestProtocol,EndPointType {
     
     var systemAdditionalParameters: Parameters {
         switch self {
-        case .getAPIWeather(let type, _):
+        case .getAPIWeather(let type, _, let language):
             switch type {
             case .current,.fiveDays:
                 return ["appid": apiKeyWeather,
-                        "units": "metric"]
+                        "units": "metric",
+                        "lang": language]
             }
         case .getImage:
             return [:]
@@ -82,10 +83,11 @@ enum APIRequestManager: APIRequestProtocol,EndPointType {
     }
     
     /// Generic GET Request
-    static func makeGetRequest<T: Codable> (type: TypeRequest ,coordinates: Parameters, onCompletion: @escaping(T?, String?) -> ()) {
+    static func makeGetRequest<T: Codable> (type: TypeRequest ,coordinates: Parameters, language: String, onCompletion: @escaping(T?, String?) -> ()) {
         let session = URLSession.shared
         do {
-            let request = try Self.getAPIWeather(type: type, coordinates: coordinates).asURLRequest()
+            let request = try Self.getAPIWeather(type: type, coordinates: coordinates, language: language).asURLRequest()
+            print(request)
             makeRequest(session: session, request: request, model: T.self) { (result, error) in
                 onCompletion(result, error)
             }
@@ -141,7 +143,7 @@ enum APIRequestManager: APIRequestProtocol,EndPointType {
         var urlRequest = try URLComponentsCollect()
         var parameters = Parameters()
         switch self {
-        case .getAPIWeather(_ , let queries):
+        case .getAPIWeather(_ , let queries, _):
             /// we are just going through all the key and value pairs in the queries and adding the same to parameters.. For Each Key-Value pair,  parameters[key] = value
             parameters = mergParametrs(left: queries, right: systemAdditionalParameters)
             URLEncoding.queryString.encode(&urlRequest, with: parameters)
