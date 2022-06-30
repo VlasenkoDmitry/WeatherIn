@@ -1,12 +1,12 @@
 import Foundation
 import UIKit
 
-class SecondVC: UIViewController {
+class ForecastVC: UIViewController {
     private var statusBarView = UIView()
     private var navigationBarView = UIView()
     private var tableView = UITableView()
     private var shortTableCellsArray: Set<Int> = []
-    private var dataFiveDays: WeatherFiveDays?
+    private var dataFiveDays: WeatherForecastFiveDays?
     private var arrayImages: [UIImage?]?
     private var numberOfRowsInSection: Int {
         get {
@@ -52,7 +52,7 @@ class SecondVC: UIViewController {
         navigationBarView.drawLineDifferentColor(colorArray: [.systemPink, .orange, .green, .blue, .yellow, .red],lineWidth: 2, lineLength: 4, lineSpacing:  2, corners: .bottom)
     }
     
-    private func updateTableView(dataFiveDays: WeatherFiveDays, arrayImages: [UIImage?]?){
+    private func updateTableView(dataFiveDays: WeatherForecastFiveDays, arrayImages: [UIImage?]?){
         self.dataFiveDays = dataFiveDays
         self.arrayImages = arrayImages
         navigationBarSetup()
@@ -65,7 +65,7 @@ class SecondVC: UIViewController {
 }
 
 //  delegates to work with table view
-extension SecondVC: UITableViewDataSource, UITableViewDelegate {
+extension ForecastVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if shortTableCellsArray.contains(indexPath.row) == false ,indexPath.row == 0 {
             return 0
@@ -113,8 +113,8 @@ extension SecondVC: UITableViewDataSource, UITableViewDelegate {
 }
 
 // update tableview cells after adding days of week in dataFiveDays(PresenterSecondVC)
-extension SecondVC: ViewOutputDelegateSecondVC {
-    func publishDataSecondVC(dataFiveDays: WeatherFiveDays, arrayImages: [UIImage?]?) {
+extension ForecastVC: ViewOutputDelegateSecondVC {
+    func publishDataSecondVC(dataFiveDays: WeatherForecastFiveDays, arrayImages: [UIImage?]?) {
         updateTableView(dataFiveDays: dataFiveDays, arrayImages: arrayImages)
     }
 }

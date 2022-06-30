@@ -112,4 +112,9 @@ extension UIView {
             self.layer.addSublayer(shapeLayer)
         }
     }
+    
+    func setTextToLabel(text: String?, measure: String?) {
+        let label = self.allSubViewsOf(type: UILabel.self)[0]
+        label.text = "\(text ?? "") " + "\(measure ?? "")"
+    }
 }

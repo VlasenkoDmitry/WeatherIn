@@ -3,8 +3,8 @@ import CoreLocation
 import UIKit
 
 class PresenterLaunchingVC {
-    private var dataFiveDays: WeatherFiveDays?
-    private var dataCurrent: WeatherCurrent?
+    private var dataFiveDays: WeatherForecastFiveDays?
+    private var dataCurrent: WeatherToday?
     private var arrayImages: [UIImage?] = []
     private var imageWeatherNow: UIImage?
     weak private var viewOutputDelegate: ViewOutputDelegateLaunchingVC?

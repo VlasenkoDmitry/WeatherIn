@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 class PresenterFirstVC {
-    var dataCurrent: WeatherCurrent?
+    var dataCurrent: WeatherToday?
     var imageWeatherNow: UIImage?
     weak private var viewOutputDelegate: ViewOutputDelegateFirstVC?
     

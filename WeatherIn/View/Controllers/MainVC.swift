@@ -1,8 +1,8 @@
 import UIKit
 
-class MainController: UITabBarController {
-    private let firstVC = FirstVC()
-    private let secondVC = SecondVC()
+class MainVC: UITabBarController {
+    private let firstVC = TodayVC()
+    private let secondVC = ForecastVC()
     private var presenter : PresenterMainVC
     private weak var viewInputDelegate: ViewInputDelegateMainVC?
     
@@ -57,7 +57,7 @@ class MainController: UITabBarController {
 }
 
 // extension to delegate from presenterMainVC. Adding view controllers to tab bar after adding all weathers data to presenters First and Second controllers
-extension MainController: ViewOutputDelegateMainVC {
+extension MainVC: ViewOutputDelegateMainVC {
     func loadViewControllersToTabBar() {
         self.viewControllers = [firstVC, secondVC]
     }

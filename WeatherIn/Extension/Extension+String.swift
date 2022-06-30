@@ -22,7 +22,9 @@ extension String {
             return LanguagesApp.English.rawValue
         }
     }
+    
     func firstUppercased() -> String {
         return prefix(1).uppercased() + dropFirst()
     }
+    
 }

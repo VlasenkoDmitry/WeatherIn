@@ -1,6 +1,6 @@
 import Foundation
 
-struct WeatherFiveDays: Codable {
+struct WeatherForecastFiveDays: Codable {
     let city: Name
     var list: [List?]
 }

@@ -1,14 +1,14 @@
 import Foundation
 import UIKit
 
-class DirectorViewsOfDetailsView {
-    private var builder: imageAndTextSettingsInDetailsView
+class DirectorViewParameterWeather {
+    private var builder: ParameterWeather
     
-    init(builder: imageAndTextSettingsInDetailsView) {
+    init(builder: ParameterWeather) {
         self.builder = builder
     }
     
-    func setBuilder(builder: imageAndTextSettingsInDetailsView) {
+    func setBuilder(builder: ParameterWeather) {
         self.builder = builder
     }
     

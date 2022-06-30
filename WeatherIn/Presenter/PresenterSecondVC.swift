@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 class PresenterSecondVC {
-    var dataFiveDays: WeatherFiveDays?
+    var dataFiveDays: WeatherForecastFiveDays?
     var arrayImages: [UIImage?]?
     
     weak private var viewOutputDelegate: ViewOutputDelegateSecondVC?

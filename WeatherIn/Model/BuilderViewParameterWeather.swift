@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class BuilderDetailsView: imageAndTextSettingsInDetailsView {
+class BuilderViewParameterWeather: ParameterWeather {
     private var view = UIView()
     
     func reset(view: UIView) {

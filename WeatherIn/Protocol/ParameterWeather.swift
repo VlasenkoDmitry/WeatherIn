@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-protocol imageAndTextSettingsInDetailsView {
+protocol ParameterWeather {
     func reset(view: UIView)
     func addImageView()
     func addTextLabel()

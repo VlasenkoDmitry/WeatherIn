@@ -1,16 +1,17 @@
 import Foundation
 import UIKit
+import SnapKit
 
-class FirstVC: UIViewController {
+class TodayVC: UIViewController {
     private var statusBarView = UIView()
     private var navigationBarView = UIView()
-    private var mainView = UIView()
+    private var pageContentView = UIView()
     private var cityView = UIView()
-    private var detailsDescriptionView = UIView()
-    private var detailsView = UIView()
+    private var parametersAndDescriptionView = UIView()
+    private var parametersView = UIView()
     private var descriptionView = UIView()
-    private var detailsFirstLineView = UIView()
-    private var detailsSecondLineView = UIView()
+    private var parametersFirstLineView = UIView()
+    private var parametersSecondLineView = UIView()
     private var humidityView = UIView()
     private var precipitationView = UIView()
     private var pressureView = UIView()
@@ -23,7 +24,7 @@ class FirstVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
-        fillingStaticData()
+        fillingStaticDataParameters()
         formatAllText()
         addRecognizer(label: descriptionLabel)
     }
@@ -46,21 +47,21 @@ class FirstVC: UIViewController {
             maker.top.equalTo(statusBarView.snp.bottom)
             maker.left.right.equalToSuperview().inset(0)
         }
-        view.addSubview(mainView)
-        mainView.snp.makeConstraints { maker in
+        view.addSubview(pageContentView)
+        pageContentView.snp.makeConstraints { maker in
             maker.top.equalTo(navigationBarView.snp.bottom)
             maker.left.right.equalToSuperview().inset(0)
             maker.bottom.equalToSuperview().inset(100)
         }
         
-        verticalDivisionBlockEqual(firstView: cityView, secondView: detailsDescriptionView, mainView: mainView)
-        verticalDivisionBlockEqual(firstView: detailsView, secondView: descriptionView, mainView: detailsDescriptionView)
-        verticalDivisionBlockEqual(firstView: detailsFirstLineView, secondView: detailsSecondLineView, mainView: detailsView)
-        horizontalDivisionBlockEqual(views: [humidityView, precipitationView, pressureView], mainView: detailsFirstLineView)
-        horizontalDivisionBlockEqual(views: [speedWindView, degWindView], mainView: detailsSecondLineView)
+        insertingTwoEqualViewsVertically(firstView: cityView, secondView: parametersAndDescriptionView, mainView: pageContentView)
+        insertingTwoEqualViewsVertically(firstView: parametersView, secondView: descriptionView, mainView: parametersAndDescriptionView)
+        insertingTwoEqualViewsVertically(firstView: parametersFirstLineView, secondView: parametersSecondLineView, mainView: parametersView)
+        insertingEqualViewsHorizontally(views: [humidityView, precipitationView, pressureView], mainView: parametersFirstLineView)
+        insertingEqualViewsHorizontally(views: [speedWindView, degWindView], mainView: parametersSecondLineView)
         
-        let builder = BuilderDetailsView()
-        let director = DirectorViewsOfDetailsView(builder: builder)
+        let builder = BuilderViewParameterWeather()
+        let director = DirectorViewParameterWeather(builder: builder)
         builder.reset(view: humidityView)
         humidityView = director.changeView()
         builder.reset(view: precipitationView)
@@ -77,10 +78,10 @@ class FirstVC: UIViewController {
             maker.top.left.right.bottom.equalTo(descriptionView)
         }
         
-        layoutViewAsMain(view: cityView)
+        layoutCityView()
     }
     
-    private func verticalDivisionBlockEqual(firstView: UIView, secondView: UIView, mainView: UIView) {
+    private func insertingTwoEqualViewsVertically(firstView: UIView, secondView: UIView, mainView: UIView) {
         mainView.addSubview(firstView)
         mainView.addSubview(secondView)
         firstView.snp.makeConstraints { maker in
@@ -96,7 +97,7 @@ class FirstVC: UIViewController {
         }
     }
     
-    private func horizontalDivisionBlockEqual(views: [UIView], mainView: UIView) {
+    private func insertingEqualViewsHorizontally(views: [UIView], mainView: UIView) {
         for (index, view) in views.enumerated() {
             if index == 0 {
                 mainView.addSubview(view)
@@ -121,16 +122,16 @@ class FirstVC: UIViewController {
         }
     }
     
-    private func layoutViewAsMain(view: UIView) {
+    private func layoutCityView() {
         let imageView = UIImageView()
-        view.addSubview(imageView)
+        cityView.addSubview(imageView)
         imageView.snp.makeConstraints { maker in
-            maker.top.equalTo(view.snp.top).inset(100)
-            maker.center.equalTo(view)
+            maker.top.equalTo(cityView.snp.top).inset(100)
+            maker.center.equalTo(cityView)
             maker.width.equalTo(imageView.snp.height)
         }
         let locationLabel = UILabel()
-        view.addSubview(locationLabel)
+        cityView.addSubview(locationLabel)
         locationLabel.snp.makeConstraints { maker in
             maker.top.equalTo(imageView.snp.bottom).inset(-10)
             maker.left.right.equalTo(view)
@@ -138,7 +139,7 @@ class FirstVC: UIViewController {
         }
         locationLabel.tag = 1
         let weatherCurrent = UILabel()
-        view.addSubview(weatherCurrent)
+        cityView.addSubview(weatherCurrent)
         weatherCurrent.snp.makeConstraints { maker in
             maker.top.equalTo(locationLabel.snp.bottom).inset(-10)
             maker.left.right.equalTo(view)
@@ -147,17 +148,17 @@ class FirstVC: UIViewController {
         weatherCurrent.tag = 2
     }
     
-    private func fillingStaticData() {
+    private func fillingStaticDataParameters() {
         navigationBarView.allSubViewsOf(type: UILabel.self)[0].text = "Today".localize()
         descriptionLabel.text = "Description".localize()
-        installationImage(view: humidityView, image: UIImage(named: "humidity"))
-        installationImage(view: pressureView, image: UIImage(named: "pressure"))
-        installationImage(view: speedWindView, image: UIImage(named: "speedWind"))
-        installationImage(view: degWindView, image: UIImage(named: "degWind"))
-        installationImage(view: precipitationView, image: UIImage(named: "precipitation"))
+        imageToView(view: humidityView, image: UIImage(named: "humidity"))
+        imageToView(view: pressureView, image: UIImage(named: "pressure"))
+        imageToView(view: speedWindView, image: UIImage(named: "speedWind"))
+        imageToView(view: degWindView, image: UIImage(named: "degWind"))
+        imageToView(view: precipitationView, image: UIImage(named: "precipitation"))
     }
     
-    private func installationImage(view: UIView, image: UIImage?, color: UIColor = .black) {
+    private func imageToView(view: UIView, image: UIImage?, color: UIColor = .black) {
         let imageView = view.allSubViewsOf(type: UIImageView.self)[0]
         imageView.image = image
         if color != .black {
@@ -166,33 +167,13 @@ class FirstVC: UIViewController {
         }
     }
     
-    private func updateVC(data: WeatherCurrent, imageWeatherNow: UIImage?) {
-        updateMainViewLabels(data: data)
-        if let textHumidity = data.main.humidity {
-            installationTextLabel(view: humidityView, textString: String(Int(textHumidity)), measure: " %")
-        }
-        var textPrecipitation = "0"
-        if let textSnow = data.rain?["1h"] {
-            textPrecipitation = String(textSnow)
-        }
-        if let textRain = data.snow?["1h"] {
-            textPrecipitation = String(textRain)
-        }
-        installationTextLabel(view: precipitationView, textString: textPrecipitation, measure: " mm".localize())
-        if let textpressure = data.main.pressure {
-            installationTextLabel(view: pressureView, textString: String(Int(textpressure)), measure: " hPa".localize())
-        }
-        if let textWindSpeed = data.wind.speed {
-            installationTextLabel(view: speedWindView, textString: String(Int(textWindSpeed)), measure: " km/h".localize())
-        }
-        if let textdegWind = data.wind.deg?.direction {
-            var t = textdegWind.description.localize()
-            installationTextLabel(view: degWindView, textString: textdegWind.description.localize(), measure: "")
-        }
-        installationImage(view: cityView, image: imageWeatherNow, color: .yellow)
+    private func updateTodayVC(data: WeatherToday, imageWeatherNow: UIImage?) {
+        updateCityViewLabels(data: data)
+        updateParametersViewLabels(data: data)
+        imageToView(view: cityView, image: imageWeatherNow, color: .yellow)
     }
     
-    private func updateMainViewLabels(data: WeatherCurrent) {
+    private func updateCityViewLabels(data: WeatherToday) {
         let labelArray = cityView.allSubViewsOf(type: UILabel.self)
         for label in labelArray {
             switch label.tag {
@@ -211,12 +192,35 @@ class FirstVC: UIViewController {
         }
     }
     
-    private func installationTextLabel(view: UIView, textString: String?, measure: String? ) {
-        let label = view.allSubViewsOf(type: UILabel.self)[0]
-        guard let text = textString else { return }
-        guard let measure = measure else { return }
-        label.text = text + measure
+    private func updateParametersViewLabels(data: WeatherToday) {
+        if let textHumidity = data.main.humidity {
+            humidityView.setTextToLabel(text: String(Int(textHumidity)), measure: " %")
+        }
+        var textPrecipitation = "0"
+        if let textSnow = data.rain?["1h"] {
+            textPrecipitation = String(textSnow)
+        }
+        if let textRain = data.snow?["1h"] {
+            textPrecipitation = String(textRain)
+        }
+        precipitationView.setTextToLabel(text: textPrecipitation, measure: " mm".localize())
+        if let textpressure = data.main.pressure {
+            pressureView.setTextToLabel(text: String(Int(textpressure)), measure: " hPa".localize())
+        }
+        if let textWindSpeed = data.wind.speed {
+            speedWindView.setTextToLabel(text: String(Int(textWindSpeed)), measure: " km/h".localize())
+        }
+        if let textdegWind = data.wind.deg?.direction {
+            degWindView.setTextToLabel(text: textdegWind.description.localize(), measure: nil)
+        }
     }
+    
+//    private func setTextToLabelThroughView(view: UIView, textString: String?, measure: String? ) {
+//        let label = view.allSubViewsOf(type: UILabel.self)[0]
+//        guard let text = textString else { return }
+//        guard let measure = measure else { return }
+//        label.text = text + measure
+//    }
     
     private func formatAllText() {
         let labelNavigationBar = navigationBarView.allSubViewsOf(type: UILabel.self)[0]
@@ -233,19 +237,19 @@ class FirstVC: UIViewController {
                 label.format(size: 17)
             }
         }
-        let arrayLabelsDetailsView = detailsView.allSubViewsOf(type: UILabel.self)
-        arrayLabelsDetailsView.map({$0.format(size: 15)})
+        let arrayLabelsParametersView = parametersView.allSubViewsOf(type: UILabel.self)
+        arrayLabelsParametersView.map({$0.format(size: 15)})
         descriptionLabel.format(size: 17, weight: .regular, textColor: .orange)
     }
     
     private func drawLine() {
         navigationBarView.drawLineDifferentColor(colorArray: [.systemPink, .orange, .green, .blue, .yellow, .red],lineWidth: 2, lineLength: 4, lineSpacing:  2, corners: .bottom)
-        let imageViews = detailsView.allSubViewsOf(type: UIImageView.self)
+        let imageViews = parametersView.allSubViewsOf(type: UIImageView.self)
         for imageView in imageViews {
             imageView.drawDashLine(strokeColor: .gray, lineLength: 4, lineSpacing:  2, distanceBorder: 3, corners: .all)
         }
-        detailsView.drawDashLine(strokeColor: .gray, lineLength: 4, lineSpacing: 1, corners: .bottom, trimLine: self.view.frame.size.width / 3)
-        detailsView.drawDashLine(strokeColor: .gray, lineLength: 4, lineSpacing: 1, corners: .top, trimLine: self.view.frame.size.width / 3)
+        parametersView.drawDashLine(strokeColor: .gray, lineLength: 4, lineSpacing: 1, corners: .bottom, trimLine: self.view.frame.size.width / 3)
+        parametersView.drawDashLine(strokeColor: .gray, lineLength: 4, lineSpacing: 1, corners: .top, trimLine: self.view.frame.size.width / 3)
     }
     
     private func addRecognizer(label: UILabel) {
@@ -258,9 +262,9 @@ class FirstVC: UIViewController {
     }
 }
 
-extension FirstVC: ViewOutputDelegateFirstVC {
-    func publishDataFirstVC(dataCurrent: WeatherCurrent?, imageWeatherNow: UIImage?) {
+extension TodayVC: ViewOutputDelegateFirstVC {
+    func publishDataFirstVC(dataCurrent: WeatherToday?, imageWeatherNow: UIImage?) {
         guard let dataCurrent = dataCurrent else { return }
-        updateVC(data: dataCurrent, imageWeatherNow: imageWeatherNow)
+        updateTodayVC(data: dataCurrent, imageWeatherNow: imageWeatherNow)
     }
 }
