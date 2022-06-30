@@ -4,15 +4,15 @@ import UIKit
 class PresenterMainVC {
     private var weatherToday: WeatherToday?
     private var weatherForecast: WeatherForecastFiveDays?
-    private var imageWeatherNow: UIImage?
-    private var arrayImages: [UIImage?]?
+    private var imageWeatherToday: UIImage?
+    private var imagesWeatherForecast: [UIImage?]?
     weak private var viewOutputDelegate: ViewOutputDelegateMainVC?
     
     init(dataCurrent: WeatherToday?, dataFiveDays: WeatherForecastFiveDays?, imageWeatherNow: UIImage?, arrayImages: [UIImage?]? ) {
         self.weatherToday = dataCurrent
         self.weatherForecast = dataFiveDays
-        self.imageWeatherNow = imageWeatherNow
-        self.arrayImages = arrayImages
+        self.imageWeatherToday = imageWeatherNow
+        self.imagesWeatherForecast = arrayImages
     }
     
     func setViewInputDelegate(viewInputDelegate: ViewOutputDelegateMainVC?) {
@@ -23,10 +23,10 @@ class PresenterMainVC {
 //addind all weather's data to presenters Today and Forecast controllers. We can use init() in TodayVC and ForecastVC, but to practise work with presenters i used presenter.
 extension PresenterMainVC: ViewInputDelegateMainVC {
     func takeDataPresentersViewControllers(firstVC: TodayVC, secondVC: ForecastVC) {
-        firstVC.presenter.dataCurrent = weatherToday
-        firstVC.presenter.imageWeatherNow = imageWeatherNow
-        secondVC.presenter.dataFiveDays = weatherForecast
-        secondVC.presenter.arrayImages = arrayImages
+        firstVC.presenter.weatherToday = weatherToday
+        firstVC.presenter.imageWeatherToday = imageWeatherToday
+        secondVC.presenter.weatherForecast = weatherForecast
+        secondVC.presenter.imagesWeatherForecast = imagesWeatherForecast
         viewOutputDelegate?.loadViewControllersToTabBar()
     }
 }

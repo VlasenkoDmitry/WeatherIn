@@ -19,10 +19,10 @@ class MainVC: UITabBarController {
         super.viewDidLoad()
         presenter.setViewInputDelegate(viewInputDelegate: self)
         self.viewInputDelegate = presenter
-        initialization()
+        initialize()
     }
     
-    private func initialization() {
+    private func initialize() {
         todayVC.title = "Today".localize()
         forecastVC.title = "Forecast".localize()
         let sunBlack = UIImage(systemName: "sun.max")

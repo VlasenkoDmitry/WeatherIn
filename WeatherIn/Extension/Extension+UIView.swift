@@ -5,7 +5,7 @@ import SnapKit
 
 extension UIView {
     
-    func layoutStatusBar(bar: UIView) {
+    func setLayoutStatusBar(bar: UIView) {
         self.addSubview(bar)
         bar.snp.makeConstraints { maker in
             maker.height.equalTo(44)
@@ -13,7 +13,7 @@ extension UIView {
         }
     }
     
-    func layoutNavigationBar(navigationBar: UIView, statusBar: UIView) {
+    func setLayoutNavigationBar(navigationBar: UIView, statusBar: UIView) {
         self.addSubview(navigationBar)
         navigationBar.snp.makeConstraints { maker in
             maker.height.equalTo(44)
@@ -28,7 +28,7 @@ extension UIView {
     }
     
     /** This is a function to get subViews of a particular type from view recursively. It would look recursively in all subviews and return back the subviews of the type T */
-    func allSubViewsOf<T : UIView>(type : T.Type) -> [T] {
+    func getAllSubViewsOf<T : UIView>(type : T.Type) -> [T] {
         var all = [T]()
         func getSubview(view: UIView) {
             if let aView = view as? T {
@@ -113,7 +113,7 @@ extension UIView {
     }
     
     func setTextToLabel(text: String?, measure: String?) {
-        let label = self.allSubViewsOf(type: UILabel.self)[0]
+        let label = self.getAllSubViewsOf(type: UILabel.self)[0]
         label.text = "\(text ?? "") " + "\(measure ?? "")"
     }
 }

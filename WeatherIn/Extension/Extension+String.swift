@@ -12,7 +12,7 @@ extension String {
         return NSLocalizedString(self, comment: "")
     }
     
-    func shortForApi() -> String {
+    func formatForApi() -> String {
         switch self {
         case "English":
             return LanguagesApp.English.rawValue
@@ -23,7 +23,7 @@ extension String {
         }
     }
     
-    func firstUppercased() -> String {
+    func formatFirstUppercased() -> String {
         return prefix(1).uppercased() + dropFirst()
     }
     

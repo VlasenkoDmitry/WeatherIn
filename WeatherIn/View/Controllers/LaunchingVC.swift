@@ -13,7 +13,7 @@ class LaunchingVC: UIViewController {
         super.viewDidLoad()
         presenter.setViewOutputDelegate(viewOutputDelegate: self)
         self.viewInputputDelegate = presenter
-        initialization()
+        initialize()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -21,7 +21,7 @@ class LaunchingVC: UIViewController {
         presenter.beginLocationDetermination()
     }
     
-    private func initialization() {
+    private func initialize() {
         screenSaver.add(view: view)
         actInd.addIndicator(view: view, format: .black)
         actInd.start()

@@ -17,14 +17,14 @@ class ActivityIndicator {
         self.view = view
         switch format {
         case .black:
-            blackFormat()
+            setBlackFormat()
         default:
-            blackFormat()
+            setBlackFormat()
         }
         view.addSubview(indicator)
     }
     
-    private func blackFormat() {
+    private func setBlackFormat() {
         indicator.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
         guard let view = view else { return }
         indicator.center = view.center

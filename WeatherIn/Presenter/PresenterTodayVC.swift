@@ -2,8 +2,8 @@ import Foundation
 import UIKit
 
 class PresenterTodayVC {
-    var dataCurrent: WeatherToday?
-    var imageWeatherNow: UIImage?
+    var weatherToday: WeatherToday?
+    var imageWeatherToday: UIImage?
     weak private var viewOutputDelegate: ViewOutputDelegateTodayVC?
     
     func setViewOutputDelegate(viewOutputDelegate: ViewOutputDelegateTodayVC?) {
@@ -13,6 +13,6 @@ class PresenterTodayVC {
 
 extension PresenterTodayVC: ViewInputDelegateFirstVC {
     func takeDataFirstVC() {
-        viewOutputDelegate?.publishDataTodayVC(dataCurrent: dataCurrent, imageWeatherNow: imageWeatherNow)
+        viewOutputDelegate?.publishDataTodayVC(dataCurrent: weatherToday, imageWeatherNow: imageWeatherToday)
     }
 }

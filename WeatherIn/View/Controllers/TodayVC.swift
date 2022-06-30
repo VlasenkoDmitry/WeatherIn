@@ -30,14 +30,14 @@ class TodayVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fillingStaticDataParameters()
-        formatAllText()
+        fillStaticDataParameters()
+        formatTextLabels()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presenter.takeDataFirstVC()
         drawLines()
+        presenter.takeDataFirstVC()
     }
     
     private func initialization() {
@@ -47,8 +47,8 @@ class TodayVC: UIViewController {
     
     private func layout() {
         self.view.backgroundColor = .white
-        view.layoutStatusBar(bar: statusBarView)
-        view.layoutNavigationBar(navigationBar: navigationBarView, statusBar: statusBarView)
+        view.setLayoutStatusBar(bar: statusBarView)
+        view.setLayoutNavigationBar(navigationBar: navigationBarView, statusBar: statusBarView)
         view.addSubview(navigationBarView)
         navigationBarView.snp.makeConstraints { maker in
             maker.height.equalTo(44)
@@ -62,11 +62,11 @@ class TodayVC: UIViewController {
             maker.bottom.equalToSuperview().inset(100)
         }
         
-        insertingTwoEqualViewsVertically(firstView: cityView, secondView: parametersAndDescriptionView, mainView: pageContentView)
-        insertingTwoEqualViewsVertically(firstView: parametersView, secondView: descriptionView, mainView: parametersAndDescriptionView)
-        insertingTwoEqualViewsVertically(firstView: parametersFirstLineView, secondView: parametersSecondLineView, mainView: parametersView)
-        insertingEqualViewsHorizontally(views: [humidityView, precipitationView, pressureView], mainView: parametersFirstLineView)
-        insertingEqualViewsHorizontally(views: [speedWindView, degWindView], mainView: parametersSecondLineView)
+        insertTwoEqualViewsVertically(firstView: cityView, secondView: parametersAndDescriptionView, mainView: pageContentView)
+        insertTwoEqualViewsVertically(firstView: parametersView, secondView: descriptionView, mainView: parametersAndDescriptionView)
+        insertTwoEqualViewsVertically(firstView: parametersFirstLineView, secondView: parametersSecondLineView, mainView: parametersView)
+        insertEqualViewsHorizontally(views: [humidityView, precipitationView, pressureView], mainView: parametersFirstLineView)
+        insertEqualViewsHorizontally(views: [speedWindView, degWindView], mainView: parametersSecondLineView)
         
         /// For the practice of the Builder we create viewParameters not by creating a separate inheritor UIView class.
         let builder = BuilderViewParameterWeather()
@@ -87,10 +87,10 @@ class TodayVC: UIViewController {
             maker.top.left.right.bottom.equalTo(descriptionView)
         }
         
-        layoutCityView()
+        setLayoutCityView()
     }
     
-    private func insertingTwoEqualViewsVertically(firstView: UIView, secondView: UIView, mainView: UIView) {
+    private func insertTwoEqualViewsVertically(firstView: UIView, secondView: UIView, mainView: UIView) {
         mainView.addSubview(firstView)
         mainView.addSubview(secondView)
         firstView.snp.makeConstraints { maker in
@@ -106,7 +106,7 @@ class TodayVC: UIViewController {
         }
     }
     
-    private func insertingEqualViewsHorizontally(views: [UIView], mainView: UIView) {
+    private func insertEqualViewsHorizontally(views: [UIView], mainView: UIView) {
         for (index, view) in views.enumerated() {
             if index == 0 {
                 mainView.addSubview(view)
@@ -131,7 +131,7 @@ class TodayVC: UIViewController {
         }
     }
     
-    private func layoutCityView() {
+    private func setLayoutCityView() {
         let imageView = UIImageView()
         cityView.addSubview(imageView)
         imageView.snp.makeConstraints { maker in
@@ -157,8 +157,8 @@ class TodayVC: UIViewController {
         weatherCurrent.tag = 2
     }
     
-    private func fillingStaticDataParameters() {
-        navigationBarView.allSubViewsOf(type: UILabel.self)[0].text = "Today".localize()
+    private func fillStaticDataParameters() {
+        navigationBarView.getAllSubViewsOf(type: UILabel.self)[0].text = "Today".localize()
         descriptionLabel.text = "Description".localize()
         imageToView(view: humidityView, image: UIImage(named: "humidity"))
         imageToView(view: pressureView, image: UIImage(named: "pressure"))
@@ -168,7 +168,7 @@ class TodayVC: UIViewController {
     }
     
     private func imageToView(view: UIView, image: UIImage?, color: UIColor = .black) {
-        let imageView = view.allSubViewsOf(type: UIImageView.self)[0]
+        let imageView = view.getAllSubViewsOf(type: UIImageView.self)[0]
         imageView.image = image
         if color != .black {
             imageView.image?.withRenderingMode(.alwaysTemplate)
@@ -183,7 +183,7 @@ class TodayVC: UIViewController {
     }
     
     private func updateCityViewLabels(data: WeatherToday) {
-        let labelArray = cityView.allSubViewsOf(type: UILabel.self)
+        let labelArray = cityView.getAllSubViewsOf(type: UILabel.self)
         for label in labelArray {
             switch label.tag {
             case 1:
@@ -194,7 +194,7 @@ class TodayVC: UIViewController {
             case 2:
                 guard let temp = data.main.temp else { return }
                 guard let description = data.weather[0].description else { return }
-                label.text = String(Int(temp)) + "°" + " | " + description.firstUppercased()
+                label.text = String(Int(temp)) + "°" + " | " + description.formatFirstUppercased()
             default:
                 label.text = ""
             }
@@ -223,18 +223,11 @@ class TodayVC: UIViewController {
             degWindView.setTextToLabel(text: textdegWind.description.localize(), measure: nil)
         }
     }
-    
-//    private func setTextToLabelThroughView(view: UIView, textString: String?, measure: String? ) {
-//        let label = view.allSubViewsOf(type: UILabel.self)[0]
-//        guard let text = textString else { return }
-//        guard let measure = measure else { return }
-//        label.text = text + measure
-//    }
-    
-    private func formatAllText() {
-        let labelNavigationBar = navigationBarView.allSubViewsOf(type: UILabel.self)[0]
+        
+    private func formatTextLabels() {
+        let labelNavigationBar = navigationBarView.getAllSubViewsOf(type: UILabel.self)[0]
         labelNavigationBar.format(size: 17)
-        let arrayLabels = cityView.allSubViewsOf(type: UILabel.self)
+        let arrayLabels = cityView.getAllSubViewsOf(type: UILabel.self)
         for label in arrayLabels {
             switch label.tag {
             case 1:
@@ -246,14 +239,16 @@ class TodayVC: UIViewController {
                 label.format(size: 17)
             }
         }
-        let arrayLabelsParametersView = parametersView.allSubViewsOf(type: UILabel.self)
-        arrayLabelsParametersView.map({$0.format(size: 15)})
+        let arrayLabelsParametersView = parametersView.getAllSubViewsOf(type: UILabel.self)
+        for label in arrayLabelsParametersView {
+            label.format(size: 15)
+        }
         descriptionLabel.format(size: 17, weight: .regular, textColor: .orange)
     }
     
     private func drawLines() {
         navigationBarView.drawLineDifferentColor(colorArray: [.systemPink, .orange, .green, .blue, .yellow, .red],lineWidth: 2, lineLength: 4, lineSpacing:  2, corners: .bottom)
-        let imageViews = parametersView.allSubViewsOf(type: UIImageView.self)
+        let imageViews = parametersView.getAllSubViewsOf(type: UIImageView.self)
         for imageView in imageViews {
             imageView.drawDashLine(strokeColor: .gray, lineLength: 4, lineSpacing:  2, distanceBorder: 3, corners: .all)
         }

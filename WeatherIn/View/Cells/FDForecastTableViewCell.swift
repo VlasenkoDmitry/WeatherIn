@@ -2,7 +2,7 @@ import UIKit
 
 class FDForecastTableViewCell: UITableViewCell {
     
-    private lazy var labelDay = UILabel()
+    private lazy var dayLabel = UILabel()
     private lazy var imageWeatherView = UIView()
     private lazy var timeforecastView = UIView()
     private lazy var timeView = UIView()
@@ -25,42 +25,42 @@ class FDForecastTableViewCell: UITableViewCell {
     }
     
     func configureNameDayCell(row: List, indexRow: Int) {
-        layoutNameDay()
-        fillingNameDay(row: row, indexRow: indexRow)
+        setLayoutLabelDay()
+        fillLabelDay(row: row, indexRow: indexRow)
         formatTextNameDay()
     }
     
-    private func layoutNameDay() {
-        self.addSubview(labelDay)
-        labelDay.snp.makeConstraints { maker in
+    private func setLayoutLabelDay() {
+        self.addSubview(dayLabel)
+        dayLabel.snp.makeConstraints { maker in
             maker.left.equalTo(self).inset(16)
             maker.top.right.bottom.equalTo(self)
         }
     }
     
-    private func fillingNameDay(row: List, indexRow: Int) {
+    private func fillLabelDay(row: List, indexRow: Int) {
         var text = ""
         guard let date = row.dt else { return }
         if indexRow == 0 {
             text = "TODAY".localize()
         } else {
             let timeData = NSDate(timeIntervalSince1970: TimeInterval(date))
-            text = timeData.dayOfWeek()
+            text = timeData.formatDayOfWeek()
         }
-        labelDay.text = text
+        dayLabel.text = text
     }
     
     private func formatTextNameDay() {
-        labelDay.format(size: 17, textAlignment: .left)
+        dayLabel.format(size: 17, textAlignment: .left)
     }
     
     func configureForecastCell(data: List, image: UIImage?) {
-        layoutForecast()
-        fillingForecast(data: data, image: image)
+        setLayoutForecast()
+        fillForecast(data: data, image: image)
         formatTextForecast()
     }
     
-    private func layoutForecast() {
+    private func setLayoutForecast() {
         self.addSubview(imageWeatherView)
         
         imageWeatherView.snp.makeConstraints { maker in
@@ -118,7 +118,7 @@ class FDForecastTableViewCell: UITableViewCell {
         }
     }
     
-    private func fillingForecast(data: List, image: UIImage?) {
+    private func fillForecast(data: List, image: UIImage?) {
         if let image = image {
             weatherImage.image = image
         }
@@ -129,8 +129,8 @@ class FDForecastTableViewCell: UITableViewCell {
         guard let day = data.dt else { return }
         guard let description = data.weather[0].description else { return }
         let timeData = NSDate(timeIntervalSince1970: TimeInterval(day))
-        timeLabel.text = timeData.date()
-        forecastLabel.text = description.firstUppercased()
+        timeLabel.text = timeData.formatDate()
+        forecastLabel.text = description.formatFirstUppercased()
     }
     
     private func formatTextForecast() {

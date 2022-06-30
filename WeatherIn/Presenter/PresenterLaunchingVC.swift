@@ -3,10 +3,10 @@ import CoreLocation
 import UIKit
 
 class PresenterLaunchingVC {
-    private var dataFiveDays: WeatherForecastFiveDays?
-    private var dataCurrent: WeatherToday?
-    private var arrayImages: [UIImage?] = []
-    private var imageWeatherNow: UIImage?
+    private var weatherForecast: WeatherForecastFiveDays?
+    private var weatherToday: WeatherToday?
+    private var imagesWeatherForecast: [UIImage?] = []
+    private var imageWeatherToday: UIImage?
     weak private var viewOutputDelegate: ViewOutputDelegateLaunchingVC?
     private var newError: String?
     private let networkManager = NetworkManager()
@@ -22,6 +22,7 @@ class PresenterLaunchingVC {
         locationManager.delegate = self
         locationManager.locationDetermination()
     }
+    
     //function to start download data after finding coordinates
     private func downloadAllData(lat: String, lon: String) {
         guard let language = languageApp else { return }
@@ -40,9 +41,9 @@ class PresenterLaunchingVC {
         loadingForecastsGroup.enter()
         networkManager.getFiveDays(lat: lat, lon: lon, language: language) { result, error in
             if error == nil && result != nil {
-                self.dataFiveDays = result
+                self.weatherForecast = result
                 guard let list = result?.list else { return }
-                self.arrayImages = Array(repeating: nil, count: list.count)
+                self.imagesWeatherForecast = Array(repeating: nil, count: list.count)
                 let semaphore = DispatchSemaphore(value: 1)
                 for (index, element) in list.enumerated() {
                     loadingForecastsGroup.enter()
@@ -50,9 +51,9 @@ class PresenterLaunchingVC {
                     self.networkManager.getImage(name: icon) { [weak self] imageData, error in
                         semaphore.wait()
                         if let imageData = imageData {
-                            self?.arrayImages[index] = UIImage(data: imageData)                           
+                            self?.imagesWeatherForecast[index] = UIImage(data: imageData)                           
                         } else {
-                            self?.arrayImages[index] = nil
+                            self?.imagesWeatherForecast[index] = nil
                         }
                         semaphore.signal()
                         loadingForecastsGroup.leave()
@@ -67,16 +68,16 @@ class PresenterLaunchingVC {
         loadingForecastsGroup.enter()
         networkManager.getCurrent(lat: lat, lon: lon, language: language) { result, error in
             if error == nil && result != nil {
-                self.dataCurrent = result
+                self.weatherToday = result
                 print("Current")
                 guard let name = result?.weather[0].icon else { return }
                 loadingForecastsGroup.enter()
                 self.networkManager.getImage(name: name) {[weak self] imageData,error in
                     if let imageData = imageData {
-                        self?.imageWeatherNow = UIImage(data: imageData)
+                        self?.imageWeatherToday = UIImage(data: imageData)
                         print(imageData)
                     } else {
-                        self?.imageWeatherNow = nil
+                        self?.imageWeatherToday = nil
                     }
                     print("FirstImage")
                     loadingForecastsGroup.leave()
@@ -91,7 +92,7 @@ class PresenterLaunchingVC {
             if let newError = self.newError {
                 completion(nil,newError)
             } else {
-            let packageData = PackageData(self.dataCurrent,self.dataFiveDays,self.imageWeatherNow,self.arrayImages)
+            let packageData = PackageData(self.weatherToday,self.weatherForecast,self.imageWeatherToday,self.imagesWeatherForecast)
             completion(packageData,nil)
             }
         }

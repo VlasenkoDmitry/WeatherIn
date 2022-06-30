@@ -21,7 +21,7 @@ class BuilderViewParameterWeather: ParameterWeather {
     }
     
     func formatImageView() {
-        let imageView = view.allSubViewsOf(type: UIImageView.self)[0]
+        let imageView = view.getAllSubViewsOf(type: UIImageView.self)[0]
         imageView.snp.makeConstraints { maker in
             maker.width.height.equalTo(20)
             maker.center.equalTo(view)
@@ -29,8 +29,8 @@ class BuilderViewParameterWeather: ParameterWeather {
     }
     
     func formatLabel() {
-        let label = view.allSubViewsOf(type: UILabel.self)[0]
-        let imageView = view.allSubViewsOf(type: UIImageView.self)[0]
+        let label = view.getAllSubViewsOf(type: UILabel.self)[0]
+        let imageView = view.getAllSubViewsOf(type: UIImageView.self)[0]
         label.snp.makeConstraints { maker in
             maker.left.right.bottom.equalTo(view)
             maker.top.equalTo(imageView.snp.bottom)
