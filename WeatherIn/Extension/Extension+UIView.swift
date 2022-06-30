@@ -5,7 +5,6 @@ import SnapKit
 
 extension UIView {
     
-    //оформление StatusBar
     func layoutStatusBar(bar: UIView) {
         self.addSubview(bar)
         bar.snp.makeConstraints { maker in
@@ -13,7 +12,7 @@ extension UIView {
             maker.left.right.top.equalToSuperview().inset(0)
         }
     }
-    //оформление NavigationBar
+    
     func layoutNavigationBar(navigationBar: UIView, statusBar: UIView) {
         self.addSubview(navigationBar)
         navigationBar.snp.makeConstraints { maker in
@@ -21,7 +20,7 @@ extension UIView {
             maker.top.equalTo(statusBar.snp.bottom)
             maker.left.right.equalToSuperview().inset(0)
         }
-        var nameVC = UILabel()
+        let nameVC = UILabel()
         navigationBar.addSubview(nameVC)
         nameVC.snp.makeConstraints { maker in
             maker.left.top.right.bottom.equalTo(navigationBar)
@@ -42,8 +41,8 @@ extension UIView {
         return all
     }
     
-    //рисует одноцветную пунктирную границу по указанным сторонам, с отступом по отношению к стороне(distanceBorder) и обрезкой линии(trimLine)
-    func drawDashLine(strokeColor: UIColor, lineWidth: CGFloat = 1, lineLength: Int = 10, lineSpacing: Int = 5,distanceBorder: CGFloat = 0, corners: UIRectSide,trimLine: CGFloat = 0) {
+    /// one-color dotted line on the specified sides, indentation, border cropping
+    func drawDashLine(strokeColor: UIColor, lineWidth: CGFloat = 1, lineLength: Int = 10, lineSpacing: Int = 5, distanceBorder: CGFloat = 0, corners: UIRectSide,trimLine: CGFloat = 0) {
         let shapeLayer = CAShapeLayer()
         shapeLayer.bounds = self.bounds
         shapeLayer.anchorPoint = CGPoint(x: 0, y: 0)
@@ -51,7 +50,7 @@ extension UIView {
         shapeLayer.strokeColor = strokeColor.cgColor
         shapeLayer.lineWidth = lineWidth
         shapeLayer.lineJoin = CAShapeLayerLineJoin.round
-        // Интервал между длиной каждого сегмента и ростками между каждым абзацем
+        /// The interval between the length of each segment and the sprouts between each paragraph
         shapeLayer.lineDashPattern = [NSNumber(value: lineLength), NSNumber(value: lineSpacing)]
         
         let path = CGMutablePath()
@@ -75,7 +74,7 @@ extension UIView {
         self.layer.addSublayer(shapeLayer)
     }
     
-    //рисует разноцветную пунктирную границу по указанным сторонам, без отступа
+    /// multi-colored dotted border on the specified sides, without cropping
     func drawLineDifferentColor(colorArray:[UIColor], lineWidth: CGFloat = 1, lineLength: Int = 10, lineSpacing: Int = 5, corners: UIRectSide) {
         for (index,color) in colorArray.enumerated() {
             let shapeLayer = CAShapeLayer()

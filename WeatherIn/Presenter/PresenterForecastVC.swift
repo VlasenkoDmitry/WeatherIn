@@ -1,13 +1,13 @@
 import Foundation
 import UIKit
 
-class PresenterSecondVC {
+class PresenterForecastVC {
     var dataFiveDays: WeatherForecastFiveDays?
     var arrayImages: [UIImage?]?
     
-    weak private var viewOutputDelegate: ViewOutputDelegateSecondVC?
+    weak private var viewOutputDelegate: ViewOutputDelegateForecastVC?
     
-    func setViewOutputDelegate(viewOutputDelegate: ViewOutputDelegateSecondVC?) {
+    func setViewOutputDelegate(viewOutputDelegate: ViewOutputDelegateForecastVC?) {
         self.viewOutputDelegate = viewOutputDelegate
     }
     
@@ -38,10 +38,10 @@ class PresenterSecondVC {
 }
 
 // preparing data for display
-extension PresenterSecondVC: ViewInputDelegateSecondVC {
-    func downloadDataSecondVC() {
+extension PresenterForecastVC: ViewInputDelegateForecastVC {
+    func downloadDataForecastVC() {
         addNamesDays()
         guard let dataFiveDays = dataFiveDays else { return }
-        viewOutputDelegate?.publishDataSecondVC(dataFiveDays: dataFiveDays, arrayImages: arrayImages)
+        viewOutputDelegate?.publishDataForecastVC(dataFiveDays: dataFiveDays, arrayImages: arrayImages)
     }
 }

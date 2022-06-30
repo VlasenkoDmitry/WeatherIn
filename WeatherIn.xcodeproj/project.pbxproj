@@ -21,11 +21,11 @@
 		E10F788627C3941C0088549D /* PresenterMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10F788527C3941C0088549D /* PresenterMainVC.swift */; };
 		E11028C028216D30002CC888 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11028BF28216D30002CC888 /* LocationManager.swift */; };
 		E11AFE49281ECA2D0090BE79 /* ViewInputDelegateFirstVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11AFE48281ECA2D0090BE79 /* ViewInputDelegateFirstVC.swift */; };
-		E11AFE4B281ECA420090BE79 /* ViewInputDelegateSecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11AFE4A281ECA420090BE79 /* ViewInputDelegateSecondVC.swift */; };
-		E11AFE4D281ECA510090BE79 /* ViewOutputDelegateFirstVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11AFE4C281ECA510090BE79 /* ViewOutputDelegateFirstVC.swift */; };
-		E11AFE4F281ECA840090BE79 /* ViewOutputDelegateSecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11AFE4E281ECA840090BE79 /* ViewOutputDelegateSecondVC.swift */; };
-		E1202011281F16B600A7A401 /* PresenterFirstVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1202010281F16B600A7A401 /* PresenterFirstVC.swift */; };
-		E1202013281F16FE00A7A401 /* PresenterSecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1202012281F16FE00A7A401 /* PresenterSecondVC.swift */; };
+		E11AFE4B281ECA420090BE79 /* ViewInputDelegateForecastVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11AFE4A281ECA420090BE79 /* ViewInputDelegateForecastVC.swift */; };
+		E11AFE4D281ECA510090BE79 /* ViewOutputDelegateTodayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11AFE4C281ECA510090BE79 /* ViewOutputDelegateTodayVC.swift */; };
+		E11AFE4F281ECA840090BE79 /* ViewOutputDelegateForecastVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11AFE4E281ECA840090BE79 /* ViewOutputDelegateForecastVC.swift */; };
+		E1202011281F16B600A7A401 /* PresenterTodayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1202010281F16B600A7A401 /* PresenterTodayVC.swift */; };
+		E1202013281F16FE00A7A401 /* PresenterForecastVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1202012281F16FE00A7A401 /* PresenterForecastVC.swift */; };
 		E123AB7C28204A0800B1E35C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E123AB7B28204A0700B1E35C /* NetworkManager.swift */; };
 		E123AB7E28204B1600B1E35C /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E123AB7D28204B1600B1E35C /* EndPointType.swift */; };
 		E123AB8028204BA200B1E35C /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E123AB7F28204BA200B1E35C /* APIRequestManager.swift */; };
@@ -68,11 +68,11 @@
 		E10F788527C3941C0088549D /* PresenterMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterMainVC.swift; sourceTree = "<group>"; };
 		E11028BF28216D30002CC888 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E11AFE48281ECA2D0090BE79 /* ViewInputDelegateFirstVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInputDelegateFirstVC.swift; sourceTree = "<group>"; };
-		E11AFE4A281ECA420090BE79 /* ViewInputDelegateSecondVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInputDelegateSecondVC.swift; sourceTree = "<group>"; };
-		E11AFE4C281ECA510090BE79 /* ViewOutputDelegateFirstVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOutputDelegateFirstVC.swift; sourceTree = "<group>"; };
-		E11AFE4E281ECA840090BE79 /* ViewOutputDelegateSecondVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOutputDelegateSecondVC.swift; sourceTree = "<group>"; };
-		E1202010281F16B600A7A401 /* PresenterFirstVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterFirstVC.swift; sourceTree = "<group>"; };
-		E1202012281F16FE00A7A401 /* PresenterSecondVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterSecondVC.swift; sourceTree = "<group>"; };
+		E11AFE4A281ECA420090BE79 /* ViewInputDelegateForecastVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInputDelegateForecastVC.swift; sourceTree = "<group>"; };
+		E11AFE4C281ECA510090BE79 /* ViewOutputDelegateTodayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOutputDelegateTodayVC.swift; sourceTree = "<group>"; };
+		E11AFE4E281ECA840090BE79 /* ViewOutputDelegateForecastVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOutputDelegateForecastVC.swift; sourceTree = "<group>"; };
+		E1202010281F16B600A7A401 /* PresenterTodayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterTodayVC.swift; sourceTree = "<group>"; };
+		E1202012281F16FE00A7A401 /* PresenterForecastVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterForecastVC.swift; sourceTree = "<group>"; };
 		E123AB7B28204A0700B1E35C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E123AB7D28204B1600B1E35C /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
 		E123AB7F28204BA200B1E35C /* APIRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
@@ -139,9 +139,9 @@
 				E10F787D27C3938C0088549D /* ViewInputDelegateMainVC.swift */,
 				E17A690527C4E2C4008619FA /* ParameterWeather.swift */,
 				E11AFE48281ECA2D0090BE79 /* ViewInputDelegateFirstVC.swift */,
-				E11AFE4C281ECA510090BE79 /* ViewOutputDelegateFirstVC.swift */,
-				E11AFE4A281ECA420090BE79 /* ViewInputDelegateSecondVC.swift */,
-				E11AFE4E281ECA840090BE79 /* ViewOutputDelegateSecondVC.swift */,
+				E11AFE4C281ECA510090BE79 /* ViewOutputDelegateTodayVC.swift */,
+				E11AFE4A281ECA420090BE79 /* ViewInputDelegateForecastVC.swift */,
+				E11AFE4E281ECA840090BE79 /* ViewOutputDelegateForecastVC.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -251,8 +251,8 @@
 			children = (
 				E10F788327C3940D0088549D /* PresenterLaunchingVC.swift */,
 				E10F788527C3941C0088549D /* PresenterMainVC.swift */,
-				E1202010281F16B600A7A401 /* PresenterFirstVC.swift */,
-				E1202012281F16FE00A7A401 /* PresenterSecondVC.swift */,
+				E1202010281F16B600A7A401 /* PresenterTodayVC.swift */,
+				E1202012281F16FE00A7A401 /* PresenterForecastVC.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -422,7 +422,7 @@
 				E10F786927C38DB80088549D /* ActivityIndicator.swift in Sources */,
 				E161A0A627C388E900BC2AA6 /* LaunchingVC.swift in Sources */,
 				E10F786F27C390310088549D /* WeatherForecastFiveDays.swift in Sources */,
-				E11AFE4B281ECA420090BE79 /* ViewInputDelegateSecondVC.swift in Sources */,
+				E11AFE4B281ECA420090BE79 /* ViewInputDelegateForecastVC.swift in Sources */,
 				E17A691427C536F0008619FA /* Extension+NSDate.swift in Sources */,
 				E10F787927C3931C0088549D /* MainVC.swift in Sources */,
 				E10F786D27C390190088549D /* WeatherToday.swift in Sources */,
@@ -430,7 +430,7 @@
 				E17A691827C54954008619FA /* Extension+UIViewController.swift in Sources */,
 				E17A68FE27C4CE96008619FA /* ForecastVC.swift in Sources */,
 				E17A690427C4E29B008619FA /* DirectorViewParameterWeather.swift in Sources */,
-				E1202013281F16FE00A7A401 /* PresenterSecondVC.swift in Sources */,
+				E1202013281F16FE00A7A401 /* PresenterForecastVC.swift in Sources */,
 				E10F788627C3941C0088549D /* PresenterMainVC.swift in Sources */,
 				E10F788427C3940D0088549D /* PresenterLaunchingVC.swift in Sources */,
 				E10F788027C393B90088549D /* ViewInputDelegateLaunchingVC.swift in Sources */,
@@ -448,11 +448,11 @@
 				E17A690027C4E003008619FA /* Extension+UIView.swift in Sources */,
 				E10F788227C393D30088549D /* ViewOutputDelegateLaunhingVC.swift in Sources */,
 				E123AB8028204BA200B1E35C /* APIRequestManager.swift in Sources */,
-				E1202011281F16B600A7A401 /* PresenterFirstVC.swift in Sources */,
-				E11AFE4D281ECA510090BE79 /* ViewOutputDelegateFirstVC.swift in Sources */,
+				E1202011281F16B600A7A401 /* PresenterTodayVC.swift in Sources */,
+				E11AFE4D281ECA510090BE79 /* ViewOutputDelegateTodayVC.swift in Sources */,
 				E17A690C27C50605008619FA /* Extension+Direction.swift in Sources */,
 				E11028C028216D30002CC888 /* LocationManager.swift in Sources */,
-				E11AFE4F281ECA840090BE79 /* ViewOutputDelegateSecondVC.swift in Sources */,
+				E11AFE4F281ECA840090BE79 /* ViewOutputDelegateForecastVC.swift in Sources */,
 				E10F787E27C3938C0088549D /* ViewInputDelegateMainVC.swift in Sources */,
 				E10F787C27C393760088549D /* ViewOutputDelegateMainVC.swift in Sources */,
 			);

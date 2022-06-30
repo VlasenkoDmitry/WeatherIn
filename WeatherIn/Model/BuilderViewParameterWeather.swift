@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 import SnapKit
 
+/// For the practice of the Builder we create viewParameters not by creating a separate inheritor UIView class.
 class BuilderViewParameterWeather: ParameterWeather {
     private var view = UIView()
     

@@ -29,7 +29,7 @@ class LaunchingVC: UIViewController {
     }
 }
 
-//after finding coordinates and downloading all data - open main controller(tab controller which consists of two vc: first and second)
+//after finding coordinates and downloading all data - open main controller(tab controller which consists of two vc: tooday and forecast)
 extension LaunchingVC: ViewOutputDelegateLaunchingVC {
     func initializeTabBarController(presenter: PresenterMainVC) {
         let controler = MainVC(presenter: presenter)

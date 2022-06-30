@@ -17,8 +17,8 @@ class ForecastVC: UIViewController {
             }
         }
     }
-    var presenter = PresenterSecondVC()
-    private weak var viewInputputDelegate: ViewInputDelegateSecondVC?
+    var presenter = PresenterForecastVC()
+    private weak var viewInputputDelegate: ViewInputDelegateForecastVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ class ForecastVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.downloadDataSecondVC()
+        presenter.downloadDataForecastVC()
     }
     
     private func layout() {
@@ -112,9 +112,9 @@ extension ForecastVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-// update tableview cells after adding days of week in dataFiveDays(PresenterSecondVC)
-extension ForecastVC: ViewOutputDelegateSecondVC {
-    func publishDataSecondVC(dataFiveDays: WeatherForecastFiveDays, arrayImages: [UIImage?]?) {
+// update tableview cells after adding days of week in dataFiveDays(PresenterForecastVC)
+extension ForecastVC: ViewOutputDelegateForecastVC {
+    func publishDataForecastVC(dataFiveDays: WeatherForecastFiveDays, arrayImages: [UIImage?]?) {
         updateTableView(dataFiveDays: dataFiveDays, arrayImages: arrayImages)
     }
 }

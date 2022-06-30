@@ -1,8 +1,8 @@
 import UIKit
 
 class MainVC: UITabBarController {
-    private let firstVC = TodayVC()
-    private let secondVC = ForecastVC()
+    private let todayVC = TodayVC()
+    private let forecastVC = ForecastVC()
     private var presenter : PresenterMainVC
     private weak var viewInputDelegate: ViewInputDelegateMainVC?
     
@@ -23,8 +23,8 @@ class MainVC: UITabBarController {
     }
     
     private func initialization() {
-        firstVC.title = "Today".localize()
-        secondVC.title = "Forecast".localize()
+        todayVC.title = "Today".localize()
+        forecastVC.title = "Forecast".localize()
         let sunBlack = UIImage(systemName: "sun.max")
         sunBlack?.withTintColor(.black, renderingMode: .alwaysOriginal)
         let sunBlue = UIImage(systemName: "sun.max")
@@ -33,14 +33,14 @@ class MainVC: UITabBarController {
         cloudBlack?.withTintColor(.black, renderingMode: .alwaysOriginal)
         let cloudBlue = UIImage(systemName: "cloud.moon")
         cloudBlue?.withTintColor(.blue, renderingMode: .alwaysOriginal)
-        firstVC.tabBarItem.image = sunBlack
-        firstVC.tabBarItem.selectedImage = sunBlue
-        secondVC.tabBarItem.image = cloudBlack
-        secondVC.tabBarItem.selectedImage = cloudBlue
+        todayVC.tabBarItem.image = sunBlack
+        todayVC.tabBarItem.selectedImage = sunBlue
+        forecastVC.tabBarItem.image = cloudBlack
+        forecastVC.tabBarItem.selectedImage = cloudBlue
         let selectedColor = UIColor(named: "MyBlue")
         let unselectedColor = UIColor.black
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: unselectedColor], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: selectedColor], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: selectedColor ?? UIColor.blue ], for: .selected)
         self.tabBar.layer.borderWidth = 0.50
         self.tabBar.layer.borderColor = UIColor.gray.cgColor
         self.tabBar.backgroundColor = .white
@@ -52,14 +52,14 @@ class MainVC: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.takeDataPresentersViewControllers(firstVC: firstVC, secondVC: secondVC)
+        presenter.takeDataPresentersViewControllers(firstVC: todayVC, secondVC: forecastVC)
     }
 }
 
-// extension to delegate from presenterMainVC. Adding view controllers to tab bar after adding all weathers data to presenters First and Second controllers
+// extension to delegate from presenterMainVC. Adding view controllers to tab bar after adding all weathers data to presenters Today and Forecast controllers
 extension MainVC: ViewOutputDelegateMainVC {
     func loadViewControllersToTabBar() {
-        self.viewControllers = [firstVC, secondVC]
+        self.viewControllers = [todayVC, forecastVC]
     }
 }
 
