@@ -58,7 +58,7 @@ enum NetworkError : String, Error {
     case missingURL = "URL is nil."
 }
 
-typealias PackageData = (WeatherToday?,WeatherForecastFiveDays?,UIImage?,[UIImage?]?)
+typealias PackageData = (weatherToday: WeatherToday?, weatherForecast: WeatherForecastFiveDays?, imageWeatherToday: UIImage?, imagesWeatherForecast: [UIImage?]?)
 
 typealias Parameters = [String : Any]
 

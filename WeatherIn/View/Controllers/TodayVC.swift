@@ -25,7 +25,7 @@ class TodayVC: UIViewController {
         super.viewDidLoad()
         presenter.setViewOutputDelegate(viewOutputDelegate: self)
         self.viewInputputDelegate = presenter
-        initialization()
+        initialize()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,12 +40,12 @@ class TodayVC: UIViewController {
         presenter.takeDataFirstVC()
     }
     
-    private func initialization() {
-        layout()
+    private func initialize() {
+        setLayout()
         addRecognizer(label: descriptionLabel)
     }
     
-    private func layout() {
+    private func setLayout() {
         self.view.backgroundColor = .white
         view.setLayoutStatusBar(bar: statusBarView)
         view.setLayoutNavigationBar(navigationBar: navigationBarView, statusBar: statusBarView)
@@ -147,27 +147,27 @@ class TodayVC: UIViewController {
             maker.height.equalTo(30)
         }
         locationLabel.tag = 1
-        let weatherCurrent = UILabel()
-        cityView.addSubview(weatherCurrent)
-        weatherCurrent.snp.makeConstraints { maker in
+        let dataWeatherLabel = UILabel()
+        cityView.addSubview(dataWeatherLabel)
+        dataWeatherLabel.snp.makeConstraints { maker in
             maker.top.equalTo(locationLabel.snp.bottom).inset(-10)
             maker.left.right.equalTo(view)
             maker.height.equalTo(30)
         }
-        weatherCurrent.tag = 2
+        dataWeatherLabel.tag = 2
     }
     
     private func fillStaticDataParameters() {
         navigationBarView.getAllSubViewsOf(type: UILabel.self)[0].text = "Today".localize()
         descriptionLabel.text = "Description".localize()
-        imageToView(view: humidityView, image: UIImage(named: "humidity"))
-        imageToView(view: pressureView, image: UIImage(named: "pressure"))
-        imageToView(view: speedWindView, image: UIImage(named: "speedWind"))
-        imageToView(view: degWindView, image: UIImage(named: "degWind"))
-        imageToView(view: precipitationView, image: UIImage(named: "precipitation"))
+        setImageToView(view: humidityView, image: UIImage(named: "humidity"))
+        setImageToView(view: pressureView, image: UIImage(named: "pressure"))
+        setImageToView(view: speedWindView, image: UIImage(named: "speedWind"))
+        setImageToView(view: degWindView, image: UIImage(named: "degWind"))
+        setImageToView(view: precipitationView, image: UIImage(named: "precipitation"))
     }
     
-    private func imageToView(view: UIView, image: UIImage?, color: UIColor = .black) {
+    private func setImageToView(view: UIView, image: UIImage?, color: UIColor = .black) {
         let imageView = view.getAllSubViewsOf(type: UIImageView.self)[0]
         imageView.image = image
         if color != .black {
@@ -176,71 +176,75 @@ class TodayVC: UIViewController {
         }
     }
     
-    private func updateTodayVC(data: WeatherToday, imageWeatherNow: UIImage?) {
-        updateCityViewLabels(data: data)
-        updateParametersViewLabels(data: data)
-        imageToView(view: cityView, image: imageWeatherNow, color: .yellow)
+    private func updateTodayVC(weatherToday: WeatherToday, imageWeatherToday: UIImage?) {
+        updateCityViewLabels(weatherToday: weatherToday)
+        updateParametersViewLabels(weatherToday: weatherToday)
+        setImageToView(view: cityView, image: imageWeatherToday, color: .yellow)
     }
     
-    private func updateCityViewLabels(data: WeatherToday) {
-        let labelArray = cityView.getAllSubViewsOf(type: UILabel.self)
-        for label in labelArray {
+    private func updateCityViewLabels(weatherToday: WeatherToday) {
+        let labelsCityView = cityView.getAllSubViewsOf(type: UILabel.self)
+        for label in labelsCityView {
             switch label.tag {
             case 1:
-                guard let city = data.name else { return }
-                guard let country = data.sys.country else { return }
+                //locationLabel
+                guard let city = weatherToday.name else { return }
+                guard let country = weatherToday.sys.country else { return }
                 let location = city + ", " + country
                 label.text = location
             case 2:
-                guard let temp = data.main.temp else { return }
-                guard let description = data.weather[0].description else { return }
-                label.text = String(Int(temp)) + "°" + " | " + description.formatFirstUppercased()
+                //dataWeatherLabel
+                guard let temperature = weatherToday.main.temp else { return }
+                guard let description = weatherToday.weather[0].description else { return }
+                label.text = String(Int(temperature)) + "°" + " | " + description.formatFirstUppercased()
             default:
                 label.text = ""
             }
         }
     }
     
-    private func updateParametersViewLabels(data: WeatherToday) {
-        if let textHumidity = data.main.humidity {
-            humidityView.setTextToLabel(text: String(Int(textHumidity)), measure: " %")
+    private func updateParametersViewLabels(weatherToday: WeatherToday) {
+        if let humidity = weatherToday.main.humidity {
+            humidityView.setTextToLabel(text: String(Int(humidity)), measure: " %")
         }
-        var textPrecipitation = "0"
-        if let textSnow = data.rain?["1h"] {
-            textPrecipitation = String(textSnow)
+        var precipitation = "0"
+        if let snow = weatherToday.snow?["1h"] {
+            precipitation = String(snow)
         }
-        if let textRain = data.snow?["1h"] {
-            textPrecipitation = String(textRain)
+        if let rain = weatherToday.rain?["1h"] {
+            precipitation = String(rain)
         }
-        precipitationView.setTextToLabel(text: textPrecipitation, measure: " mm".localize())
-        if let textpressure = data.main.pressure {
-            pressureView.setTextToLabel(text: String(Int(textpressure)), measure: " hPa".localize())
+        precipitationView.setTextToLabel(text: precipitation, measure: " mm".localize())
+        if let pressure = weatherToday.main.pressure {
+            pressureView.setTextToLabel(text: String(Int(pressure)), measure: " hPa".localize())
         }
-        if let textWindSpeed = data.wind.speed {
-            speedWindView.setTextToLabel(text: String(Int(textWindSpeed)), measure: " km/h".localize())
+        if let windSpeed = weatherToday.wind.speed {
+            speedWindView.setTextToLabel(text: String(Int(windSpeed)), measure: " km/h".localize())
         }
-        if let textdegWind = data.wind.deg?.direction {
-            degWindView.setTextToLabel(text: textdegWind.description.localize(), measure: nil)
+        if let windDirection = weatherToday.wind.deg?.direction {
+            degWindView.setTextToLabel(text: windDirection.description.localize(), measure: nil)
         }
     }
         
     private func formatTextLabels() {
         let labelNavigationBar = navigationBarView.getAllSubViewsOf(type: UILabel.self)[0]
         labelNavigationBar.format(size: 17)
-        let arrayLabels = cityView.getAllSubViewsOf(type: UILabel.self)
-        for label in arrayLabels {
+        let labelsCityView = cityView.getAllSubViewsOf(type: UILabel.self)
+        for label in labelsCityView {
             switch label.tag {
             case 1:
+                //locationLabel
                 label.format(size: 17)
             case 2:
+                //dataWeatherLabel
                 guard let blueColor =  UIColor(named: "MyBlue") else { return }
                 label.format(size: 34, weight: .light, textColor: blueColor)
             default:
                 label.format(size: 17)
             }
         }
-        let arrayLabelsParametersView = parametersView.getAllSubViewsOf(type: UILabel.self)
-        for label in arrayLabelsParametersView {
+        let labelsParametersView = parametersView.getAllSubViewsOf(type: UILabel.self)
+        for label in labelsParametersView {
             label.format(size: 15)
         }
         descriptionLabel.format(size: 17, weight: .regular, textColor: .orange)
@@ -267,8 +271,8 @@ class TodayVC: UIViewController {
 }
 
 extension TodayVC: ViewOutputDelegateTodayVC {
-    func publishDataTodayVC(dataCurrent: WeatherToday?, imageWeatherNow: UIImage?) {
-        guard let dataCurrent = dataCurrent else { return }
-        updateTodayVC(data: dataCurrent, imageWeatherNow: imageWeatherNow)
+    func publishDataTodayVC(weatherToday: WeatherToday?, imageWeatherToday: UIImage?) {
+        guard let dataCurrent = weatherToday else { return }
+        updateTodayVC(weatherToday: dataCurrent, imageWeatherToday: imageWeatherToday)
     }
 }

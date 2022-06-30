@@ -8,11 +8,11 @@ class PresenterMainVC {
     private var imagesWeatherForecast: [UIImage?]?
     weak private var viewOutputDelegate: ViewOutputDelegateMainVC?
     
-    init(dataCurrent: WeatherToday?, dataFiveDays: WeatherForecastFiveDays?, imageWeatherNow: UIImage?, arrayImages: [UIImage?]? ) {
-        self.weatherToday = dataCurrent
-        self.weatherForecast = dataFiveDays
-        self.imageWeatherToday = imageWeatherNow
-        self.imagesWeatherForecast = arrayImages
+    init(weatherToday: WeatherToday?, weatherForecast: WeatherForecastFiveDays?, imageWeatherToday: UIImage?, imageWeatherForecast: [UIImage?]? ) {
+        self.weatherToday = weatherToday
+        self.weatherForecast = weatherForecast
+        self.imageWeatherToday = imageWeatherToday
+        self.imagesWeatherForecast = imageWeatherForecast
     }
     
     func setViewInputDelegate(viewInputDelegate: ViewOutputDelegateMainVC?) {

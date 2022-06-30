@@ -19,10 +19,19 @@ class MainVC: UITabBarController {
         super.viewDidLoad()
         presenter.setViewInputDelegate(viewInputDelegate: self)
         self.viewInputDelegate = presenter
-        initialize()
     }
     
-    private func initialize() {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fillAndFormatTabBar()
+        presenter.takeDataPresentersViewControllers(firstVC: todayVC, secondVC: forecastVC)
+    }
+    
+    private func fillAndFormatTabBar() {
         todayVC.title = "Today".localize()
         forecastVC.title = "Forecast".localize()
         let sunBlack = UIImage(systemName: "sun.max")
@@ -44,15 +53,6 @@ class MainVC: UITabBarController {
         self.tabBar.layer.borderWidth = 0.50
         self.tabBar.layer.borderColor = UIColor.gray.cgColor
         self.tabBar.backgroundColor = .white
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        presenter.takeDataPresentersViewControllers(firstVC: todayVC, secondVC: forecastVC)
     }
 }
 

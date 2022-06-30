@@ -2,5 +2,5 @@ import Foundation
 import UIKit
 
 protocol ViewOutputDelegateTodayVC: AnyObject {
-    func publishDataTodayVC(dataCurrent: WeatherToday?, imageWeatherNow: UIImage?)
+    func publishDataTodayVC(weatherToday: WeatherToday?, imageWeatherToday: UIImage?)
 }

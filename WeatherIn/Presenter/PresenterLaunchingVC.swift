@@ -28,7 +28,7 @@ class PresenterLaunchingVC {
         guard let language = languageApp else { return }
         loadData(lat: lat, lon: lon, language: language, completion: { package,error in
             if error == nil {
-                let presenter = PresenterMainVC(dataCurrent: package?.0, dataFiveDays:  package?.1, imageWeatherNow:  package?.2, arrayImages:  package?.3)
+                let presenter = PresenterMainVC(weatherToday: package?.weatherToday, weatherForecast:  package?.weatherForecast, imageWeatherToday:  package?.imageWeatherToday, imageWeatherForecast:  package?.imagesWeatherForecast)
                 self.viewOutputDelegate?.initializeTabBarController(presenter: presenter)
             }
         })

@@ -6,12 +6,12 @@ class ForecastVC: UIViewController {
     private var navigationBarView = UIView()
     private var tableView = UITableView()
     private var cellsWithDaysOfWeek: Set<Int> = []
-    private var forecastFiveDays: WeatherForecastFiveDays?
+    private var weatherForecast: WeatherForecastFiveDays?
     private var arrayImages: [UIImage?]?
     private var numberOfRowsInSection: Int {
         get {
-            if let count = forecastFiveDays?.list.count {
-                return count
+            if let number = weatherForecast?.list.count {
+                return number
             } else {
                 return 20
             }
@@ -26,13 +26,13 @@ class ForecastVC: UIViewController {
         tableView.dataSource = self
         self.tableView.register(FDForecastTableViewCell.self, forCellReuseIdentifier: "FDForecastTableViewCell")
         layout()
-        fillNavigationBar()
         presenter.setViewOutputDelegate(viewOutputDelegate: self)
         self.viewInputputDelegate = presenter
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        fillNavigationBar()
         self.view.backgroundColor = .white
         presenter.downloadDataForecastVC()
     }
@@ -52,15 +52,15 @@ class ForecastVC: UIViewController {
         navigationBarView.drawLineDifferentColor(colorArray: [.systemPink, .orange, .green, .blue, .yellow, .red],lineWidth: 2, lineLength: 4, lineSpacing:  2, corners: .bottom)
     }
     
-    private func updateTableView(dataFiveDays: WeatherForecastFiveDays, arrayImages: [UIImage?]?){
-        self.forecastFiveDays = dataFiveDays
+    private func updateTableView(weatherForecast: WeatherForecastFiveDays, arrayImages: [UIImage?]?){
+        self.weatherForecast = weatherForecast
         self.arrayImages = arrayImages
         fillNavigationBar()
         tableView.reloadData()
     }
     
     private func fillNavigationBar() {
-        navigationBarView.getAllSubViewsOf(type: UILabel.self)[0].text = forecastFiveDays?.city.name
+        navigationBarView.getAllSubViewsOf(type: UILabel.self)[0].text = weatherForecast?.city.name
         navigationBarView.getAllSubViewsOf(type: UILabel.self)[0].format(size: 17)
     }
 }
@@ -90,11 +90,11 @@ extension ForecastVC: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FDForecastTableViewCell", for: indexPath) as? FDForecastTableViewCell else { return UITableViewCell() }
         clearCell(cell: cell)
         // before that in dataFiveDays was add extra data to devide by days of week. If data is nil - we create special cell in tableview
-        if let data = forecastFiveDays?.list[indexPath.row] {
+        if let data = weatherForecast?.list[indexPath.row] {
             cell.tag = 2
             cell.configureForecastCell(data: data, image: arrayImages?[indexPath.row])
         } else {
-            if let row = forecastFiveDays?.list[indexPath.row + 1] {
+            if let row = weatherForecast?.list[indexPath.row + 1] {
                 cell.configureNameDayCell(row: row, indexRow: indexPath.row)
                 cellsWithDaysOfWeek.insert(indexPath.row)
             }
@@ -115,7 +115,7 @@ extension ForecastVC: UITableViewDataSource, UITableViewDelegate {
 
 // update tableview cells after adding days of week in dataFiveDays(PresenterForecastVC)
 extension ForecastVC: ViewOutputDelegateForecastVC {
-    func publishDataForecastVC(dataFiveDays: WeatherForecastFiveDays, arrayImages: [UIImage?]?) {
-        updateTableView(dataFiveDays: dataFiveDays, arrayImages: arrayImages)
+    func publishDataForecastVC(weatherForecast: WeatherForecastFiveDays, arrayImages: [UIImage?]?) {
+        updateTableView(weatherForecast: weatherForecast, arrayImages: arrayImages)
     }
 }

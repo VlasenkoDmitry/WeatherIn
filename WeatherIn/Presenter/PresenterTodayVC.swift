@@ -13,6 +13,6 @@ class PresenterTodayVC {
 
 extension PresenterTodayVC: ViewInputDelegateFirstVC {
     func takeDataFirstVC() {
-        viewOutputDelegate?.publishDataTodayVC(dataCurrent: weatherToday, imageWeatherNow: imageWeatherToday)
+        viewOutputDelegate?.publishDataTodayVC(weatherToday: weatherToday, imageWeatherToday: imageWeatherToday)
     }
 }

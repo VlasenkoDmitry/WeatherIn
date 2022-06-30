@@ -14,23 +14,23 @@ class PresenterForecastVC {
     // add extra data to devide by days of week
     private func addNamesDays() {
         guard let firstDate = weatherForecast?.list[0]?.dt else { return }
-        var countDay = Int(Double(firstDate) / Double(86400))
-        guard let data = weatherForecast?.list else { return }
-        var counterData = data.count
-        for i in 0...counterData {
+        var numberDay = Int(Double(firstDate) / Double(86400))
+        guard let listForecast = weatherForecast?.list else { return }
+        var numberForecasts = listForecast.count
+        for i in 0...numberForecasts {
             if i == 0 {
                 weatherForecast?.list.insert(nil, at: 0)
                 imagesWeatherForecast?.insert(nil, at: 0)
-                counterData += 1
+                numberForecasts += 1
                 continue
             }
             if let dateUTC = weatherForecast?.list[i]?.dt {
-                let countDayNewCurrent = Int(Double(dateUTC) / Double(86400))
-                if countDay == countDayNewCurrent { continue } else {
+                let numberDayNewCurrent = Int(Double(dateUTC) / Double(86400))
+                if numberDay == numberDayNewCurrent { continue } else {
                     weatherForecast?.list.insert(nil, at: i - 1)
                     imagesWeatherForecast?.insert(nil, at: i - 1)
-                    countDay = countDayNewCurrent
-                    counterData += 1
+                    numberDay = numberDayNewCurrent
+                    numberForecasts += 1
                 }
             }
         }
@@ -42,6 +42,6 @@ extension PresenterForecastVC: ViewInputDelegateForecastVC {
     func downloadDataForecastVC() {
         addNamesDays()
         guard let dataFiveDays = weatherForecast else { return }
-        viewOutputDelegate?.publishDataForecastVC(dataFiveDays: dataFiveDays, arrayImages: imagesWeatherForecast)
+        viewOutputDelegate?.publishDataForecastVC(weatherForecast: dataFiveDays, arrayImages: imagesWeatherForecast)
     }
 }
