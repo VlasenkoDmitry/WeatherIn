@@ -17,35 +17,39 @@ class MainVC: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.setViewInputDelegate(viewInputDelegate: self)
+        linkPresenter()
+    }
+    
+    private func linkPresenter() {
+        presenter.setViewOutputDelegate(viewOutputDelegate: self)
         self.viewInputDelegate = presenter
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
+        
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fillAndFormatTabBar()
-        presenter.takeDataPresentersViewControllers(firstVC: todayVC, secondVC: forecastVC)
+        initializeTabBar()
+        presenter.setDownloadedDataToPresentersViewControllers(firstVC: todayVC, secondVC: forecastVC)
     }
     
-    private func fillAndFormatTabBar() {
+    func initializeTabBar() {
+        fillTabBar()
+        formatTabbar()
+    }
+    
+    private func fillTabBar() {
         todayVC.title = "Today".localize()
         forecastVC.title = "Forecast".localize()
-        let sunBlack = UIImage(systemName: "sun.max")
-        sunBlack?.withTintColor(.black, renderingMode: .alwaysOriginal)
-        let sunBlue = UIImage(systemName: "sun.max")
-        sunBlue?.withTintColor(.blue, renderingMode: .alwaysOriginal)
-        let cloudBlack = UIImage(systemName: "cloud.moon")
-        cloudBlack?.withTintColor(.black, renderingMode: .alwaysOriginal)
-        let cloudBlue = UIImage(systemName: "cloud.moon")
-        cloudBlue?.withTintColor(.blue, renderingMode: .alwaysOriginal)
-        todayVC.tabBarItem.image = sunBlack
-        todayVC.tabBarItem.selectedImage = sunBlue
-        forecastVC.tabBarItem.image = cloudBlack
-        forecastVC.tabBarItem.selectedImage = cloudBlue
+        todayVC.tabBarItem.image = UIImage(systemName: "sun.max")
+        todayVC.tabBarItem.selectedImage = UIImage(systemName: "sun.max")
+        forecastVC.tabBarItem.image = UIImage(systemName: "cloud.moon")
+        forecastVC.tabBarItem.selectedImage = UIImage(systemName: "cloud.moon")
+    }
+    
+    private func formatTabbar() {
+        todayVC.tabBarItem.image?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        todayVC.tabBarItem.selectedImage?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        forecastVC.tabBarItem.image?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        forecastVC.tabBarItem.selectedImage?.withTintColor(.blue, renderingMode: .alwaysOriginal)
         let selectedColor = UIColor(named: "MyBlue")
         let unselectedColor = UIColor.black
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: unselectedColor], for: .normal)

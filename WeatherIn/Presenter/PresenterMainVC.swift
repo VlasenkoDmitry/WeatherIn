@@ -15,14 +15,14 @@ class PresenterMainVC {
         self.imagesWeatherForecast = imageWeatherForecast
     }
     
-    func setViewInputDelegate(viewInputDelegate: ViewOutputDelegateMainVC?) {
-        self.viewOutputDelegate = viewInputDelegate
+    func setViewOutputDelegate(viewOutputDelegate: ViewOutputDelegateMainVC?) {
+        self.viewOutputDelegate = viewOutputDelegate
     }
 }
 
 //addind all weather's data to presenters Today and Forecast controllers. We can use init() in TodayVC and ForecastVC, but to practise work with presenters i used presenter.
 extension PresenterMainVC: ViewInputDelegateMainVC {
-    func takeDataPresentersViewControllers(firstVC: TodayVC, secondVC: ForecastVC) {
+    func setDownloadedDataToPresentersViewControllers(firstVC: TodayVC, secondVC: ForecastVC) {
         firstVC.presenter.weatherToday = weatherToday
         firstVC.presenter.imageWeatherToday = imageWeatherToday
         secondVC.presenter.weatherForecast = weatherForecast

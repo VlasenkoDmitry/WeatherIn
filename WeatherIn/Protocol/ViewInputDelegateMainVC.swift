@@ -1,5 +1,5 @@
 import Foundation
 
 protocol ViewInputDelegateMainVC: AnyObject {
-    func takeDataPresentersViewControllers(firstVC: TodayVC,secondVC: ForecastVC)
+    func setDownloadedDataToPresentersViewControllers(firstVC: TodayVC,secondVC: ForecastVC)
 }

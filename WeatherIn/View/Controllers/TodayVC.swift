@@ -23,9 +23,14 @@ class TodayVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        linkPresenter()
+        setLayout()
+        addRecognizer(label: descriptionLabel)
+    }
+    
+    private func linkPresenter() {
         presenter.setViewOutputDelegate(viewOutputDelegate: self)
         self.viewInputputDelegate = presenter
-        initialize()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,10 +45,7 @@ class TodayVC: UIViewController {
         presenter.takeDataFirstVC()
     }
     
-    private func initialize() {
-        setLayout()
-        addRecognizer(label: descriptionLabel)
-    }
+
     
     private func setLayout() {
         self.view.backgroundColor = .white
