@@ -44,7 +44,7 @@ class TodayVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         drawLines()
-        presenter.transmitWeatherData()
+        presenter.transmitWeatherDataToday()
     }
     
     private func setLayout() {
@@ -139,26 +139,36 @@ class TodayVC: UIViewController {
     
     private func insertEqualViewsHorizontally(views: [UIView], mainView: UIView) {
         for (index, view) in views.enumerated() {
+            mainView.addSubview(view)
             if index == 0 {
-                mainView.addSubview(view)
-                view.snp.makeConstraints { maker in
-                    maker.top.bottom.left.equalTo(mainView)
-                }
+                layoutAsLeftBlock(mainView: mainView)
             } else if index != views.count - 1 {
-                mainView.addSubview(view)
-                view.snp.makeConstraints { maker in
-                    maker.top.bottom.equalTo(mainView)
-                    maker.left.equalTo(views[index - 1].snp.right)
-                    maker.width.equalTo(views[index - 1])
-                }
+                layoutAsMiddleBlock(views: views, mainView: mainView, index: index)
             } else {
-                mainView.addSubview(view)
-                view.snp.makeConstraints { maker in
-                    maker.top.bottom.right.equalTo(mainView)
-                    maker.left.equalTo(views[index - 1].snp.right)
-                    maker.width.equalTo(views[index - 1])
-                }
+                layoutAsRightBlock(views: views, mainView: mainView, index: index)
             }
+        }
+    }
+    
+    private func layoutAsLeftBlock(mainView: UIView) {
+        view.snp.makeConstraints { maker in
+            maker.top.bottom.left.equalTo(mainView)
+        }
+    }
+    
+    private func layoutAsMiddleBlock(views: [UIView], mainView: UIView, index: Int) {
+        view.snp.makeConstraints { maker in
+            maker.top.bottom.equalTo(mainView)
+            maker.left.equalTo(views[index - 1].snp.right)
+            maker.width.equalTo(views[index - 1])
+        }
+    }
+    
+    private func layoutAsRightBlock(views: [UIView],mainView: UIView, index: Int) {
+        view.snp.makeConstraints { maker in
+            maker.top.bottom.right.equalTo(mainView)
+            maker.left.equalTo(views[index - 1].snp.right)
+            maker.width.equalTo(views[index - 1])
         }
     }
     

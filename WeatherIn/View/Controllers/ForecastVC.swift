@@ -22,24 +22,29 @@ class ForecastVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        linkTableView()
+        linkPresenter()
+        layout()
+    }
+    
+    private func linkTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.register(FDForecastTableViewCell.self, forCellReuseIdentifier: "FDForecastTableViewCell")
-        layout()
-        presenter.setViewOutputDelegate(viewOutputDelegate: self)
-        self.viewInputputDelegate = presenter
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        fillNavigationBar()
-        self.view.backgroundColor = .white
-        presenter.downloadDataForecastVC()
+    private func linkPresenter() {
+        presenter.setViewOutputDelegate(viewOutputDelegate: self)
+        self.viewInputputDelegate = presenter
     }
     
     private func layout() {
         view.setLayoutStatusBarView(bar: statusBarView)
         view.setLayoutNavigationBar(navigationBar: navigationBarView, topElement: statusBarView)
+        setLayoutTableView()
+    }
+    
+    private func setLayoutTableView() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { maker in
             maker.top.equalTo(navigationBarView.snp.bottom)
@@ -47,12 +52,19 @@ class ForecastVC: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fillNavigationBar()
+        self.view.backgroundColor = .white
+        presenter.transmitWeatherDataForecast()
+    }
+        
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationBarView.drawLineDifferentColor(colorArray: [.systemPink, .orange, .green, .blue, .yellow, .red],lineWidth: 2, lineLength: 4, lineSpacing:  2, corners: .bottom)
     }
     
-    private func updateTableView(weatherForecast: WeatherForecastFiveDays, arrayImages: [UIImage?]?){
+    private func updateForecastVC(weatherForecast: WeatherForecastFiveDays, arrayImages: [UIImage?]?) {
         self.weatherForecast = weatherForecast
         self.arrayImages = arrayImages
         fillNavigationBar()
@@ -116,6 +128,6 @@ extension ForecastVC: UITableViewDataSource, UITableViewDelegate {
 // update tableview cells after adding days of week in dataFiveDays(PresenterForecastVC)
 extension ForecastVC: ViewOutputDelegateForecastVC {
     func publishDataForecastVC(weatherForecast: WeatherForecastFiveDays, arrayImages: [UIImage?]?) {
-        updateTableView(weatherForecast: weatherForecast, arrayImages: arrayImages)
+        updateForecastVC(weatherForecast: weatherForecast, arrayImages: arrayImages)
     }
 }

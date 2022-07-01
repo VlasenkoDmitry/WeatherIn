@@ -39,7 +39,7 @@ class PresenterForecastVC {
 
 // preparing data for display
 extension PresenterForecastVC: ViewInputDelegateForecastVC {
-    func downloadDataForecastVC() {
+    func transmitWeatherDataForecast() {
         addNamesDays()
         guard let dataFiveDays = weatherForecast else { return }
         viewOutputDelegate?.publishDataForecastVC(weatherForecast: dataFiveDays, arrayImages: imagesWeatherForecast)

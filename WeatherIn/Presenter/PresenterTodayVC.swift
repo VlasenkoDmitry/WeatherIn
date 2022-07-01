@@ -12,7 +12,7 @@ class PresenterTodayVC {
 }
 
 extension PresenterTodayVC: ViewInputDelegateFirstVC {
-    func transmitWeatherData() {
+    func transmitWeatherDataToday() {
         viewOutputDelegate?.getrWeatherDataToday(weatherToday: weatherToday, imageWeatherToday: imageWeatherToday)
     }
 }
