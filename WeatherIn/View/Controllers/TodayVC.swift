@@ -25,6 +25,7 @@ class TodayVC: UIViewController {
         super.viewDidLoad()
         linkPresenter()
         setLayout()
+        buildViewsToParametersView()
         addRecognizer(label: descriptionLabel)
     }
     
@@ -35,6 +36,7 @@ class TodayVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.view.backgroundColor = .white
         fillStaticDataParameters()
         formatTextLabels()
     }
@@ -42,54 +44,34 @@ class TodayVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         drawLines()
-        presenter.takeDataFirstVC()
+        presenter.transmitWeatherData()
     }
     
-
-    
     private func setLayout() {
-        self.view.backgroundColor = .white
-        view.setLayoutStatusBar(bar: statusBarView)
-        view.setLayoutNavigationBar(navigationBar: navigationBarView, statusBar: statusBarView)
-        view.addSubview(navigationBarView)
+        view.setLayoutStatusBarView(bar: statusBarView)
+        setNavigationBarView()
+        setLayoutPageContentView()
+    }
+    
+    private func setNavigationBarView() {
+        view.setLayoutNavigationBar(navigationBar: navigationBarView, topElement: statusBarView)
         navigationBarView.snp.makeConstraints { maker in
             maker.height.equalTo(44)
             maker.top.equalTo(statusBarView.snp.bottom)
             maker.left.right.equalToSuperview().inset(0)
         }
+    }
+    
+    private func setLayoutPageContentView() {
+        insertTwoEqualViewsVertically(firstView: cityView, secondView: parametersAndDescriptionView, mainView: pageContentView)
         view.addSubview(pageContentView)
         pageContentView.snp.makeConstraints { maker in
             maker.top.equalTo(navigationBarView.snp.bottom)
             maker.left.right.equalToSuperview().inset(0)
             maker.bottom.equalToSuperview().inset(100)
         }
-        
-        insertTwoEqualViewsVertically(firstView: cityView, secondView: parametersAndDescriptionView, mainView: pageContentView)
-        insertTwoEqualViewsVertically(firstView: parametersView, secondView: descriptionView, mainView: parametersAndDescriptionView)
-        insertTwoEqualViewsVertically(firstView: parametersFirstLineView, secondView: parametersSecondLineView, mainView: parametersView)
-        insertEqualViewsHorizontally(views: [humidityView, precipitationView, pressureView], mainView: parametersFirstLineView)
-        insertEqualViewsHorizontally(views: [speedWindView, degWindView], mainView: parametersSecondLineView)
-        
-        /// For the practice of the Builder we create viewParameters not by creating a separate inheritor UIView class.
-        let builder = BuilderViewParameterWeather()
-        let director = DirectorViewParameterWeather(builder: builder)
-        builder.reset(view: humidityView)
-        humidityView = director.changeView()
-        builder.reset(view: precipitationView)
-        precipitationView = director.changeView()
-        builder.reset(view: pressureView)
-        pressureView = director.changeView()
-        builder.reset(view: speedWindView)
-        speedWindView = director.changeView()
-        builder.reset(view: degWindView)
-        degWindView = director.changeView()
-        
-        descriptionView.addSubview(descriptionLabel)
-        descriptionLabel.snp.makeConstraints { maker in
-            maker.top.left.right.bottom.equalTo(descriptionView)
-        }
-        
         setLayoutCityView()
+        setLayoutParametersAndDescriptionView()
     }
     
     private func insertTwoEqualViewsVertically(firstView: UIView, secondView: UIView, mainView: UIView) {
@@ -105,31 +87,6 @@ class TodayVC: UIViewController {
             maker.left.right.equalTo(mainView)
             maker.top.equalTo(firstView.snp.bottom)
             maker.height.equalTo(firstView)
-        }
-    }
-    
-    private func insertEqualViewsHorizontally(views: [UIView], mainView: UIView) {
-        for (index, view) in views.enumerated() {
-            if index == 0 {
-                mainView.addSubview(view)
-                view.snp.makeConstraints { maker in
-                    maker.top.bottom.left.equalTo(mainView)
-                }
-            } else if index != views.count - 1 {
-                mainView.addSubview(view)
-                view.snp.makeConstraints { maker in
-                    maker.top.bottom.equalTo(mainView)
-                    maker.left.equalTo(views[index - 1].snp.right)
-                    maker.width.equalTo(views[index - 1])
-                }
-            } else {
-                mainView.addSubview(view)
-                view.snp.makeConstraints { maker in
-                    maker.top.bottom.right.equalTo(mainView)
-                    maker.left.equalTo(views[index - 1].snp.right)
-                    maker.width.equalTo(views[index - 1])
-                }
-            }
         }
     }
     
@@ -159,6 +116,68 @@ class TodayVC: UIViewController {
         dataWeatherLabel.tag = 2
     }
     
+    private func setLayoutParametersAndDescriptionView() {
+        insertTwoEqualViewsVertically(firstView: parametersView, secondView: descriptionView, mainView: parametersAndDescriptionView)
+        setLayoutParametersView()
+        setLayoutDescriptionView()
+        
+    }
+    
+    private func setLayoutParametersView() {
+        insertTwoEqualViewsVertically(firstView: parametersFirstLineView, secondView: parametersSecondLineView, mainView: parametersView)
+        insertEqualViewsHorizontally(views: [humidityView, precipitationView, pressureView], mainView: parametersFirstLineView)
+        insertEqualViewsHorizontally(views: [speedWindView, degWindView], mainView: parametersSecondLineView)
+    }
+    
+    
+    private func setLayoutDescriptionView() {
+        descriptionView.addSubview(descriptionLabel)
+        descriptionLabel.snp.makeConstraints { maker in
+            maker.top.left.right.bottom.equalTo(descriptionView)
+        }
+    }
+    
+    private func insertEqualViewsHorizontally(views: [UIView], mainView: UIView) {
+        for (index, view) in views.enumerated() {
+            if index == 0 {
+                mainView.addSubview(view)
+                view.snp.makeConstraints { maker in
+                    maker.top.bottom.left.equalTo(mainView)
+                }
+            } else if index != views.count - 1 {
+                mainView.addSubview(view)
+                view.snp.makeConstraints { maker in
+                    maker.top.bottom.equalTo(mainView)
+                    maker.left.equalTo(views[index - 1].snp.right)
+                    maker.width.equalTo(views[index - 1])
+                }
+            } else {
+                mainView.addSubview(view)
+                view.snp.makeConstraints { maker in
+                    maker.top.bottom.right.equalTo(mainView)
+                    maker.left.equalTo(views[index - 1].snp.right)
+                    maker.width.equalTo(views[index - 1])
+                }
+            }
+        }
+    }
+    
+    /// For the practice of the Builder we create viewParameters not by creating a separate inheritor UIView class.
+    private func buildViewsToParametersView() {
+        let builder = BuilderViewParameterWeather()
+        let director = DirectorViewParameterWeather(builder: builder)
+        builder.reset(view: humidityView)
+        humidityView = director.changeView()
+        builder.reset(view: precipitationView)
+        precipitationView = director.changeView()
+        builder.reset(view: pressureView)
+        pressureView = director.changeView()
+        builder.reset(view: speedWindView)
+        speedWindView = director.changeView()
+        builder.reset(view: degWindView)
+        degWindView = director.changeView()
+    }
+    
     private func fillStaticDataParameters() {
         navigationBarView.getAllSubViewsOf(type: UILabel.self)[0].text = "Today".localize()
         descriptionLabel.text = "Description".localize()
@@ -178,26 +197,26 @@ class TodayVC: UIViewController {
         }
     }
     
-    private func updateTodayVC(weatherToday: WeatherToday, imageWeatherToday: UIImage?) {
+    private func updateTodayVC(weatherToday: WeatherToday?, imageWeatherToday: UIImage?) {
         updateCityViewLabels(weatherToday: weatherToday)
         updateParametersViewLabels(weatherToday: weatherToday)
         setImageToView(view: cityView, image: imageWeatherToday, color: .yellow)
     }
     
-    private func updateCityViewLabels(weatherToday: WeatherToday) {
+    private func updateCityViewLabels(weatherToday: WeatherToday?) {
         let labelsCityView = cityView.getAllSubViewsOf(type: UILabel.self)
         for label in labelsCityView {
             switch label.tag {
             case 1:
                 //locationLabel
-                guard let city = weatherToday.name else { return }
-                guard let country = weatherToday.sys.country else { return }
+                guard let city = weatherToday?.name else { return }
+                guard let country = weatherToday?.sys.country else { return }
                 let location = city + ", " + country
                 label.text = location
             case 2:
                 //dataWeatherLabel
-                guard let temperature = weatherToday.main.temp else { return }
-                guard let description = weatherToday.weather[0].description else { return }
+                guard let temperature = weatherToday?.main.temp else { return }
+                guard let description = weatherToday?.weather[0].description else { return }
                 label.text = String(Int(temperature)) + "°" + " | " + description.formatFirstUppercased()
             default:
                 label.text = ""
@@ -205,25 +224,25 @@ class TodayVC: UIViewController {
         }
     }
     
-    private func updateParametersViewLabels(weatherToday: WeatherToday) {
-        if let humidity = weatherToday.main.humidity {
+    private func updateParametersViewLabels(weatherToday: WeatherToday?) {
+        if let humidity = weatherToday?.main.humidity {
             humidityView.setTextToLabel(text: String(Int(humidity)), measure: " %")
         }
         var precipitation = "0"
-        if let snow = weatherToday.snow?["1h"] {
+        if let snow = weatherToday?.snow?["1h"] {
             precipitation = String(snow)
         }
-        if let rain = weatherToday.rain?["1h"] {
+        if let rain = weatherToday?.rain?["1h"] {
             precipitation = String(rain)
         }
         precipitationView.setTextToLabel(text: precipitation, measure: " mm".localize())
-        if let pressure = weatherToday.main.pressure {
+        if let pressure = weatherToday?.main.pressure {
             pressureView.setTextToLabel(text: String(Int(pressure)), measure: " hPa".localize())
         }
-        if let windSpeed = weatherToday.wind.speed {
+        if let windSpeed = weatherToday?.wind.speed {
             speedWindView.setTextToLabel(text: String(Int(windSpeed)), measure: " km/h".localize())
         }
-        if let windDirection = weatherToday.wind.deg?.direction {
+        if let windDirection = weatherToday?.wind.deg?.direction {
             degWindView.setTextToLabel(text: windDirection.description.localize(), measure: nil)
         }
     }
@@ -273,8 +292,7 @@ class TodayVC: UIViewController {
 }
 
 extension TodayVC: ViewOutputDelegateTodayVC {
-    func publishDataTodayVC(weatherToday: WeatherToday?, imageWeatherToday: UIImage?) {
-        guard let dataCurrent = weatherToday else { return }
-        updateTodayVC(weatherToday: dataCurrent, imageWeatherToday: imageWeatherToday)
+    func getrWeatherDataToday(weatherToday: WeatherToday?, imageWeatherToday: UIImage?) {
+        updateTodayVC(weatherToday: weatherToday, imageWeatherToday: imageWeatherToday)
     }
 }

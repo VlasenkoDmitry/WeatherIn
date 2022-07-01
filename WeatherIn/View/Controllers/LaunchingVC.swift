@@ -41,6 +41,6 @@ class LaunchingVC: UIViewController {
 extension LaunchingVC: ViewOutputDelegateLaunchingVC {
     func displayMainVC(presenter: PresenterMainVC) {
         let controler = MainVC(presenter: presenter)
-        self.navigationController?.pushViewController(controler, animated: false)
+        self.navigationController?.pushViewController(controler, animated: true)
     }
 }

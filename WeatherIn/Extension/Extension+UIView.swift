@@ -5,7 +5,7 @@ import SnapKit
 
 extension UIView {
     
-    func setLayoutStatusBar(bar: UIView) {
+    func setLayoutStatusBarView(bar: UIView) {
         self.addSubview(bar)
         bar.snp.makeConstraints { maker in
             maker.height.equalTo(44)
@@ -13,11 +13,11 @@ extension UIView {
         }
     }
     
-    func setLayoutNavigationBar(navigationBar: UIView, statusBar: UIView) {
+    func setLayoutNavigationBar(navigationBar: UIView, topElement: UIView) {
         self.addSubview(navigationBar)
         navigationBar.snp.makeConstraints { maker in
             maker.height.equalTo(44)
-            maker.top.equalTo(statusBar.snp.bottom)
+            maker.top.equalTo(topElement.snp.bottom)
             maker.left.right.equalToSuperview().inset(0)
         }
         let nameVC = UILabel()

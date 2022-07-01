@@ -38,8 +38,8 @@ class ForecastVC: UIViewController {
     }
     
     private func layout() {
-        view.setLayoutStatusBar(bar: statusBarView)
-        view.setLayoutNavigationBar(navigationBar: navigationBarView, statusBar: statusBarView)
+        view.setLayoutStatusBarView(bar: statusBarView)
+        view.setLayoutNavigationBar(navigationBar: navigationBarView, topElement: statusBarView)
         view.addSubview(tableView)
         tableView.snp.makeConstraints { maker in
             maker.top.equalTo(navigationBarView.snp.bottom)
