@@ -11,8 +11,11 @@ class PresenterForecastVC {
         self.viewOutputDelegate = viewOutputDelegate
     }
     
-    // add extra data to devide by days of week
-    private func addNamesDays() {
+    private func prepareWeatherToDisplay() {
+        addNamesDaysInWeather()
+    }
+    
+    private func addNamesDaysInWeather() {
         guard let firstDate = weatherForecast?.list[0]?.dt else { return }
         var numberDay = Int(Double(firstDate) / Double(86400))
         guard let listForecast = weatherForecast?.list else { return }
@@ -39,8 +42,8 @@ class PresenterForecastVC {
 
 // preparing data for display
 extension PresenterForecastVC: ViewInputDelegateForecastVC {
-    func transmitWeatherDataForecast() {
-        addNamesDays()
+    func transmitWeatherDataForecastToForecastVC() {
+        prepareWeatherToDisplay()
         guard let dataFiveDays = weatherForecast else { return }
         viewOutputDelegate?.publishDataForecastVC(weatherForecast: dataFiveDays, arrayImages: imagesWeatherForecast)
     }

@@ -13,7 +13,7 @@ class ActivityIndicator {
     init() {
     }
     
-    func addIndicator (view: UIView, format: FormatIndicator) {
+    func addTo (view: UIView, format: FormatIndicator) {
         self.view = view
         switch format {
         case .black:

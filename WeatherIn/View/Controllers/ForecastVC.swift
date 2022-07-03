@@ -19,6 +19,7 @@ class ForecastVC: UIViewController {
     }
     var presenter = PresenterForecastVC()
     private weak var viewInputputDelegate: ViewInputDelegateForecastVC?
+    private let heightStandartCellInTableView: CGFloat = 100
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +57,7 @@ class ForecastVC: UIViewController {
         super.viewWillAppear(animated)
         fillNavigationBar()
         self.view.backgroundColor = .white
-        presenter.transmitWeatherDataForecast()
+        presenter.transmitWeatherDataForecastToForecastVC()
     }
         
     override func viewDidAppear(_ animated: Bool) {
@@ -84,9 +85,9 @@ extension ForecastVC: UITableViewDataSource, UITableViewDelegate {
             return 0
         }
         if cellsWithDaysOfWeek.contains(indexPath.row) {
-            return 50
+            return heightStandartCellInTableView / 2
         } else {
-            return 100
+            return heightStandartCellInTableView
         }
     }
     

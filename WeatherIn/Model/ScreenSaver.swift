@@ -8,7 +8,7 @@ class ScreenSaver {
         
     }
     
-    func add(view: UIView) {
+    func addTo(view: UIView) {
         viewImage.image = UIImage(named: "ScreenSaver")
         viewImage.frame = view.frame
         view.addSubview(viewImage)

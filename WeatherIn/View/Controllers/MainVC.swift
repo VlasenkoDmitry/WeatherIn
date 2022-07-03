@@ -18,6 +18,7 @@ class MainVC: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         linkPresenter()
+        presenter.setDownloadedDataToPresentersViewControllers(firstVC: todayVC, secondVC: forecastVC)
     }
     
     private func linkPresenter() {
@@ -28,7 +29,6 @@ class MainVC: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         initializeTabBar()
-        presenter.setDownloadedDataToPresentersViewControllers(firstVC: todayVC, secondVC: forecastVC)
     }
     
     func initializeTabBar() {
@@ -60,7 +60,7 @@ class MainVC: UITabBarController {
     }
 }
 
-// extension to delegate from presenterMainVC. Adding view controllers to tab bar after adding all weathers data to presenters Today and Forecast controllers
+// Adding view controllers to tab bar after adding all weathers data to presenters Today and Forecast controllers
 extension MainVC: ViewOutputDelegateMainVC {
     func loadViewControllersToTabBar() {
         self.viewControllers = [todayVC, forecastVC]

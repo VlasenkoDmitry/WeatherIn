@@ -44,9 +44,10 @@ class TodayVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         drawLines()
-        presenter.transmitWeatherDataToday()
+        presenter.transmitWeatherDataTodayToTodayVC()
     }
     
+    // StatusBarView, NavigationBarView, PageContentView (CityView, ParametersAndDescriptionView(ParametersView, DescriptionView))
     private func setLayout() {
         view.setLayoutStatusBarView(bar: statusBarView)
         setNavigationBarView()
@@ -125,8 +126,8 @@ class TodayVC: UIViewController {
     
     private func setLayoutParametersView() {
         insertTwoEqualViewsVertically(firstView: parametersFirstLineView, secondView: parametersSecondLineView, mainView: parametersView)
-        insertEqualViewsHorizontally(views: [humidityView, precipitationView, pressureView], mainView: parametersFirstLineView)
-        insertEqualViewsHorizontally(views: [speedWindView, degWindView], mainView: parametersSecondLineView)
+        insertEqualViewsHorizontally(views: [humidityView, precipitationView, pressureView], superView: parametersFirstLineView)
+        insertEqualViewsHorizontally(views: [speedWindView, degWindView], superView: parametersSecondLineView)
     }
     
     
@@ -137,38 +138,38 @@ class TodayVC: UIViewController {
         }
     }
     
-    private func insertEqualViewsHorizontally(views: [UIView], mainView: UIView) {
-        for (index, view) in views.enumerated() {
-            mainView.addSubview(view)
-            if index == 0 {
-                layoutAsLeftBlock(mainView: mainView)
-            } else if index != views.count - 1 {
-                layoutAsMiddleBlock(views: views, mainView: mainView, index: index)
+    private func insertEqualViewsHorizontally(views: [UIView], superView: UIView) {
+        for (indexParameter, viewParameter) in views.enumerated() {
+            superView.addSubview(viewParameter)
+            if indexParameter == 0 {
+                layoutAsLeftBlock(viewParameter: viewParameter, superView: superView)
+            } else if indexParameter != views.count - 1 {
+                layoutAsMiddleBlock(viewParameter: viewParameter, superView: superView, views: views, indexParameter: indexParameter)
             } else {
-                layoutAsRightBlock(views: views, mainView: mainView, index: index)
+                layoutAsRightBlock(viewParameter: viewParameter, superView: superView, views: views, indexParameter: indexParameter)
             }
         }
     }
     
-    private func layoutAsLeftBlock(mainView: UIView) {
-        view.snp.makeConstraints { maker in
-            maker.top.bottom.left.equalTo(mainView)
+    private func layoutAsLeftBlock(viewParameter: UIView, superView: UIView) {
+        viewParameter.snp.makeConstraints { maker in
+            maker.top.bottom.left.equalTo(superView)
         }
     }
-    
-    private func layoutAsMiddleBlock(views: [UIView], mainView: UIView, index: Int) {
-        view.snp.makeConstraints { maker in
-            maker.top.bottom.equalTo(mainView)
-            maker.left.equalTo(views[index - 1].snp.right)
-            maker.width.equalTo(views[index - 1])
+
+    private func layoutAsMiddleBlock(viewParameter: UIView, superView: UIView, views: [UIView], indexParameter: Int) {
+        viewParameter.snp.makeConstraints { maker in
+           maker.top.bottom.equalTo(superView)
+           maker.left.equalTo(views[indexParameter - 1].snp.right)
+            maker.width.equalTo(views[indexParameter - 1])
         }
     }
-    
-    private func layoutAsRightBlock(views: [UIView],mainView: UIView, index: Int) {
-        view.snp.makeConstraints { maker in
-            maker.top.bottom.right.equalTo(mainView)
-            maker.left.equalTo(views[index - 1].snp.right)
-            maker.width.equalTo(views[index - 1])
+
+    private func layoutAsRightBlock(viewParameter: UIView, superView: UIView, views: [UIView], indexParameter: Int) {
+        viewParameter.snp.makeConstraints { maker in
+            maker.top.bottom.right.equalTo(superView)
+            maker.left.equalTo(views[indexParameter - 1].snp.right)
+            maker.width.equalTo(views[indexParameter - 1])
         }
     }
     
@@ -209,7 +210,7 @@ class TodayVC: UIViewController {
     
     private func updateTodayVC(weatherToday: WeatherToday?, imageWeatherToday: UIImage?) {
         updateCityViewLabels(weatherToday: weatherToday)
-        updateParametersViewLabels(weatherToday: weatherToday)
+        updateLabelsOfParametersView(weatherToday: weatherToday)
         setImageToView(view: cityView, image: imageWeatherToday, color: .yellow)
     }
     
@@ -234,7 +235,7 @@ class TodayVC: UIViewController {
         }
     }
     
-    private func updateParametersViewLabels(weatherToday: WeatherToday?) {
+    private func updateLabelsOfParametersView(weatherToday: WeatherToday?) {
         if let humidity = weatherToday?.main.humidity {
             humidityView.setTextToLabel(text: String(Int(humidity)), measure: " %")
         }
@@ -302,7 +303,7 @@ class TodayVC: UIViewController {
 }
 
 extension TodayVC: ViewOutputDelegateTodayVC {
-    func getrWeatherDataToday(weatherToday: WeatherToday?, imageWeatherToday: UIImage?) {
+    func getWeatherDataToday(weatherToday: WeatherToday?, imageWeatherToday: UIImage?) {
         updateTodayVC(weatherToday: weatherToday, imageWeatherToday: imageWeatherToday)
     }
 }

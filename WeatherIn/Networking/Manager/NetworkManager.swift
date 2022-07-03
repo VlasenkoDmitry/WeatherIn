@@ -2,8 +2,6 @@ import Foundation
 import UIKit
 
 struct NetworkManager {
-    
-    
     func getCurrent(lat: String,lon: String, language: String, onCompletion: @escaping (WeatherToday?, String?) -> ()) {
         let parametrs: Parameters = ["lat": lat, "lon": lon]
         APIRequestManager.makeGetRequest( type: .current, coordinates: parametrs,language: language) { (result: WeatherToday?, error) in
@@ -58,7 +56,7 @@ enum NetworkError : String, Error {
     case missingURL = "URL is nil."
 }
 
-typealias PackageData = (weatherToday: WeatherToday?, weatherForecast: WeatherForecastFiveDays?, imageWeatherToday: UIImage?, imagesWeatherForecast: [UIImage?]?)
+typealias PackageWeatherData = (weatherToday: WeatherToday?, weatherForecast: WeatherForecastFiveDays?, imageWeatherToday: UIImage?, imagesWeatherForecast: [UIImage?]?)
 
 typealias Parameters = [String : Any]
 

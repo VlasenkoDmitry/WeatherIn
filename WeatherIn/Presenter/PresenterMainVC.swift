@@ -20,7 +20,6 @@ class PresenterMainVC {
     }
 }
 
-//addind all weather's data to presenters Today and Forecast controllers. We can use init() in TodayVC and ForecastVC, but to practise work with presenters i used presenter.
 extension PresenterMainVC: ViewInputDelegateMainVC {
     func setDownloadedDataToPresentersViewControllers(firstVC: TodayVC, secondVC: ForecastVC) {
         firstVC.presenter.weatherToday = weatherToday

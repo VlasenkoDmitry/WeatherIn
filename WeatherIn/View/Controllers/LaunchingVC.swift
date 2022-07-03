@@ -2,7 +2,6 @@ import Foundation
 import UIKit
 import CoreLocation
 
-//launching screen, begin location determination and load data in presenter
 class LaunchingVC: UIViewController {
     private let screenSaver = ScreenSaver()
     private var presenter = PresenterLaunchingVC()
@@ -12,9 +11,8 @@ class LaunchingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         linkPresenter()
-        screenSaver.add(view: view)
-        addTurnOnIndicatior()
-        formatNavigationBar()
+        screenSaver.addTo(view: view)
+        activityIndicator.addTo(view: view, format: .black)
     }
     
     private func linkPresenter() {
@@ -22,22 +20,23 @@ class LaunchingVC: UIViewController {
         self.viewInputputDelegate = presenter
     }
     
-    private func addTurnOnIndicatior() {
-        activityIndicator.addIndicator(view: view, format: .black)
-        activityIndicator.start()
-    }
-    
     private func formatNavigationBar() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        formatNavigationBar()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        activityIndicator.start()
         presenter.beginLocationDetermination()
     }
 }
 
-//after finding coordinates and downloading all data - open main controller(tab controller which consists of two vc: tooday and forecast)
+//after finding coordinates and downloading all data
 extension LaunchingVC: ViewOutputDelegateLaunchingVC {
     func displayMainVC(presenter: PresenterMainVC) {
         let controler = MainVC(presenter: presenter)

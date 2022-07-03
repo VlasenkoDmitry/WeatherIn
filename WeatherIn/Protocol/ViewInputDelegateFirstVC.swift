@@ -1,5 +1,5 @@
 import Foundation
 
 protocol ViewInputDelegateFirstVC: AnyObject {
-    func transmitWeatherDataToday()
+    func transmitWeatherDataTodayToTodayVC()
 }

@@ -18,49 +18,46 @@ class PresenterLaunchingVC {
         self.viewOutputDelegate = viewOutputDelegate
     }
     
-    //loading object class LocationManager and finding coordinates. Delegate is for beginning download data
     private func locationDetermination() {
         locationManager.delegate = self
         locationManager.locationDetermination()
     }
     
-    //function to start download data after finding coordinates
-    private func downloadAllData(lat: String, lon: String) {
+    private func downloadWeatherByCoordinates(lat: String, lon: String) {
         guard let language = languageApp else { return }
-        loadData(lat: lat, lon: lon, language: language, completion: { package, error in
+        loadData(lat: lat, lon: lon, language: language, completion: { [weak self] package, error in
             if let package = package, error == nil {
                 let presenter = PresenterMainVC(weatherToday: package.weatherToday, weatherForecast:  package.weatherForecast, imageWeatherToday:  package.imageWeatherToday, imageWeatherForecast: package.imagesWeatherForecast)
-                self.viewOutputDelegate?.displayMainVC(presenter: presenter)
+                self?.viewOutputDelegate?.displayMainVC(presenter: presenter)
             }
         })
     }
     
-    private func loadData(lat: String, lon: String, language: String, completion: @escaping (PackageData?,String?)->()) {
+    private func loadData(lat: String, lon: String, language: String, completion: @escaping (PackageWeatherData?,String?)->()) {
         //to synchronize download data use DispatchGroup
-        
         loadingWeatherGroup.enter()
-        networkManager.getFiveDays(lat: lat, lon: lon, language: language) { result, error in
-            self.resultProcessingGetFiveDay(result: result, error: error)
-            self.loadingWeatherGroup.leave()
+        networkManager.getFiveDays(lat: lat, lon: lon, language: language) { [weak self] result, error in
+            self?.processLoadingFiveDays(result: result, error: error)
+            self?.loadingWeatherGroup.leave()
         }
         
         loadingWeatherGroup.enter()
-        networkManager.getCurrent(lat: lat, lon: lon, language: language) { result, error in
-            self.resultProcessingGetCurrent(result: result, error: error)
-            self.loadingWeatherGroup.leave()
+        networkManager.getCurrent(lat: lat, lon: lon, language: language) { [weak self] result, error in
+            self?.processLoadingCurrent(result: result, error: error)
+            self?.loadingWeatherGroup.leave()
         }
 
         loadingWeatherGroup.notify(queue: .main) {
             if let newError = self.newError {
                 completion(nil,newError)
             } else {
-                let packageData = PackageData(self.weatherToday,self.weatherForecast,self.imageWeatherToday,self.imagesWeatherForecast)
-                completion(packageData,nil)
+                let packageWeatherData = PackageWeatherData(self.weatherToday, self.weatherForecast, self.imageWeatherToday, self.imagesWeatherForecast)
+                completion(packageWeatherData,nil)
             }
         }
     }
     
-    private func resultProcessingGetFiveDay(result: WeatherForecastFiveDays?,error: String?) {
+    private func processLoadingFiveDays(result: WeatherForecastFiveDays?, error: String?) {
         if error == nil && result != nil {
             self.weatherForecast = result
             guard let list = result?.list else { return }
@@ -85,13 +82,13 @@ class PresenterLaunchingVC {
         }
     }
     
-    private func resultProcessingGetCurrent(result: WeatherToday?,error: String?) {
+    private func processLoadingCurrent(result: WeatherToday?, error: String?) {
         if error == nil && result != nil {
             self.weatherToday = result
             print("Current")
             guard let name = result?.weather[0].icon else { return }
             self.loadingWeatherGroup.enter()
-            self.networkManager.getImage(name: name) {[weak self] imageData,error in
+            self.networkManager.getImage(name: name) { [weak self] imageData,error in
                 if let imageData = imageData {
                     self?.imageWeatherToday = UIImage(data: imageData)
                     print(imageData)
@@ -107,16 +104,15 @@ class PresenterLaunchingVC {
     }
 }
 
-//extension to begin find location (delegate LaunchingVC)
 extension PresenterLaunchingVC: ViewInputDelegateLaunchingVC {
     func beginLocationDetermination() {
         locationDetermination()
     }
 }
 
-//extension for download data after finding coordinates in class LocationManager
+//download data after finding coordinates in class LocationManager
 extension PresenterLaunchingVC: LocationManagerDelegate {
     func downloadData(lat: String, lon: String) {
-        downloadAllData(lat: lat, lon: lon)
+        downloadWeatherByCoordinates(lat: lat, lon: lon)
     }
 }
