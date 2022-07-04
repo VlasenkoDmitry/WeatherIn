@@ -2,8 +2,8 @@ import Foundation
 import UIKit
 
 class PresenterForecastVC {
-    var weatherForecast: WeatherForecastFiveDays?
-    var imagesWeatherForecast: [UIImage?]?
+    private var weatherForecast: WeatherForecastFiveDays?
+    private var imagesWeatherForecast: [UIImage?]?
     
     weak private var viewOutputDelegate: ViewOutputDelegateForecastVC?
     
@@ -37,6 +37,11 @@ class PresenterForecastVC {
                 }
             }
         }
+    }
+    
+    func updateWeather(weatherForecast: WeatherForecastFiveDays?, imagesWeatherForecast: [UIImage?]?) {
+        self.weatherForecast = weatherForecast
+        self.imagesWeatherForecast = imagesWeatherForecast
     }
 }
 

@@ -3,7 +3,7 @@ import UIKit
 class MainVC: UITabBarController {
     private let todayVC = TodayVC()
     private let forecastVC = ForecastVC()
-    private var presenter : PresenterMainVC
+    private let presenter : PresenterMainVC
     private weak var viewInputDelegate: ViewInputDelegateMainVC?
     
     init(presenter: PresenterMainVC) {

@@ -2,9 +2,11 @@ import Foundation
 import UIKit
 
 class ForecastVC: UIViewController {
-    private var statusBarView = UIView()
-    private var navigationBarView = UIView()
-    private var tableView = UITableView()
+    let presenter = PresenterForecastVC()
+    private let statusBarView = UIView()
+    private let navigationBarView = UIView()
+    private let tableView = UITableView()
+    private let heightStandartCellInTableView: CGFloat = 100
     private var cellsWithDaysOfWeek: Set<Int> = []
     private var weatherForecast: WeatherForecastFiveDays?
     private var arrayImages: [UIImage?]?
@@ -17,9 +19,8 @@ class ForecastVC: UIViewController {
             }
         }
     }
-    var presenter = PresenterForecastVC()
     private weak var viewInputputDelegate: ViewInputDelegateForecastVC?
-    private let heightStandartCellInTableView: CGFloat = 100
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

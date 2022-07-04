@@ -3,22 +3,24 @@ import UIKit
 import SnapKit
 
 class TodayVC: UIViewController {
-    private var statusBarView = UIView()
-    private var navigationBarView = UIView()
-    private var pageContentView = UIView()
-    private var cityView = UIView()
-    private var parametersAndDescriptionView = UIView()
-    private var parametersView = UIView()
-    private var descriptionView = UIView()
-    private var parametersFirstLineView = UIView()
-    private var parametersSecondLineView = UIView()
+    let presenter = PresenterTodayVC()
+    private let statusBarView = UIView()
+    private let navigationBarView = UIView()
+    private let pageContentView = UIView()
+    private let cityView = UIView()
+    private let parametersAndDescriptionView = UIView()
+    private let parametersView = UIView()
+    private let descriptionView = UIView()
+    private let parametersFirstLineView = UIView()
+    private let parametersSecondLineView = UIView()
+    private let descriptionLabel = UILabel()
     private var humidityView = UIView()
     private var precipitationView = UIView()
     private var pressureView = UIView()
     private var speedWindView = UIView()
     private var degWindView = UIView()
-    private var descriptionLabel = UILabel()
-    var presenter = PresenterTodayVC()
+    
+    
     private weak var viewInputputDelegate: ViewInputDelegateFirstVC?
     
     override func viewDidLoad() {

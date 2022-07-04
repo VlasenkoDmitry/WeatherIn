@@ -3,16 +3,16 @@ import CoreLocation
 import UIKit
 
 class PresenterLaunchingVC {
+    private let networkManager = NetworkManager()
+    private let locationManager = LocationManager()
+    private let languageApp = Locale.current.languageCode
+    private let loadingWeatherGroup = DispatchGroup()
     private var weatherForecast: WeatherForecastFiveDays?
     private var weatherToday: WeatherToday?
     private var imagesWeatherForecast: [UIImage?] = []
     private var imageWeatherToday: UIImage?
-    weak private var viewOutputDelegate: ViewOutputDelegateLaunchingVC?
     private var newError: String?
-    private let networkManager = NetworkManager()
-    private var locationManager = LocationManager()
-    private let languageApp = Locale.current.languageCode
-    private let loadingWeatherGroup = DispatchGroup()
+    weak private var viewOutputDelegate: ViewOutputDelegateLaunchingVC?
     
     func setViewOutputDelegate(viewOutputDelegate:ViewOutputDelegateLaunchingVC?) {
         self.viewOutputDelegate = viewOutputDelegate

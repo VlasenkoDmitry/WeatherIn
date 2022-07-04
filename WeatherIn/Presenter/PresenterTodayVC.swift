@@ -2,12 +2,17 @@ import Foundation
 import UIKit
 
 class PresenterTodayVC {
-    var weatherToday: WeatherToday?
-    var imageWeatherToday: UIImage?
+    private var weatherToday: WeatherToday?
+    private var imageWeatherToday: UIImage?
     weak private var viewOutputDelegate: ViewOutputDelegateTodayVC?
     
     func setViewOutputDelegate(viewOutputDelegate: ViewOutputDelegateTodayVC?) {
         self.viewOutputDelegate = viewOutputDelegate
+    }
+    
+    func updateWeather(weatherToday: WeatherToday?, imageWeatherToday: UIImage?) {
+        self.weatherToday = weatherToday
+        self.imageWeatherToday = imageWeatherToday
     }
 }
 

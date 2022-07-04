@@ -4,9 +4,9 @@ import CoreLocation
 
 class LaunchingVC: UIViewController {
     private let screenSaver = ScreenSaver()
-    private var presenter = PresenterLaunchingVC()
+    private let presenter = PresenterLaunchingVC()
+    private let activityIndicator = ActivityIndicator()
     private weak var viewInputputDelegate: ViewInputDelegateLaunchingVC?
-    private var activityIndicator = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()

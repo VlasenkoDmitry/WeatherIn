@@ -22,10 +22,12 @@ class PresenterMainVC {
 
 extension PresenterMainVC: ViewInputDelegateMainVC {
     func setDownloadedDataToPresentersViewControllers(firstVC: TodayVC, secondVC: ForecastVC) {
-        firstVC.presenter.weatherToday = weatherToday
-        firstVC.presenter.imageWeatherToday = imageWeatherToday
-        secondVC.presenter.weatherForecast = weatherForecast
-        secondVC.presenter.imagesWeatherForecast = imagesWeatherForecast
+        firstVC.presenter.updateWeather(weatherToday: weatherToday, imageWeatherToday: imageWeatherToday)
+//        firstVC.presenter.weatherToday = weatherToday
+//        firstVC.presenter.imageWeatherToday = imageWeatherToday
+        secondVC.presenter.updateWeather(weatherForecast: weatherForecast, imagesWeatherForecast: imagesWeatherForecast)
+//        secondVC.presenter.weatherForecast = weatherForecast
+//        secondVC.presenter.imagesWeatherForecast = imagesWeatherForecast
         viewOutputDelegate?.loadViewControllersToTabBar()
     }
 }
