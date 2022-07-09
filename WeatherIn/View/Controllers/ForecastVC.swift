@@ -19,7 +19,7 @@ class ForecastVC: UIViewController {
             }
         }
     }
-    private weak var viewInputputDelegate: ViewInputDelegateForecastVC?
+    private weak var viewInputDelegate: ViewInputDelegateForecastVC?
     
     
     override func viewDidLoad() {
@@ -37,7 +37,7 @@ class ForecastVC: UIViewController {
     
     private func linkPresenter() {
         presenter.setViewOutputDelegate(viewOutputDelegate: self)
-        self.viewInputputDelegate = presenter
+        self.viewInputDelegate = presenter
     }
     
     private func layout() {

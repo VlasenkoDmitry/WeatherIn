@@ -21,7 +21,7 @@ class TodayVC: UIViewController {
     private var degWindView = UIView()
     
     
-    private weak var viewInputputDelegate: ViewInputDelegateFirstVC?
+    private weak var viewInputDelegate: ViewInputDelegateFirstVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class TodayVC: UIViewController {
     
     private func linkPresenter() {
         presenter.setViewOutputDelegate(viewOutputDelegate: self)
-        self.viewInputputDelegate = presenter
+        self.viewInputDelegate = presenter
     }
     
     override func viewWillAppear(_ animated: Bool) {
